@@ -6,12 +6,7 @@ const getUsers = async () => {
   return users;
 };
 export default async function Home() {
-  const users = await getUsers();
-  console.log("users:", users);
-  return (
-    <div>
-      <Navbar />
-      Home
-    </div>
-  );
+  // const users = await getUsers();
+  // console.log("users:", users);
+  return <div>Home</div>;
 }

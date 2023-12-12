@@ -1,13 +1,11 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar/Navbar";
-import { v4 as uuid } from 'uuid'
 import { useDispatch } from "react-redux";
-import { addUser } from "@/redux/slices/userSlice";
+import { addUser } from "../../redux/slices/userSlice";
+
 const AddUser = () => {
   const dispatch = useDispatch()
   const [userInfo, setUserInfo] = useState({
-    id: "",
     name: "",
     email: "",
     contact: "",
@@ -21,7 +19,6 @@ const AddUser = () => {
   const handleAdd = () => {
     dispatch(addUser(userInfo))
     setUserInfo({
-      id: uuid(),
       name: "",
       email: "",
       contact: "",
@@ -34,12 +31,10 @@ const AddUser = () => {
   }, [])
 
   return <div>
-    <Navbar />
     <div className="">
       <div className="className">
         <div className="className">
           <h1 className="className">Add User details</h1>
-          <input type="text" name="id" value={userInfo.id} disabled />
           <input type="text" name="name" value={userInfo.name} onChange={handleInputChange} />
           <input type="text" name="email" value={userInfo.email} onChange={handleInputChange} />
           <input type="text" name="contact" value={userInfo.contact} onChange={handleInputChange} />
