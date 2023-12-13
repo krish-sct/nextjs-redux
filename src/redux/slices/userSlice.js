@@ -1,5 +1,4 @@
-const { createSlice } = require("@reduxjs/toolkit");
-
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   users: {
     totalPages: 0,
