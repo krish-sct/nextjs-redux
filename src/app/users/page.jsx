@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar/Navbar";
 import Users from "../components/Users/Users";
 export const metadata = {
   title: "Users",

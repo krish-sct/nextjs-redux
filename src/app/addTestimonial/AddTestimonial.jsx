@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTestimonials, getTestimonials } from "../../utils/apis";
+import { addTestimonial, getTestimonials } from "../../utils/apis";
 import { setTestimonials } from "../../redux/slices/testimonialSlice";
 import { useRouter } from "next/navigation";
 const AddTestimonial = () => {
@@ -17,7 +17,7 @@ const AddTestimonial = () => {
         setTestimonial((prev) => { return { ...prev, [name]: value } })
     }
     const handleAdd = async () => {
-        const res = await addTestimonials(testimonial)
+        const res = await addTestimonial(testimonial)
         if (res?.status === 200) {
             const testimonials = await getTestimonials();
             if (testimonials) {

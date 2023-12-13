@@ -36,3 +36,16 @@ export async function POST(req, res) {
     return NextResponse.json({ error: "Database" }, { status: 500 });
   }
 }
+export async function DELETE(req, res) {
+  const _id = req.nextUrl?.searchParams?.get("id");
+  try {
+    await connect();
+    const res = await Testimonial.deleteOne({ _id });
+    return NextResponse.json(
+      { message: "Testimonial Deleted", status: 200 },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json({ error: "Database" }, { status: 500 });
+  }
+}

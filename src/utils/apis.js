@@ -8,7 +8,7 @@ export const getTestimonials = async (page, limit) => {
   );
   return response.json();
 };
-export const addTestimonials = async (data) => {
+export const addTestimonial = async (data) => {
   const res = await fetch(`${configs.baseURL}/testimonials`, {
     cache: "no-store",
     method: "POST",
@@ -16,6 +16,16 @@ export const addTestimonials = async (data) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+  });
+  return res.json();
+};
+export const deleteTestimonial = async (id) => {
+  const res = await fetch(`${configs.baseURL}/testimonials?id=${id}`, {
+    cache: "no-store",
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   return res.json();
 };
