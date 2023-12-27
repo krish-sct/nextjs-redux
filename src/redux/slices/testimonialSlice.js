@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getTestimonials, addTestimonial } from "../../utils/apis";
+import {
+  getTestimonials,
+  addTestimonial as apiAddTestimonial,
+} from "../../utils/apis";
 const initialState = {
   testimonials: {
     totalPages: 0,
@@ -13,6 +16,7 @@ export const fetchTestimonial = createAsyncThunk(
   "testimonial/fetchTestimonial",
   async (page, limit) => {
     const response = await getTestimonials(page, limit);
+    console.log({ response });
     return response.data;
   }
 );
@@ -30,6 +34,13 @@ export const deleteTestimonial = createAsyncThunk(
     return response.data;
   }
 );
+export const editTestimonial = createAsyncThunk(
+  "testimonial/editTestimonial",
+  async (data) => {
+    const response = await editTestimonial(data);
+    return response.data;
+  }
+);
 export const testimonialSlice = createSlice({
   name: "testimonial",
   initialState,
@@ -43,6 +54,7 @@ export const testimonialSlice = createSlice({
         state.error = null;
       },
       [fetchTestimonial.fulfilled]: (state, action) => {
+        //console.log("payload test:",action.payload);
         state.loading = false;
         state.testimonials = action.payload;
       },

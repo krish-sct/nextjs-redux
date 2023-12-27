@@ -22,30 +22,3 @@ export async function GET(req, res) {
     return NextResponse.json({ error: "Database" }, { status: 500 });
   }
 }
-export async function POST(req, res) {
-  const body = await req.json();
-  const newTestimonial = new Testimonial(body);
-  try {
-    await connect();
-    await newTestimonial.save();
-    return NextResponse.json(
-      { message: "Testimonial added", status: 200 },
-      { status: 200 }
-    );
-  } catch (error) {
-    return NextResponse.json({ error: "Database" }, { status: 500 });
-  }
-}
-export async function DELETE(req, res) {
-  const _id = req.nextUrl?.searchParams?.get("id");
-  try {
-    await connect();
-    const res = await Testimonial.deleteOne({ _id });
-    return NextResponse.json(
-      { message: "Testimonial Deleted", status: 200 },
-      { status: 200 }
-    );
-  } catch (error) {
-    return NextResponse.json({ error: "Database" }, { status: 500 });
-  }
-}

@@ -1,0 +1,26 @@
+.container {
+    height: calc(100vh - 75px);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    background-image: url("");
+    background-blend-mode: darken;
+    background-position: center;
+    background-size: cover;
+}
+
+.wrapper {
+    position: absolute;
+    top: 13.5rem;
+    left: 10rem;
+}
+
+.title {
+    margin-bottom: 2rem;
+    font-size: 50px;
+    color: white;
+}
+
+.desc {
+    font-size: 22px;
+    color: #efefef;
+} 

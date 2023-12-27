@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 const List = () => {
     const testimonials = useSelector((state) => state?.testimonialData?.testimonials)
-    //console.log({ testimonials });
+    console.log("Testimonials:", testimonials );
 
     return (
         <div>

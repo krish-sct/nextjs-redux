@@ -18,4 +18,5 @@ const testimonialSchema = new Schema(
 );
 
 //If the User collection does not exist create a new one.
-export default mongoose.models.Testimonial || mongoose.model("Testimonial", testimonialSchema);
+export default mongoose.models.Testimonial ||
+  mongoose.model("Testimonial", testimonialSchema);
