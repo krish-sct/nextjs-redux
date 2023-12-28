@@ -11,7 +11,9 @@ const initialState = {
 };
 export const fetchTestimonial = createAsyncThunk(
   "testimonial/fetchTestimonial",
-  async (page, limit) => {
+  async (data) => {
+    let page = data?.page;
+    let limit = data?.limit;
     try {
       const response = await getTestimonials(page, limit);
       return response;

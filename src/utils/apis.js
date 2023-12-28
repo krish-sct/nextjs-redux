@@ -1,4 +1,6 @@
 import configs from "./configs";
+let defaultPage = 1;
+let defaultLimit = 10;
 //Testimonial
 export const getTestimonials = async (page, limit) => {
   const response = await fetch(
