@@ -16,15 +16,15 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const fetchAll = async () => {
     try {
-      await dispatch(fetchTestimonial());
-      await dispatch(fetchArticle());
-      await dispatch(fetchCareer());
-      await dispatch(fetchEventTradeShow())
-      await dispatch(fetchFaq())
-      await dispatch(fetchNews())
-      await dispatch(fetchNewsLetter())
-      await dispatch(fetchPodcast())
-      await dispatch(fetchPressRelease())
+      dispatch(fetchTestimonial());
+      dispatch(fetchArticle());
+      dispatch(fetchCareer());
+      dispatch(fetchEventTradeShow())
+      dispatch(fetchFaq())
+      dispatch(fetchNews())
+      dispatch(fetchNewsLetter())
+      dispatch(fetchPodcast())
+      dispatch(fetchPressRelease())
     } catch (error) {
       console.error("Error in fetching:", error);
     }

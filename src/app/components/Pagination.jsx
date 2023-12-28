@@ -21,7 +21,7 @@ const Pagination = ({ total, current }) => {
     }
   }
   useEffect(() => {
-    fetchSelectedPage()
+    //fetchSelectedPage()
   }, [currentPage])
   return (
     <div className='flex f-r'>

@@ -17,6 +17,7 @@ const Contactus= () => {
     hearAboutUs: "",
     queries: ""
   });
+  
 
   const generateRandomCaptcha = (length) => {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
