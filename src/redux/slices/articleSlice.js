@@ -16,8 +16,7 @@ export const fetchArticle = createAsyncThunk(
   async (page, limit) => {
     try {
       const response = await getArticles(page, limit);
-      console.log({ response });
-      return response.data;
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -31,21 +30,21 @@ export const articleSlice = createSlice({
     setArticles: (state, action) => {
       state.articles = { ...action.payload };
     },
-
-    extraReducers: {
-      [fetchArticle.pending]: (state) => {
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchArticle.pending, (state) => {
         state.loading = true;
         state.error = null;
-      },
-      [fetchArticle.fulfilled]: (state, action) => {
+      })
+      .addCase(fetchArticle.fulfilled, (state, action) => {
         state.loading = false;
         state.articles = action.payload;
-      },
-      [fetchArticle.rejected]: (state, action) => {
+      })
+      .addCase(fetchArticle.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      },
-    },
+      });
   },
 });
 

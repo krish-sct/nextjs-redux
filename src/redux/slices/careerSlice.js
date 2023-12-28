@@ -15,8 +15,7 @@ export const fetchCareer = createAsyncThunk(
   "career/fetchCareer",
   async (page, limit) => {
     const response = await getCareers(page, limit);
-    console.log({ response });
-    return response.data;
+    return response;
   }
 );
 
@@ -27,20 +26,21 @@ export const careerSlice = createSlice({
     setCareers: (state, action) => {
       state.careers = { ...action.payload };
     },
-    extraReducers: {
-      [fetchCareer.pending]: (state) => {
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCareer.pending, (state) => {
         state.loading = true;
         state.error = null;
-      },
-      [fetchCareer.fulfilled]: (state, action) => {
+      })
+      .addCase(fetchCareer.fulfilled, (state, action) => {
         state.loading = false;
         state.careers = action.payload;
-      },
-      [fetchCareer.rejected]: (state, action) => {
+      })
+      .addCase(fetchCareer.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      },
-    },
+      });
   },
 });
 
