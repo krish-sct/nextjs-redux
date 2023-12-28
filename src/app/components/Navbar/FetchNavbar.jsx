@@ -33,7 +33,7 @@ const Navbar = () => {
   }
   useEffect(()=>{
     fetchAll()
-  },[dispatch])
+  },[])
   return (
     <div>
       <nav className="">
