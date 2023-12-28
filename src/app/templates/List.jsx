@@ -6,7 +6,6 @@ import Template from './Template'
 
 const List = () => {
     const templates=useSelector((state)=>state?.templateData?.templates)
-    console.log("Templates:",templates);
 
   return (
     <div>

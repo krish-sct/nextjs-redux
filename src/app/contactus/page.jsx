@@ -88,14 +88,7 @@ const Contactus= () => {
       
   ]
 
-  // const countries=[
-  //   "India",
-  //   "Europe",
-  //   "UK",
-  //   "North America(West)",
-  //   "North America(East)",
-  //   "USA"
-  // ]
+
 
    useEffect(() => {
      setFormValues({
@@ -147,13 +140,6 @@ const Contactus= () => {
                 setFormValues((prev)=>({...prev,country:e}))
               }}
             >
-             {/* <option value='' disabled>{field.placeholder}</option>
-            {countries.map((country, i) => (
-             <option key={i} value={country}>
-              {country}
-              </option>
-             ))}
-         */}
             </CountrySelect>
             </div>
           ) : (

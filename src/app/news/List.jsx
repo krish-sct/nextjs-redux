@@ -6,10 +6,6 @@ import News from './News'
 
 const List = () => {
     const news=useSelector((state)=>state?.newsData?.news)
-    console.log("News:",news);
-
-
-
     
   return (
     <div>

@@ -6,7 +6,6 @@ import NewsLetter from './NewsLetter'
 
 const List = () => {
     const newsLetter=useSelector((state)=>state?.newsLetterData?.newsLetter)
-    console.log("NewsLetter:",newsLetter);
 
   return (
     <div>

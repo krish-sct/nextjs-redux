@@ -6,7 +6,6 @@ import {useSelector} from 'react-redux'
 
 const List = () => {
     const faqs=useSelector((state)=>state?.faqData?.faqs)
-    console.log("Faqs:",faqs);
 
   return (
     <div>

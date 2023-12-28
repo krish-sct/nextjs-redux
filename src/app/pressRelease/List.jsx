@@ -6,7 +6,6 @@ import PressRelease from './pressRelease'
 
 const List = () => {
     const pressReleases=useSelector((state)=>state?.pressReleaseData?.pressReleases)
-    console.log("pressReleases:",pressReleases);
 
   return (
     <div>

@@ -6,7 +6,6 @@ import Podcast from './Podcast'
 
 const List = () => {
     const podcasts=useSelector((state)=>state?.podcastData?.podcasts)
-    console.log("Podcasts:",podcasts);
 
   return (
     <div>

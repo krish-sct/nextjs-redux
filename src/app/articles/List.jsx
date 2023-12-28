@@ -5,10 +5,7 @@ import Pagination from '../components/Pagination'
 import Article from './Article'
 
 const List = () => {
-
     const articles=useSelector((state)=>state?.articleData?.articles)
-    console.log("Articles:",articles);
-
   return (
     <div>
         <h1>Articles</h1>
