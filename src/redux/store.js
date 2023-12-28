@@ -9,6 +9,7 @@ import pressReleaseReducer from "./slices/pressReleaseSlice";
 import podcastReducer from "./slices/podcastSlice";
 import eventTradeShowsReducer from "./slices/eventTradeShowsSlice";
 import faqReducer from "./slices/faqSlice";
+import contactusReducer from "./slices/contactUsSlice";
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     podcastData: podcastReducer,
     eventTradeShowsData: eventTradeShowsReducer,
     faqData: faqReducer,
+    contactusData: contactusReducer,
   },
 });
 export default store;

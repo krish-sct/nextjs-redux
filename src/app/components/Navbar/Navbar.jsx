@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setTestimonials } from "../../../redux/slices/testimonialSlice";
+import {  setTestimonials } from "../../../redux/slices/testimonialSlice";
 import { getTestimonials, getArticles, getTemplates, getCareers, getNews, getNewsLetters, getPodcasts, getPressReleases, getEventTradeShows, getFaqs, getContactus } from '../../../utils/apis'
 import { setArticles } from "../../../redux/slices/articleSlice";
 import { setTemplates } from "../../../redux/slices/templateSlice";
@@ -13,7 +13,7 @@ import { setPressReleases } from "../../../redux/slices/pressReleaseSlice";
 import { setPodcasts } from "../../../redux/slices/podcastSlice";
 import { setEventTradeShows } from "../../../redux/slices/eventTradeShowsSlice";
 import { setFaqs } from "../../../redux/slices/faqSlice";
-import {setContactForms} from "../../../redux/slices/contactUsSlice"
+
 
 const Navbar = () => {
   const dispatch = useDispatch()

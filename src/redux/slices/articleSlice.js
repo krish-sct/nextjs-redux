@@ -14,9 +14,13 @@ const initialState = {
 export const fetchArticle = createAsyncThunk(
   "articles/fetchArticle",
   async (page, limit) => {
-    const response = await getArticles(page, limit);
-    console.log({ response });
-    return response.data;
+    try {
+      const response = await getArticles(page, limit);
+      console.log({ response });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -27,6 +31,7 @@ export const articleSlice = createSlice({
     setArticles: (state, action) => {
       state.articles = { ...action.payload };
     },
+
     extraReducers: {
       [fetchArticle.pending]: (state) => {
         state.loading = true;

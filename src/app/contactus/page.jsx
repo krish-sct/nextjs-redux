@@ -1,39 +1,122 @@
 'use client'
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { addContactForm } from "../../utils/apis";
+import styles from './contactus.module.css'
+import { CountrySelect} from "react-country-state-city";
+import "react-country-state-city/dist/react-country-state-city.css";
+
 
 const Contactus= () => {
-  const [formInfo,setFormInfo]=useState({
+  const [formValues, setFormValues] = useState({
     name: "",
-    companyName:"",
+    companyName: "",
     email: "",
     contactNo: "",
-    country:"",
-    captcha:"",
-    hearAboutUs:"",
-    queries:""
-  })
-  const [selectedCountry,setSelectedCountry]=useState('');
+    country: "",
+    captcha: "",
+    hearAboutUs: "",
+    queries: ""
+  });
 
-  const countries=[
-    "India",
-    "Europe",
-    "UK",
-    "North America(West)",
-    "North America(East)"
+  const generateRandomCaptcha = (length) => {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let captcha = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      captcha += characters.charAt(randomIndex);
+    }
+    return captcha;
+  };
+  const formData=[
+      {
+       name:'name',
+       placeholder:'Name*',
+       type:'text',
+       value:'',
+       className:''
+      },
+     {
+      name:'companyName',
+      placeholder:'Company Name*',
+      type:'text',
+      value:'',
+      className:''
+      },
+      {
+        name:'email',
+        placeholder:'Email*',
+        type:'text',
+        value:'',
+        className:''
+      },
+      {
+        name:'contactNo',
+        placeholder:'Contact Number',
+        type:'text',
+        value:'',
+        className:''
+      },
+      {
+        name:'country',
+        placeholder:'Country',
+        type:'select',
+        value:'',
+        className:''
+      },
+      {
+        name:'captcha',
+        placeholder:'captcha',
+        type:'text',
+        value:formValues.captcha,
+        className:''
+      },
+      {
+        name:'hearAboutUs',
+        placeholder:'How did you hear about us?',
+        type:'text',
+        value:'',
+        className:''
+      },
+      {
+        name:'queries',
+        placeholder:'Describe your queries',
+        type:'text',
+        value:'',
+        className:''
+      },
+      
   ]
+
+  // const countries=[
+  //   "India",
+  //   "Europe",
+  //   "UK",
+  //   "North America(West)",
+  //   "North America(East)",
+  //   "USA"
+  // ]
+
+   useEffect(() => {
+     setFormValues({
+      ...formValues,
+       captcha: generateRandomCaptcha(6)
+      });
+   }, []);
+
 
   const handleSubmit=async(e)=>{
     e.preventDefault();
-    const res=await addContactForm(formInfo)
+    const countryName = formValues.country ? formValues.country.name : "";
+    const formDataWithCountryName = { ...formValues, country: countryName };
+    const res=await addContactForm(formDataWithCountryName)
     if(res?.status===200){
-      setFormInfo({
+      setFormValues({
         name: "",
         companyName:"",
         email: "",
         contactNo: "",
         country:"",
-        captcha:"",
+        captcha:generateRandomCaptcha(6),
         hearAboutUs:"",
         queries:""
       })
@@ -43,44 +126,54 @@ const Contactus= () => {
   }
 
   const handleChange=(e)=>{
-    setFormInfo({...formInfo,[e.target.name]:e.target.value})
+    setFormValues({...formValues,[e.target.name]:e.target.value})
   }
 
   return(
-    <div className="">
-       <div className="border bg-violet items-center h-screen flex justify-center">
-        <h1 className="text-center">Write to us</h1>
-        <hr/>
-        <p className="text-center">
-         We are always open for your enquiries, comments and suggestions that may help us serve you in a better way. Please fill out the digital form below to communicate to us. We will respond quickly to your enquiries /comments / suggestions.
-        </p>
-    </div>
-    
-       <div className="bg-gray-300 p-8 rounded-md shadow-md ">
-        <h1 className="text-3xl font-bold text-center">Contact</h1>
-         <form onSubmit={handleSubmit} className="text-center ">
-          <input type="text" name="name" placeholder="Name*" onChange={handleChange} value={formInfo.name} className="w-full p-2 border rounded"/><br/>
-          <input type="text" name="companyName" placeholder="Company Name*" onChange={handleChange} value={formInfo.companyName} /><br/>
-          <input type="text" name="email" placeholder="Email*" onChange={handleChange} value={formInfo.email}/><br/>
-          <input type="text" name="contactNo" placeholder="Contact Number" onChange={handleChange} value={formInfo.contactNo}/><br/>
-          <select name="country" placeholder="" value={selectedCountry.country} onChange={(e)=>{
-            setSelectedCountry(e.target.value);
-            setFormInfo({ ...formInfo, country: e.target.value });
-          }} >
-          <option value='' disabled>USA</option>
-          {countries.map((country, i) => (
-            <option key={i} value={country}>
+    <div>
+    <h1 className="text-3xl font-bold text-center">Contact</h1>
+    <form onSubmit={handleSubmit} className="text-center ">
+     {formData.map((field,i) => (
+        <div key={i}>
+          {field.type === 'select' && field.name === 'country' ? (
+            <div className={styles.dropdownstyles}>
+            <CountrySelect
+              name={field.name}
+              placeholder={field.placeholder}
+              value={formValues.country || ''}
+              className={field.className}
+              onChange={(e)=>{
+                setFormValues((prev)=>({...prev,country:e}))
+              }}
+            >
+             {/* <option value='' disabled>{field.placeholder}</option>
+            {countries.map((country, i) => (
+             <option key={i} value={country}>
               {country}
-            </option>
-          ))}
-          </select>
-          <br/>
-        <input type="text" name="captcha" placeholder="captcha*" onChange={handleChange} value={formInfo.captcha}/><br/>
-        <textarea type="text" name="hearAboutUs" placeholder="How did you hear about us?" onChange={handleChange} value={formInfo.hearAboutUs} cols={20} rows={10}/><br/>
-        <input type="text" name="queries" placeholder="Describe your queries" onChange={handleChange} value={formInfo.queries}/><br/>
-         <button type="submit" className="p-2 rounded my-5 bg-green-400 font-bold hover:border-l-green-100" >Submit</button>
-        </form>
-       </div>
+              </option>
+             ))}
+         */}
+            </CountrySelect>
+            </div>
+          ) : (
+            <>
+            <input
+              type={field.type}
+              name={field.name}
+              placeholder={field.placeholder}
+              value={formValues[field.name] || ''}
+              className={field.className}
+              onChange={handleChange}
+            />
+             {field.name === 'captcha' && (
+                  <p className={styles.captcha}>{formValues.captcha}</p>
+                )}
+            </>
+          )}
+        </div>
+      ))}
+       <button type="submit" className="p-2 rounded my-5 bg-green-400 font-bold hover:border-l-green-100" >Submit</button>
+    </form>
     </div>
   )
   

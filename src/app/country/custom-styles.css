@@ -1,9 +1,4 @@
-
-.RCSF__flag {
-    display: none;
+.react-country-state-city .dropdown-text {
+    color: #3498db; 
+    font-size: 16px; 
   }
-  
- .RCSF__option {
-    color: #333; 
-  }
-  

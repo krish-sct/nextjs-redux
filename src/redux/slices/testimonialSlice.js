@@ -1,8 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  getTestimonials,
-  addTestimonial as apiAddTestimonial,
-} from "../../utils/apis";
+import { getTestimonials } from "../../utils/apis";
 const initialState = {
   testimonials: {
     totalPages: 0,
@@ -15,32 +12,16 @@ const initialState = {
 export const fetchTestimonial = createAsyncThunk(
   "testimonial/fetchTestimonial",
   async (page, limit) => {
-    const response = await getTestimonials(page, limit);
-    console.log({ response });
-    return response.data;
+    try {
+      const response = await getTestimonials(page, limit);
+      console.log({ response });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
-export const addTestimonial = createAsyncThunk(
-  "testimonial/addTestimonial",
-  async (data) => {
-    const response = await addTestimonial(data);
-    return response.data;
-  }
-);
-export const deleteTestimonial = createAsyncThunk(
-  "testimonial/deleteTestimonial",
-  async (data) => {
-    const response = await deleteTestimonial(data);
-    return response.data;
-  }
-);
-export const editTestimonial = createAsyncThunk(
-  "testimonial/editTestimonial",
-  async (data) => {
-    const response = await editTestimonial(data);
-    return response.data;
-  }
-);
+
 export const testimonialSlice = createSlice({
   name: "testimonial",
   initialState,

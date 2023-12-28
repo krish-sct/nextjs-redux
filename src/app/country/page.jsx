@@ -20,29 +20,49 @@
 
 // export default MyComponent;
 
+
+
+
 'use client'
 import {
     CitySelect,
     CountrySelect,
     StateSelect,
   } from "react-country-state-city";
-import "./custom-styles.css"; 
 import "react-country-state-city/dist/react-country-state-city.css";
 import { useState } from "react";
 
   const countryPage=()=> {
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
+
+    const countrySelectStyles = {
+      fontSize: "16px",
+      color: "black",   
+    };
+
+    const dropdownstyles={
+      color: "#3498db", 
+      fontSize: "16px",
+      width:"20rem"
+    }
+
     return (
-      <div>
+      <div style={dropdownstyles}>
         <h6>Country</h6>
         <CountrySelect
           onChange={(e) => {
             setCountryid(e.id);
           }}
           placeHolder="Select Country"
+          style={countrySelectStyles} 
         />
-        <h6>State</h6>
+       
+      </div>
+    );
+  }
+  export default countryPage;
+ {/* <h6>State</h6>
         <StateSelect
           countryid={countryid}
           onChange={(e) => {
@@ -58,8 +78,4 @@ import { useState } from "react";
             console.log(e);
           }}
           placeHolder="Select City"
-        />
-      </div>
-    );
-  }
-  export default countryPage;
+        /> */}

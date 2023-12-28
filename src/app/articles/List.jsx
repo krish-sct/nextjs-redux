@@ -1,10 +1,18 @@
 'use client'
-import React from 'react'
-import {useSelector} from 'react-redux'
+import React, { useEffect } from 'react'
+import {useSelector,useDispatch} from 'react-redux'
 import Pagination from '../components/Pagination'
 import Article from './Article'
+import { fetchArticle } from '../../redux/slices/articleSlice'
 
 const List = () => {
+ 
+    // const dispatch=useDispatch();
+
+    // useEffect(()=>{
+    //   dispatch(fetchArticle());
+    // },[dispatch])
+
     const articles=useSelector((state)=>state?.articleData?.articles)
     console.log("Articles:",articles);
 

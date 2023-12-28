@@ -11,7 +11,7 @@ const initialState = {
   error: null,
 };
 
-export const addUser = createAsyncThunk(
+export const addContactForm = createAsyncThunk(
   "contactforms/addContactForm",
   async (data) => {
     try {
@@ -27,7 +27,7 @@ export const contactUSSlice = createSlice({
   name: "contactform",
   initialState,
   reducers: {
-    setUsetContactFormssers: (state, action) => {
+    setContactForms: (state, action) => {
       console.log({ action });
       state.contactforms = { ...action.payload };
     },
