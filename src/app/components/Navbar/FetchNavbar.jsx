@@ -11,6 +11,7 @@ import { fetchNews } from "../../../redux/slices/newsSlice";
 import { fetchNewsLetter } from "../../../redux/slices/newsLetterSlice";
 import { fetchPodcast } from "../../../redux/slices/podcastSlice";
 import { fetchPressRelease } from "../../../redux/slices/pressReleaseSlice";
+import { fetchTemplate } from "../../../redux/slices/templateSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch()
@@ -25,6 +26,7 @@ const Navbar = () => {
       dispatch(fetchNewsLetter())
       dispatch(fetchPodcast())
       dispatch(fetchPressRelease())
+      dispatch(fetchTemplate())
     } catch (error) {
       console.error("Error in fetching:", error);
     }

@@ -15,8 +15,7 @@ export const fetchNewsLetter = createAsyncThunk(
   "newsLetter/fetchNewsLetter",
   async (page, limit) => {
     const response = await getNewsLetters(page, limit);
-    console.log({ response });
-    return response.data;
+    return response;
   }
 );
 
@@ -27,20 +26,21 @@ export const newsLetterSlice = createSlice({
     setNewsLetter: (state, action) => {
       state.newsLetter = { ...action.payload };
     },
-    extraReducers: {
-      [fetchNewsLetter.pending]: (state) => {
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchNewsLetter.pending, (state) => {
         state.loading = true;
         state.error = null;
-      },
-      [fetchNewsLetter.fulfilled]: (state, action) => {
+      })
+      .addCase(fetchNewsLetter.fulfilled, (state, action) => {
         state.loading = false;
         state.newsLetter = action.payload;
-      },
-      [fetchNewsLetter.rejected]: (state, action) => {
+      })
+      .addCase(fetchNewsLetter.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      },
-    },
+      });
   },
 });
 

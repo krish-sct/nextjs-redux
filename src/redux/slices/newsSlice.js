@@ -15,8 +15,7 @@ export const fetchNews = createAsyncThunk(
   "news/fetchNews",
   async (page, limit) => {
     const response = await getNews(page, limit);
-    console.log({ response });
-    return response.data;
+    return response;
   }
 );
 
@@ -27,20 +26,21 @@ export const newsSlice = createSlice({
     setNews: (state, action) => {
       state.news = { ...action.payload };
     },
-    extraReducers: {
-      [fetchNews.pending]: (state) => {
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchNews.pending, (state) => {
         state.loading = true;
         state.error = null;
-      },
-      [fetchNews.fulfilled]: (state, action) => {
+      })
+      .addCase(fetchNews.fulfilled, (state, action) => {
         state.loading = false;
         state.news = action.payload;
-      },
-      [fetchNews.rejected]: (state, action) => {
+      })
+      .addCase(fetchNews.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      },
-    },
+      });
   },
 });
 

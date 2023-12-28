@@ -15,8 +15,7 @@ export const fetchFaq = createAsyncThunk(
   "faqs/fetchFaq",
   async (page, limit) => {
     const response = await getFaqs(page, limit);
-    console.log({ response });
-    return response.data;
+    return response;
   }
 );
 
@@ -27,20 +26,21 @@ export const faqSlice = createSlice({
     setFaqs: (state, action) => {
       state.faqs = { ...action.payload };
     },
-    extraReducers: {
-      [fetchFaq.pending]: (state) => {
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchFaq.pending, (state) => {
         state.loading = true;
         state.error = null;
-      },
-      [fetchFaq.fulfilled]: (state, action) => {
+      })
+      .addCase(fetchFaq.fulfilled, (state, action) => {
         state.loading = false;
         state.faqs = action.payload;
-      },
-      [fetchFaq.rejected]: (state, action) => {
+      })
+      .addCase(fetchFaq.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      },
-    },
+      });
   },
 });
 

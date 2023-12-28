@@ -15,8 +15,7 @@ export const fetchTemplate = createAsyncThunk(
   "template/fetchTemplate",
   async (page, limit) => {
     const response = await getTemplates(page, limit);
-    console.log({ response });
-    return response.data;
+    return response;
   }
 );
 
@@ -27,20 +26,21 @@ export const templateSlice = createSlice({
     setTemplates: (state, action) => {
       state.templates = { ...action.payload };
     },
-    extraReducers: {
-      [fetchTemplate.pending]: (state) => {
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTemplate.pending, (state) => {
         state.loading = true;
         state.error = null;
-      },
-      [fetchTemplate.fulfilled]: (state, action) => {
+      })
+      .addCase(fetchTemplate.fulfilled, (state, action) => {
         state.loading = false;
         state.templates = action.payload;
-      },
-      [fetchTemplate.rejected]: (state, action) => {
+      })
+      .addCase(fetchTemplate.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      },
-    },
+      });
   },
 });
 

@@ -15,8 +15,7 @@ export const fetchEventTradeShow = createAsyncThunk(
   "eventTradeShows/fetchEventTradeShow",
   async (page, limit) => {
     const response = await getEventTradeShows(page, limit);
-    console.log({ response });
-    return response.data;
+    return response;
   }
 );
 
@@ -27,20 +26,21 @@ export const eventTradeShowsSlice = createSlice({
     setEventTradeShows: (state, action) => {
       state.eventTradeShows = { ...action.payload };
     },
-    extraReducers: {
-      [fetchEventTradeShow.pending]: (state) => {
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchEventTradeShow.pending, (state) => {
         state.loading = true;
         state.error = null;
-      },
-      [fetchEventTradeShow.fulfilled]: (state, action) => {
+      })
+      .addCase(fetchEventTradeShow.fulfilled, (state, action) => {
         state.loading = false;
         state.eventTradeShows = action.payload;
-      },
-      [fetchEventTradeShow.rejected]: (state, action) => {
+      })
+      .addCase(fetchEventTradeShow.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      },
-    },
+      });
   },
 });
 

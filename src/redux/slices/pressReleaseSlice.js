@@ -15,8 +15,7 @@ export const fetchPressRelease = createAsyncThunk(
   "pressReleases/fetchPressRelease",
   async (page, limit) => {
     const response = await getPressReleases(page, limit);
-    console.log({ response });
-    return response.data;
+    return response;
   }
 );
 
@@ -27,20 +26,21 @@ export const pressReleaseSlice = createSlice({
     setPressReleases: (state, action) => {
       state.pressReleases = { ...action.payload };
     },
-    extraReducers: {
-      [fetchPressRelease.pending]: (state) => {
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPressRelease.pending, (state) => {
         state.loading = true;
         state.error = null;
-      },
-      [fetchPressRelease.fulfilled]: (state, action) => {
+      })
+      .addCase(fetchPressRelease.fulfilled, (state, action) => {
         state.loading = false;
         state.pressReleases = action.payload;
-      },
-      [fetchPressRelease.rejected]: (state, action) => {
+      })
+      .addCase(fetchPressRelease.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      },
-    },
+      });
   },
 });
 

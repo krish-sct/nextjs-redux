@@ -15,8 +15,7 @@ export const fetchPodcast = createAsyncThunk(
   "podcasts/fetchPodcast",
   async (page, limit) => {
     const response = await getPodcasts(page, limit);
-    console.log({ response });
-    return response.data;
+    return response;
   }
 );
 
@@ -27,20 +26,21 @@ export const podcastsSlice = createSlice({
     setPodcasts: (state, action) => {
       state.podcasts = { ...action.payload };
     },
-    extraReducers: {
-      [fetchPodcast.pending]: (state) => {
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPodcast.pending, (state) => {
         state.loading = true;
         state.error = null;
-      },
-      [fetchPodcast.fulfilled]: (state, action) => {
+      })
+      .addCase(fetchPodcast.fulfilled, (state, action) => {
         state.loading = false;
         state.podcasts = action.payload;
-      },
-      [fetchPodcast.rejected]: (state, action) => {
+      })
+      .addCase(fetchPodcast.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      },
-    },
+      });
   },
 });
 
