@@ -18,7 +18,7 @@ export const fetchTestimonial = createAsyncThunk(
       const response = await getTestimonials(page, limit);
       return response;
     } catch (error) {
-      console.log(error);
+      console.error("Error in fetching:", error);
     }
   }
 );

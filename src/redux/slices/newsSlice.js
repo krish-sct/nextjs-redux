@@ -11,13 +11,16 @@ const initialState = {
   error: null,
 };
 
-export const fetchNews = createAsyncThunk(
-  "news/fetchNews",
-  async (page, limit) => {
+export const fetchNews = createAsyncThunk("news/fetchNews", async (data) => {
+  let page = data?.page;
+  let limit = data?.limit;
+  try {
     const response = await getNews(page, limit);
     return response;
+  } catch (error) {
+    console.error("Error in fetching:", error);
   }
-);
+});
 
 export const newsSlice = createSlice({
   name: "news",

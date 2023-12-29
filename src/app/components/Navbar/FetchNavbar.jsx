@@ -12,6 +12,7 @@ import { fetchNewsLetter } from "../../../redux/slices/newsLetterSlice";
 import { fetchPodcast } from "../../../redux/slices/podcastSlice";
 import { fetchPressRelease } from "../../../redux/slices/pressReleaseSlice";
 import { fetchTemplate } from "../../../redux/slices/templateSlice";
+import { fetchMasterForm } from "../../../redux/slices/masterSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ const Navbar = () => {
       dispatch(fetchPodcast())
       dispatch(fetchPressRelease())
       dispatch(fetchTemplate())
+      dispatch(fetchMasterForm())
     } catch (error) {
       console.error("Error in fetching:", error);
     }
@@ -53,7 +55,7 @@ const Navbar = () => {
           <Link className="link" href="/eventTradeShows">EventTradeShows</Link><br/>
           <Link className="link" href="/faqs">FAQ</Link><br/>
           <Link className="link" href="/contactus">Contact Us</Link><br/>
-
+          <Link className="link" href="/masterForm">MasterForm</Link><br/>
         </ul>
       </nav>
     </div>

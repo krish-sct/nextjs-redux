@@ -4,7 +4,9 @@ let defaultLimit = 10;
 //Testimonial
 export const getTestimonials = async (page, limit) => {
   const response = await fetch(
-    `${configs.baseURL}/testimonials?page=${page || 1}&limit=${limit || 5}`,
+    `${configs.baseURL}/testimonials?page=${page || defaultPage}&limit=${
+      limit || defaultLimit
+    }`,
     {
       cache: "no-store",
     }
@@ -16,7 +18,9 @@ export const getTestimonials = async (page, limit) => {
 export const getArticles = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/articles?page=${page || 1}&limit=${limit || 10}`,
+      `${configs.baseURL}/articles?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
       {
         cache: "no-store",
       }
@@ -37,7 +41,9 @@ export const getArticles = async (page, limit) => {
 export const getTemplates = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/templates?page=${page || 1}&limit=${limit || 10}`,
+      `${configs.baseURL}/templates?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
       {
         cache: "no-store",
       }
@@ -58,7 +64,9 @@ export const getTemplates = async (page, limit) => {
 export const getCareers = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/careers?page=${page || 1}&limit=${limit || 10}`,
+      `${configs.baseURL}/careers?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
       {
         cache: "no-store",
       }
@@ -79,7 +87,9 @@ export const getCareers = async (page, limit) => {
 export const getNews = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/news?page=${page || 1}&limit=${limit || 10}`,
+      `${configs.baseURL}/news?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
       {
         cache: "no-store",
       }
@@ -100,7 +110,9 @@ export const getNews = async (page, limit) => {
 export const getNewsLetters = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/newsLetters?page=${page || 1}&limit=${limit || 10}`,
+      `${configs.baseURL}/newsLetters?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
       {
         cache: "no-store",
       }
@@ -121,7 +133,9 @@ export const getNewsLetters = async (page, limit) => {
 export const getPressReleases = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/pressReleases?page=${page || 1}&limit=${limit || 10}`,
+      `${configs.baseURL}/pressReleases?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
       {
         cache: "no-store",
       }
@@ -142,7 +156,9 @@ export const getPressReleases = async (page, limit) => {
 export const getPodcasts = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/podcasts?page=${page || 1}&limit=${limit || 10}`,
+      `${configs.baseURL}/podcasts?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
       {
         cache: "no-store",
       }
@@ -162,8 +178,8 @@ export const getPodcasts = async (page, limit) => {
 export const getEventTradeShows = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/eventTradeShows?page=${page || 1}&limit=${
-        limit || 10
+      `${configs.baseURL}/eventTradeShows?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
       }`,
       {
         cache: "no-store",
@@ -184,7 +200,9 @@ export const getEventTradeShows = async (page, limit) => {
 export const getFaqs = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/faqs?page=${page || 1}&limit=${limit || 10}`,
+      `${configs.baseURL}/faqs?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
       {
         cache: "no-store",
       }
@@ -204,7 +222,9 @@ export const getFaqs = async (page, limit) => {
 export const getContactus = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/contactus?page=${page || 1}&limit=${limit || 10}`,
+      `${configs.baseURL}/contactus?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
       {
         cache: "no-store",
       }
@@ -230,4 +250,26 @@ export const addContactForm = async (data) => {
     body: JSON.stringify(data),
   });
   return res.json();
+};
+
+//master
+export const getMasterForms = async (page, limit) => {
+  try {
+    const response = await fetch(
+      `${configs.baseURL}/masterForm?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      console.error(`Failed to fetch masterForm : ${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getMasterForm:", error.message);
+    throw error;
+  }
 };

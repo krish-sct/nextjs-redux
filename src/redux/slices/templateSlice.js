@@ -13,9 +13,15 @@ const initialState = {
 
 export const fetchTemplate = createAsyncThunk(
   "template/fetchTemplate",
-  async (page, limit) => {
-    const response = await getTemplates(page, limit);
-    return response;
+  async (data) => {
+    let page = data?.page;
+    let limit = data?.limit;
+    try {
+      const response = await getTemplates(page, limit);
+      return response;
+    } catch (error) {
+      console.error("Error in fetching:", error);
+    }
   }
 );
 

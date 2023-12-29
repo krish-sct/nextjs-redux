@@ -13,9 +13,15 @@ const initialState = {
 
 export const fetchCareer = createAsyncThunk(
   "career/fetchCareer",
-  async (page, limit) => {
-    const response = await getCareers(page, limit);
-    return response;
+  async (data) => {
+    let page = data?.page;
+    let limit = data?.limit;
+    try {
+      const response = await getCareers(page, limit);
+      return response;
+    } catch (error) {
+      console.error("Error in fetching:", error);
+    }
   }
 );
 

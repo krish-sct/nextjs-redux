@@ -13,12 +13,14 @@ const initialState = {
 
 export const fetchArticle = createAsyncThunk(
   "articles/fetchArticle",
-  async (page, limit) => {
+  async (data) => {
+    let page = data?.page;
+    let limit = data?.limit;
     try {
       const response = await getArticles(page, limit);
       return response;
     } catch (error) {
-      console.log(error);
+      console.error("Error", error);
     }
   }
 );

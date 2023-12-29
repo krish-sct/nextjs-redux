@@ -13,9 +13,15 @@ const initialState = {
 
 export const fetchNewsLetter = createAsyncThunk(
   "newsLetter/fetchNewsLetter",
-  async (page, limit) => {
-    const response = await getNewsLetters(page, limit);
-    return response;
+  async (data) => {
+    let page = data?.page;
+    let limit = data?.limit;
+    try {
+      const response = await getNewsLetters(page, limit);
+      return response;
+    } catch (error) {
+      console.error("Error in fetching:", error);
+    }
   }
 );
 
