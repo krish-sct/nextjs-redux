@@ -219,27 +219,6 @@ export const getFaqs = async (page, limit) => {
 };
 
 //ContactUs
-export const getContactus = async (page, limit) => {
-  try {
-    const response = await fetch(
-      `${configs.baseURL}/contactus?page=${page || defaultPage}&limit=${
-        limit || defaultLimit
-      }`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      console.error(`Failed to fetch contactus : ${response.status}`);
-    }
-    return response.json();
-  } catch (error) {
-    console.error("Error in getContactus:", error.message);
-    throw error;
-  }
-};
-
 export const addContactForm = async (data) => {
   const res = await fetch(`${configs.baseURL}/contactus`, {
     cache: "no-store",
@@ -253,23 +232,29 @@ export const addContactForm = async (data) => {
 };
 
 //master
-export const getMasterForms = async (page, limit) => {
+export const getMaster = async () => {
   try {
-    const response = await fetch(
-      `${configs.baseURL}/masterForm?page=${page || defaultPage}&limit=${
-        limit || defaultLimit
-      }`,
-      {
-        cache: "no-store",
-      }
-    );
-
+    const response = await fetch(`${configs.baseURL}/master`, {
+      cache: "no-store",
+    });
     if (!response.ok) {
-      console.error(`Failed to fetch masterForm : ${response.status}`);
+      console.error(`Failed to fetch master: ${response.status}`);
     }
     return response.json();
   } catch (error) {
-    console.error("Error in getMasterForm:", error.message);
+    console.error("Error in getMaster:", error.message);
     throw error;
   }
+};
+
+export const addMaster = async (data) => {
+  const res = await fetch(`${configs.baseURL}/master`, {
+    cache: "no-store",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return res.json();
 };
