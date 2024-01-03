@@ -2,9 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getMaster, addMaster as apiAddMaster } from "../../utils/apis";
 
 const initialState = {
-  masters: {
-    masters: [],
-  },
+  masterData: {},
   loading: false,
   error: null,
 };
@@ -45,7 +43,7 @@ export const masterSlice = createSlice({
       })
       .addCase(fetchMaster.fulfilled, (state, action) => {
         state.loading = false;
-        state.masterForms = action.payload;
+        state.masterData = action.payload;
       })
       .addCase(fetchMaster.rejected, (state, action) => {
         state.loading = false;

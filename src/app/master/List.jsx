@@ -4,12 +4,11 @@ import {useSelector} from 'react-redux'
 import Master from './Master'
 
 const List = () => {
-    const masters=useSelector((state)=>state?.masterData)
-    console.log("masters",{masters});
+    const masters=useSelector((state)=>state?.masterData?.masterData)
     return (
      <div>
       <h3>Master</h3>
-      <Master masters={masters} />
+      <Master data={masters} />
       </div>
   )
 }

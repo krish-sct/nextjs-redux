@@ -1,80 +1,94 @@
-'use client'
-import React,{useState,useEffect} from "react";
+"use client";
+import React from "react";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { addContactForm } from "../../utils/apis";
+import styles from "./contactus.module.css";
+import { CountrySelect } from "react-country-state-city";
+import "react-country-state-city/dist/react-country-state-city.css";
 
-const Contactus= () => {
-  const [formValues, setFormValues] = useState({
-    name: "",
-    email: "",
-  });
-  
-  const formData=[
-      {
-       name:'name',
-       placeholder:'Name*',
-       type:'text',
-       value:'',
-       className:''
-      },
-      {
-        name:'email',
-        placeholder:'Email*',
-        type:'text',
-        value:'',
-        className:''
-      }
-  ]
+const ContactPage = () => {
+  const masters = useSelector((state) => state?.masterData?.masterData);
 
+  const [formData, setFormData] = useState([]);
 
+  const handleFormData = () => {
+    let data = masters?.filter(
+      (e) => e?.type?.toLowerCase() === "contactus"
+    )[0];
+    setFormData(data?.formData || []);
+  };
 
-   useEffect(() => {
-     setFormValues({
-      ...formValues
-      });
-   }, []);
-
-
-  const handleSubmit=async(e)=>{
-    e.preventDefault();
-    const res=await addContactForm(formValues)
-    console.log("res",res);
-    if(res?.status===200){
-      setFormValues({
-        name: "",
-        email: "",
-      })
-    }else{
-      console.error("Error")
+  useEffect(() => {
+    if (masters?.length) {
+      handleFormData();
     }
-  }
+  }, [masters]);
 
-  const handleChange=(e)=>{
-    setFormValues({...formValues,[e.target.name]:e.target.value})
-  }
+  const handleChange = (e) => {
+    setFormData((prev) => {
+      let data = [...prev];
+      return data.map((field) => {
+        return field.name === e.target.name
+          ? { ...field, value: e.target.value }
+          : field;
+      });
+    });
+  };
 
-  return(
-    <div>
-    <h1 className="text-3xl font-bold text-center">Contact</h1>
-    <form onSubmit={handleSubmit} className="text-center ">
-     {formData.map((field,i) => (
-        <div key={i}>
-        <input
-              type={field.type}
-              name={field.name}
-              placeholder={field.placeholder}
-              value={formValues[field.name] || ''}
-              className={field.className}
-              onChange={handleChange}
-            />    
-         </div>
-        
-        
-      ))}
-       <button type="submit" className="p-2 rounded my-5 bg-green-400 font-bold hover:border-l-green-100" >Submit</button>
-    </form>
+  const handleSubmit = async () => {
+    let data = formData.map((e) => {
+      return { name: e.name, value: e.value };
+    });
+    const res = await addContactForm({ formData: data });
+    if (res?.status === 200) {
+      handleFormData();
+    } else {
+      console.error("Error");
+    }
+  };
+
+  return (
+    <div className="text-black">
+      <h1>Contact Form</h1>
+      <div>
+        {formData?.map((field, i) => (
+          <div key={i}>
+            {field.type === "select" && field.name === "country" ? (
+              <div className={styles.dropdownstyles}>
+                <CountrySelect
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={field.value || ""}
+                  className={field.className}
+                  onChange={(e) => {
+                    console.log(e);
+                  }}
+                ></CountrySelect>
+              </div>
+            ) : (
+              <>
+                <input
+                  type={field.type}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={field.value || ""}
+                  className={field.className}
+                  onChange={handleChange}
+                />
+              </>
+            )}
+          </div>
+        ))}
+        <button
+          onClick={handleSubmit}
+          className="p-2 rounded my-5 bg-green-400 font-bold hover:border-l-green-100"
+        >
+          Submit
+        </button>
+      </div>
     </div>
-  )
-  
+  );
 };
 
-export default Contactus;
+export default ContactPage;

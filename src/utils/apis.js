@@ -219,8 +219,10 @@ export const getFaqs = async (page, limit) => {
 };
 
 //ContactUs
+
 export const addContactForm = async (data) => {
-  const res = await fetch(`${configs.baseURL}/contactus`, {
+  console.log({ data });
+  const response = await fetch(`${configs.baseURL}/contactus`, {
     cache: "no-store",
     method: "POST",
     headers: {
@@ -228,7 +230,8 @@ export const addContactForm = async (data) => {
     },
     body: JSON.stringify(data),
   });
-  return res.json();
+  //console.log(response);
+  return response.json();
 };
 
 //master

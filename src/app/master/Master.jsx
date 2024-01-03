@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Master = ({masters}) => {
+const Master = ({data}) => {
 
   return (
     <div>
-      {masters.masterForms.map((master,i)=>(
+      {data?.masterData?.map((master,i)=>(
         <div key={i} className='card'>
           {master.type==='contactus' ?
           (

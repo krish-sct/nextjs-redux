@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const masterSchema = new Schema({
-  components: [
+  formData: [
     {
       type: Object,
       default: [],
