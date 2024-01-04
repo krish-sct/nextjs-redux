@@ -74,7 +74,6 @@ const ContactPage = () => {
                   value={field.value || ""}
                   className={field.className}
                   onChange={(selectedCountry) => {
-                    console.log(selectedCountry);
                     handleCountryChange(selectedCountry);
                   }}
                 ></CountrySelect>
