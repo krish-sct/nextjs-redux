@@ -30,7 +30,10 @@ const Footer = () => {
       </div>
 
       <br />
-      <div>copyright @2024 e-con Systems.</div>
+      <div>
+        &copy; Copyright @{new Date().getFullYear()} E-con systems .<br />
+        All rights reserved.
+      </div>
     </div>
   );
 };
