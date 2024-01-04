@@ -92,10 +92,7 @@ const ContactPage = () => {
             )}
           </div>
         ))}
-        <button
-          onClick={handleSubmit}
-          className="p-2 rounded my-5 bg-green-400 font-bold hover:border-l-green-100"
-        >
+        <button onClick={handleSubmit} className="">
           Submit
         </button>
       </div>
