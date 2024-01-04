@@ -36,6 +36,18 @@ const ContactPage = () => {
     });
   };
 
+  const handleCountryChange = (selectedCountry) => {
+    const countryName = selectedCountry?.label || selectedCountry;
+    console.log("countryname", countryName.name);
+    setFormData((prev) => {
+      return prev.map((field) => {
+        return field.name === "country"
+          ? { ...field, value: countryName.name }
+          : field;
+      });
+    });
+  };
+
   const handleSubmit = async () => {
     let data = formData.map((e) => {
       return { name: e.name, value: e.value };
@@ -61,8 +73,9 @@ const ContactPage = () => {
                   placeholder={field.placeholder}
                   value={field.value || ""}
                   className={field.className}
-                  onChange={(e) => {
-                    console.log(e);
+                  onChange={(selectedCountry) => {
+                    console.log(selectedCountry);
+                    handleCountryChange(selectedCountry);
                   }}
                 ></CountrySelect>
               </div>
