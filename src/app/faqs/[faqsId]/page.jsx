@@ -13,7 +13,7 @@ const FaqsDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    if (faq?.length) {
+    if (faq?.length && params) {
       handleFaqDetails();
     }
   }, [faq]);

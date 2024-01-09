@@ -6,6 +6,7 @@ const initialState = {
     totalPages: 0,
     currentPage: 0,
     faqs: [],
+    faqDetails: {},
   },
   loading: false,
   error: null,
@@ -21,6 +22,18 @@ export const fetchFaq = createAsyncThunk("faqs/fetchFaq", async (data) => {
     console.error("Error in fetching:", error);
   }
 });
+
+export const fetchFaqById = createAsyncThunk(
+  "faqs/fetchFaqById",
+  async (faqsId) => {
+    try {
+      const response = await getFaqs(faqsId);
+      return response;
+    } catch (error) {
+      console.error("Error in fetching:", error);
+    }
+  }
+);
 
 export const faqSlice = createSlice({
   name: "faq",
@@ -41,6 +54,18 @@ export const faqSlice = createSlice({
         state.faqs = action.payload;
       })
       .addCase(fetchFaq.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchFaqById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchFaqById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.faqs.faqDetails = action.payload;
+      })
+      .addCase(fetchFaqById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

@@ -10,7 +10,6 @@ const initialState = {
 export const fetchMaster = createAsyncThunk("master/fetchMaster", async () => {
   try {
     const response = await getMaster();
-    //console.log({ response });
     return response;
   } catch (error) {
     console.error("Error in fetching:", error);

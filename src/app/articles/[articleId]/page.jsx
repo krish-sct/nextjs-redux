@@ -1,41 +1,40 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import configs from "../../../utils/configs";
+import { useSelector, useDispatch } from "react-redux";
 import TemplatePreview from "../../components/TemplatePreview";
-
-async function generateMetadata({ params }) {
-  const res = await fetch(`${configs.baseURL}/articles/${params?.articleId}`);
-  console.log("response:", res);
-
-  const post = await res.json();
-  console.log(post);
-
-  document.title = `Article - ${post.title}`;
-
-  return {
-    title: `Article - ${post.title}`,
-    keywords: ["article", "post"],
-    description: post.body,
-  };
-}
+import { fetchArticleById } from "../../../redux/slices/articleSlice";
 
 const ArticleDetails = ({ params }) => {
+  const dispatch = useDispatch();
   const article = useSelector(
     (state) => state?.articleData?.articles?.articles
   );
-
+  console.log({ article });
+  const articlePageDetails = useSelector(
+    (state) => state?.articleData?.articles?.articleDetails
+  );
+  console.log({ articlePageDetails });
   const [articleDetails, setArticleDetails] = useState([]);
   const handleArticleDetails = () => {
     let data = article?.filter((e) => e?._id === params?.articleId)[0];
     setArticleDetails(data?.components || []);
   };
 
+  const getDetailsById = () => {
+    dispatch(fetchArticleById(params.articleId));
+  };
+
   useEffect(() => {
-    if (article?.length) {
+    if (article?.length && params) {
       handleArticleDetails();
     }
   }, [article]);
+
+  useEffect(() => {
+    if (articlePageDetails?.length && params) {
+      getDetailsById();
+    }
+  }, [articlePageDetails, params]);
 
   return (
     <div>

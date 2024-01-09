@@ -15,7 +15,7 @@ const TestimonialDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    if (testimonial?.length) {
+    if (testimonial?.length && params) {
       handleTestimonialDetails();
     }
   }, [testimonial]);

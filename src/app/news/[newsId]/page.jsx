@@ -26,7 +26,7 @@ const NewsDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    if (newses?.length) {
+    if (newses?.length && params) {
       handleNewsDetails();
     }
   }, [newses]);

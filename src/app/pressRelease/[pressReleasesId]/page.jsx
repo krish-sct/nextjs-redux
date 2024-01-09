@@ -17,7 +17,7 @@ const PressReleasesDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    if (pressRelease?.length) {
+    if (pressRelease?.length && params) {
       handlepressReleaseDetails();
     }
   }, [pressRelease]);

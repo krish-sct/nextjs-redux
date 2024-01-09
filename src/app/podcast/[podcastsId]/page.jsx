@@ -15,7 +15,7 @@ const PodcastsDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    if (podcasts?.length) {
+    if (podcasts?.length && params) {
       handlePodcastDetails();
     }
   }, [podcasts]);

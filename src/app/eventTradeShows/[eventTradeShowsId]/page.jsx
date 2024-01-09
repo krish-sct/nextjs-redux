@@ -17,7 +17,7 @@ const EventTradeShowsDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    if (eventTradeShow?.length) {
+    if (eventTradeShow?.length && params) {
       handleEventTradeShowDetails();
     }
   }, [eventTradeShow]);

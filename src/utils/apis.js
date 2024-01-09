@@ -14,6 +14,24 @@ export const getTestimonials = async (page, limit) => {
   return response.json();
 };
 
+export const getTestimonialById = async (testimonialId) => {
+  try {
+    const response = await fetch(
+      `${configs.baseURL}/testimonials?id=${testimonialId}`,
+      {
+        cache: "no-store",
+      }
+    );
+    if (!response.ok) {
+      console.error(`Failed to fetch testimonial:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getTestimonialById:", error.message);
+    throw error;
+  }
+};
+
 //Article
 export const getArticles = async (page, limit) => {
   try {
@@ -32,6 +50,24 @@ export const getArticles = async (page, limit) => {
     return response.json();
   } catch (error) {
     console.error("Error in getArticles:", error.message);
+    throw error;
+  }
+};
+
+export const getArticleById = async (articleId) => {
+  try {
+    const response = await fetch(
+      `${configs.baseURL}/articles?id=${articleId}`,
+      {
+        cache: "no-store",
+      }
+    );
+    if (!response.ok) {
+      console.error(`Failed to fetch article:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getArticleById:", error.message);
     throw error;
   }
 };
@@ -59,6 +95,21 @@ export const getCareers = async (page, limit) => {
   }
 };
 
+export const getCareerById = async (careerId) => {
+  try {
+    const response = await fetch(`${configs.baseURL}/careers?id=${careerId}`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch career:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getCareerById:", error.message);
+    throw error;
+  }
+};
+
 //News
 
 export const getNews = async (page, limit) => {
@@ -78,6 +129,22 @@ export const getNews = async (page, limit) => {
     return response.json();
   } catch (error) {
     console.error("Error in getNews:", error.message);
+    throw error;
+  }
+};
+
+export const getNewsById = async (newsId) => {
+  try {
+    const response = await fetch(`${configs.baseURL}/news?id=${newsId}`, {
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to fetch news:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getNewsById:", error.message);
     throw error;
   }
 };
@@ -105,6 +172,25 @@ export const getNewsLetters = async (page, limit) => {
   }
 };
 
+export const getNewsLetterById = async (newsId) => {
+  try {
+    const response = await fetch(
+      `${configs.baseURL}/newsLetters?id=${newsLetterId}`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      console.error(`Failed to fetch newsLetter:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getNewsLetterById:", error.message);
+    throw error;
+  }
+};
+
 //PressRelease
 
 export const getPressReleases = async (page, limit) => {
@@ -124,6 +210,25 @@ export const getPressReleases = async (page, limit) => {
     return response.json();
   } catch (error) {
     console.error("Error in getPressRelease:", error.message);
+    throw error;
+  }
+};
+
+export const getPressReleasesById = async (pressReleasesId) => {
+  try {
+    const response = await fetch(
+      `${configs.baseURL}/pressReleases?id=${pressReleasesId}`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      console.error(`Failed to fetch pressReleases:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getPressReleasesById:", error.message);
     throw error;
   }
 };
@@ -151,6 +256,24 @@ export const getPodcasts = async (page, limit) => {
   }
 };
 
+export const getPodcastById = async (podcastsId) => {
+  try {
+    const response = await fetch(
+      `${configs.baseURL}/podcasts?id=${podcastsId}`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      console.error(`Failed to fetch podcasts:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getPodcastsById:", error.message);
+    throw error;
+  }
+};
 //EventTradeShows
 export const getEventTradeShows = async (page, limit) => {
   try {
@@ -173,6 +296,24 @@ export const getEventTradeShows = async (page, limit) => {
   }
 };
 
+export const getEventTradeShowsById = async (eventTradeShowsId) => {
+  try {
+    const response = await fetch(
+      `${configs.baseURL}/eventTradeShows?id=${eventTradeShowsId}`,
+      {
+        cache: "no-store",
+      }
+    );
+    if (!response.ok) {
+      console.error(`Failed to fetch eventTradeShows:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getEventTradeShowsById:", error.message);
+    throw error;
+  }
+};
+
 //Faq
 export const getFaqs = async (page, limit) => {
   try {
@@ -191,6 +332,21 @@ export const getFaqs = async (page, limit) => {
     return response.json();
   } catch (error) {
     console.error("Error in getFaqs:", error.message);
+    throw error;
+  }
+};
+
+export const getFaqById = async (faqsId) => {
+  try {
+    const response = await fetch(`${configs.baseURL}/faqs?id=${faqsId}`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch faqs:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getFaqId:", error.message);
     throw error;
   }
 };

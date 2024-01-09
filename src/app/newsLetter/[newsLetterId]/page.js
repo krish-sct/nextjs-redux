@@ -15,7 +15,7 @@ const NewsLetterDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    if (newsLetters?.length) {
+    if (newsLetters?.length && params) {
       handleNewsLetterDetails();
     }
   }, [newsLetters]);

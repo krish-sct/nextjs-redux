@@ -13,7 +13,7 @@ const CareerDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    if (career?.length) {
+    if (career?.length && params) {
       handleCareerDetails();
     }
   }, [career]);
