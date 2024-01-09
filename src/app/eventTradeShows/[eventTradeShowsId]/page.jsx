@@ -1,11 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import TemplatePreview from "../../components/TemplatePreview";
+import { fetchEventTradeShowById } from "../../../redux/slices/eventTradeShowsSlice";
 
 const EventTradeShowsDetails = ({ params }) => {
+  const dispatch = useDispatch();
   const eventTradeShow = useSelector(
     (state) => state?.eventTradeShowsData?.eventTradeShows?.eventTradeShows
+  );
+
+  const eventTradeShowPageDetails = useSelector(
+    (state) =>
+      state?.eventTradeShowsData?.eventTradeShows?.eventTradeShowDetails
+        ?.eventTradeShow?.components
   );
 
   const [eventTradeShowDetails, setEventTradeShowDetails] = useState([]);
@@ -16,15 +24,29 @@ const EventTradeShowsDetails = ({ params }) => {
     setEventTradeShowDetails(data?.components || []);
   };
 
+  const getDetailsById = () => {
+    dispatch(fetchEventTradeShowById(params.eventTradeShowsId));
+  };
+
   useEffect(() => {
     if (eventTradeShow?.length && params) {
       handleEventTradeShowDetails();
+      getDetailsById();
     }
   }, [eventTradeShow]);
 
+  useEffect(() => {
+    if (eventTradeShowPageDetails?.length) {
+      setEventTradeShowDetails(eventTradeShowPageDetails || []);
+    }
+  }, [eventTradeShowPageDetails]);
+
   return (
     <div>
-      <TemplatePreview templateData={eventTradeShowDetails} />
+      <TemplatePreview
+        templateData={eventTradeShowDetails}
+        title={"EventTradeShows"}
+      />
     </div>
   );
 };

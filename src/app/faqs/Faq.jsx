@@ -14,9 +14,10 @@ const Faq = ({ faqs }) => {
       {faqs?.faqs?.map((faq, i) => (
         <div key={i} className="card">
           <li>
-            <a href={`/faqs/${faq._id}`}>
-              {faq?.components?.filter((e) => e.key === "header")?.[0]?.value}
-            </a>
+            {
+              faq?.components?.filter((e) => e.key === "description")?.[0]
+                ?.value
+            }
             <p className="f-r lightseagreen">{handleDate(faq.createdAt)}</p>
           </li>
           <br />

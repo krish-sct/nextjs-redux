@@ -6,7 +6,6 @@ export async function generateMetadata({ params }) {
   );
 
   const post = await res.json();
-  // console.log(post);
   return {
     title: `${post.title}  blogpost_${params.postId}`,
     keywords: ["blog", "post", "blogs"],

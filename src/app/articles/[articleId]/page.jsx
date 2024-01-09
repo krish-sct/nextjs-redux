@@ -9,11 +9,11 @@ const ArticleDetails = ({ params }) => {
   const article = useSelector(
     (state) => state?.articleData?.articles?.articles
   );
-  console.log({ article });
+
   const articlePageDetails = useSelector(
-    (state) => state?.articleData?.articles?.articleDetails
+    (state) => state?.articleData?.articles?.articleDetails?.article?.components
   );
-  console.log({ articlePageDetails });
+
   const [articleDetails, setArticleDetails] = useState([]);
   const handleArticleDetails = () => {
     let data = article?.filter((e) => e?._id === params?.articleId)[0];
@@ -27,19 +27,20 @@ const ArticleDetails = ({ params }) => {
   useEffect(() => {
     if (article?.length && params) {
       handleArticleDetails();
+      getDetailsById();
     }
   }, [article]);
 
   useEffect(() => {
-    if (articlePageDetails?.length && params) {
-      getDetailsById();
+    if (articlePageDetails?.length) {
+      setArticleDetails(articlePageDetails || []);
     }
-  }, [articlePageDetails, params]);
+  }, [articlePageDetails]);
 
   return (
     <div>
       <h1>Article</h1>
-      <TemplatePreview templateData={articleDetails} title={'Article'} />
+      <TemplatePreview templateData={articleDetails} title={"Article"} />
     </div>
   );
 };

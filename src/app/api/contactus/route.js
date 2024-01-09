@@ -4,7 +4,6 @@ import ContactUsQuery from "../../../models/ContactUsQuery";
 
 export async function POST(req, res) {
   const body = await req.json();
-  console.log({ body });
   const newContactUsQuery = new ContactUsQuery(body);
   try {
     await connect();

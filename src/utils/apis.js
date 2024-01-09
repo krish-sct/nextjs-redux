@@ -172,7 +172,7 @@ export const getNewsLetters = async (page, limit) => {
   }
 };
 
-export const getNewsLetterById = async (newsId) => {
+export const getNewsLetterById = async (newsLetterId) => {
   try {
     const response = await fetch(
       `${configs.baseURL}/newsLetters?id=${newsLetterId}`,
@@ -363,7 +363,6 @@ export const addContactForm = async (data) => {
     },
     body: JSON.stringify(data),
   });
-  //console.log(response);
   return response.json();
 };
 

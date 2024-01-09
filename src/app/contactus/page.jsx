@@ -37,7 +37,6 @@ const ContactPage = () => {
 
   const handleCountryChange = (selectedCountry) => {
     const countryName = selectedCountry?.label || selectedCountry;
-    console.log("countryname", countryName.name);
     setFormData((prev) => {
       return prev.map((field) => {
         return field.name === "country"

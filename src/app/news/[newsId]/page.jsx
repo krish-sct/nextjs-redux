@@ -1,23 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import configs from "../../../utils/configs";
+import { useSelector, useDispatch } from "react-redux";
 import TemplatePreview from "../../components/TemplatePreview";
-
-async function generateMetadata() {
-  const res = await fetch(`${configs.baseURL}/news/${news._id}`);
-
-  const post = await res.json();
-  console.log(post);
-  return {
-    title: `News - ${post.title}`,
-    keywords: ["news", "post"],
-    description: post.body,
-  };
-}
+import { fetchNewsById } from "../../../redux/slices/newsSlice";
 
 const NewsDetails = ({ params }) => {
+  const dispatch = useDispatch();
   const newses = useSelector((state) => state?.newsData?.news?.news);
+
+  const newsPageDetails = useSelector(
+    (state) => state?.newsData?.news?.newsDetails?.newses?.components
+  );
 
   const [newsDetails, setNewsDetails] = useState([]);
   const handleNewsDetails = () => {
@@ -25,16 +18,26 @@ const NewsDetails = ({ params }) => {
     setNewsDetails(data?.components || []);
   };
 
+  const getDetailsById = () => {
+    dispatch(fetchNewsById(params.newsId));
+  };
+
   useEffect(() => {
     if (newses?.length && params) {
       handleNewsDetails();
+      getDetailsById();
     }
   }, [newses]);
 
+  useEffect(() => {
+    if (newsPageDetails?.length) {
+      setNewsDetails(newsPageDetails || []);
+    }
+  }, [newsPageDetails]);
   return (
     <div>
       <h1>News</h1>
-      <TemplatePreview templateData={newsDetails} />
+      <TemplatePreview templateData={newsDetails} title={"News"} />
     </div>
   );
 };
