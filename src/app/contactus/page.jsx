@@ -59,9 +59,9 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="">
+    <div className={styles.contactPageContainer}>
       <h1>Contact Form</h1>
-      <div>
+      <div className="">
         {formData?.map((field, i) => (
           <div key={i}>
             {field.type === "select" && field.name === "country" ? (
