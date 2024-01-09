@@ -22,3 +22,20 @@ export async function GET(req, res) {
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 }
+
+export async function GETById(req, { params }) {
+  const { id } = params;
+  try {
+    await connect();
+    const article = await Article.findOne({ _id: id });
+
+    if (!article) {
+      return NextResponse.json({ error: "Article not found" });
+    }
+
+    return NextResponse.json({ article });
+  } catch (error) {
+    console.error("Error fetching article:", error);
+    return NextResponse.json({ error: "Internal Server Error" });
+  }
+}

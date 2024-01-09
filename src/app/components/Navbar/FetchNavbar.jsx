@@ -1,6 +1,7 @@
-'use client'
+"use client";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import styles from "./Navbar.module.css";
 import { useDispatch } from "react-redux";
 import { fetchTestimonial } from "../../../redux/slices/testimonialSlice";
 import { fetchArticle } from "../../../redux/slices/articleSlice";
@@ -11,53 +12,99 @@ import { fetchNews } from "../../../redux/slices/newsSlice";
 import { fetchNewsLetter } from "../../../redux/slices/newsLetterSlice";
 import { fetchPodcast } from "../../../redux/slices/podcastSlice";
 import { fetchPressRelease } from "../../../redux/slices/pressReleaseSlice";
-import { fetchTemplate } from "../../../redux/slices/templateSlice";
 import { fetchMaster } from "../../../redux/slices/masterSlice";
 
+const links = [
+  {
+    id: 1,
+    title: "Home",
+    url: "/",
+  },
+  {
+    id: 2,
+    title: "Testimonials",
+    url: "/testimonials",
+  },
+  {
+    id: 3,
+    title: "Articles",
+    url: "/articles",
+  },
+  {
+    id: 4,
+    title: "Careers",
+    url: "/careers",
+  },
+  {
+    id: 5,
+    title: "News",
+    url: "/news",
+  },
+  {
+    id: 6,
+    title: "NewsLetter",
+    url: "/newsLetter",
+  },
+  {
+    id: 7,
+    title: " Podcasts",
+    url: "/podcast",
+  },
+  {
+    id: 8,
+    title: "PressRelease",
+    url: "/pressRelease",
+  },
+  {
+    id: 9,
+    title: " FAQ",
+    url: "/faqs",
+  },
+  {
+    id: 10,
+    title: "EventTradeShows",
+    url: "/eventTradeShows",
+  },
+  {
+    id: 11,
+    title: "Contact Us",
+    url: "/contactus",
+  },
+];
+
 const Navbar = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const fetchAll = async () => {
     try {
       dispatch(fetchTestimonial());
       dispatch(fetchArticle());
       dispatch(fetchCareer());
-      dispatch(fetchEventTradeShow())
-      dispatch(fetchFaq())
-      dispatch(fetchNews())
-      dispatch(fetchNewsLetter())
-      dispatch(fetchPodcast())
-      dispatch(fetchPressRelease())
-      dispatch(fetchTemplate())
-      dispatch(fetchMaster())
+      dispatch(fetchEventTradeShow());
+      dispatch(fetchFaq());
+      dispatch(fetchNews());
+      dispatch(fetchNewsLetter());
+      dispatch(fetchPodcast());
+      dispatch(fetchPressRelease());
+      dispatch(fetchMaster());
     } catch (error) {
       console.error("Error in fetching:", error);
     }
-  }
-  useEffect(()=>{
-    fetchAll()
-  },[])
+  };
+  useEffect(() => {
+    fetchAll();
+  }, []);
   return (
-    <div>
-      <nav className="">
-        <Link className="link" href="/">
-          <h3>E-con Systems</h3>
-        </Link>
-        <ul>
-          <Link className="link" href="/">Home</Link><br />
-          <Link className="link" href="/testimonials">Testimonials</Link><br />
-          <Link className="link" href="/articles">Articles</Link><br/>
-          <Link className="link" href="/templates">Templates</Link><br/>
-          <Link className="link" href="/careers">Careers</Link><br/>
-          <Link className="link" href="/news">News</Link><br/>
-          <Link className="link" href="/newsLetter">NewsLetter</Link><br/>
-          <Link className="link" href="/podcast">Podcasts</Link><br/>
-          <Link className="link" href="/pressRelease">PressRelease</Link><br/>
-          <Link className="link" href="/eventTradeShows">EventTradeShows</Link><br/>
-          <Link className="link" href="/faqs">FAQ</Link><br/>
-          <Link className="link" href="/contactus">Contact Us</Link><br/>
-          <Link className="link" href="/master">Master</Link><br/>
-        </ul>
-      </nav>
+    <div className={styles.container}>
+      <Link className={styles.text} href="/">
+        E-con Systems
+      </Link>
+      <div className={styles.links}>
+        {links.map((link) => (
+          <Link key={link.id} href={link.url} className={styles.links}>
+            {link.title}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

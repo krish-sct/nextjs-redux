@@ -1,7 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import testimonialReducer from "./slices/testimonialSlice";
 import articleReducer from "./slices/articleSlice";
-import templateReducer from "./slices/templateSlice";
 import careerReducer from "./slices/careerSlice";
 import newsReducer from "./slices/newsSlice";
 import newsLetterReducer from "./slices/newsLetterSlice";
@@ -15,7 +14,6 @@ import masterReducer from "./slices/masterSlice";
 const rootReducer = combineReducers({
   testimonialData: testimonialReducer,
   articleData: articleReducer,
-  templateData: templateReducer,
   careerData: careerReducer,
   newsData: newsReducer,
   newsLetterData: newsLetterReducer,

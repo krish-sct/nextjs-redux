@@ -6,8 +6,11 @@ import { Providers } from "../redux/providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Econ Systems",
-  description: "Econ Systems",
+  title: {
+    template: "%s | Econ Systems",
+    //default: "Econ Systems",
+  },
+  description: "Econ Systems build experience for any stack",
 };
 
 export default function RootLayout({ children }) {
@@ -16,8 +19,10 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={inter.className}>
           <>
-            <Navbar />
-            {children}
+            <div className="container">
+              <Navbar />
+              {children}
+            </div>
           </>
         </body>
       </html>

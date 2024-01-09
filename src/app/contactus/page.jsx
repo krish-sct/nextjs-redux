@@ -9,7 +9,6 @@ import "react-country-state-city/dist/react-country-state-city.css";
 
 const ContactPage = () => {
   const masters = useSelector((state) => state?.masterData?.masterData);
-
   const [formData, setFormData] = useState([]);
 
   const handleFormData = () => {
@@ -61,7 +60,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="text-black">
+    <div className="">
       <h1>Contact Form</h1>
       <div>
         {formData?.map((field, i) => (

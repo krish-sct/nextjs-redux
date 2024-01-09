@@ -1,15 +1,31 @@
-import React from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
+import { handleDate } from "../../utils/common";
 
-const News = ({news}) => {
+const News = ({ news }) => {
+  const newses = useSelector((state) => state?.newsData?.news);
+
+  const getHeader = (header) => {
+    return header.value || "";
+  };
+
   return (
-    <div>
-      {news?.news?.map((news,i)=>(
-        <div key={i} className='card'>
-            <p>Id:{news._id}</p>
+    <ul>
+      {news?.news?.map((newses, i) => (
+        <div key={i} className="card">
+          <li>
+            <a href={`/news/${newses._id}`}>
+              {
+                newses?.components?.filter((e) => e.key === "header")?.[0]
+                  ?.value
+              }
+            </a>
+            <p className="f-r lightseagreen">{handleDate(newses.createdAt)}</p>
+          </li>
         </div>
       ))}
-    </div>
-  )
-}
+    </ul>
+  );
+};
 
-export default News
+export default News;

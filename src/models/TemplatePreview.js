@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const templateSchema = new Schema({
+const templatePreviewSchema = new Schema({
   components: {
     type: Object,
     default: {},
@@ -10,4 +10,4 @@ const templateSchema = new Schema({
 });
 
 export default mongoose.models.Template ||
-  mongoose.model("Template", templateSchema);
+  mongoose.model("Template", templatePreviewSchema);

@@ -4,14 +4,9 @@ const { Schema } = mongoose;
 
 const testimonialSchema = new Schema(
   {
-    description: {
-      type: String,
-    },
-    person: {
-      type: String,
-    },
-    company: {
-      type: String,
+    components: {
+      type: Object,
+      default: {},
     },
   },
   { timestamps: true }

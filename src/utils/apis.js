@@ -36,29 +36,6 @@ export const getArticles = async (page, limit) => {
   }
 };
 
-//Template
-
-export const getTemplates = async (page, limit) => {
-  try {
-    const response = await fetch(
-      `${configs.baseURL}/templates?page=${page || defaultPage}&limit=${
-        limit || defaultLimit
-      }`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      console.error(`Failed to fetch templates: ${response.status}`);
-    }
-    return response.json();
-  } catch (error) {
-    console.error("Error in getTemplates:", error.message);
-    throw error;
-  }
-};
-
 //Career
 
 export const getCareers = async (page, limit) => {
