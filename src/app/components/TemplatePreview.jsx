@@ -1,6 +1,7 @@
 import React from "react";
+import SEO from "./SEO";
 
-const TemplatePreview = ({ templateData }) => {
+const TemplatePreview = ({ templateData, title }) => {
   return (
     <div className="preview-wrapper">
       <h4>Template Preview</h4>
@@ -38,6 +39,7 @@ const TemplatePreview = ({ templateData }) => {
                 <div className="images">
                   {e?.imgs?.map((img, imgI) => {
                     return (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         className="images-img"
                         src={img?.src}
@@ -76,6 +78,7 @@ const TemplatePreview = ({ templateData }) => {
               {e?.key === "banner" ? (
                 <div class="banner">
                   <img
+                    // eslint-disable-next-line @next/next/no-img-element
                     src="https://picsum.photos/800/300"
                     alt="Nature Banner"
                   />
@@ -90,6 +93,11 @@ const TemplatePreview = ({ templateData }) => {
                 <div>
                   <div className="date">{e?.value}</div>
                 </div>
+              ) : (
+                ""
+              )}
+              {e?.key === "seo" ? (
+                <SEO data={e.value} title={title} />
               ) : (
                 ""
               )}

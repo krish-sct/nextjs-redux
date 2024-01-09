@@ -7,7 +7,6 @@ export const metadata = {
   },
   type: "article",
   description: "Articles build experience for any stack",
-  keywords: ["Article", "Nvidia", "camera"],
   authors: [{ name: "Deepthi" }, { name: "Bala", url: "" }],
   formatDetection: {
     email: false,
