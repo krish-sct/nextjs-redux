@@ -13,6 +13,7 @@ import { fetchNewsLetter } from "../../../redux/slices/newsLetterSlice";
 import { fetchPodcast } from "../../../redux/slices/podcastSlice";
 import { fetchPressRelease } from "../../../redux/slices/pressReleaseSlice";
 import { fetchMaster } from "../../../redux/slices/masterSlice";
+import { fetchVideoUrl } from "../../../redux/slices/videoSlice";
 
 const links = [
   {
@@ -67,6 +68,11 @@ const links = [
   },
   {
     id: 11,
+    title: "Videos",
+    url: "/videos",
+  },
+  {
+    id: 12,
     title: "Contact Us",
     url: "/contactus",
   },
@@ -85,6 +91,7 @@ const Navbar = () => {
       dispatch(fetchNewsLetter());
       dispatch(fetchPodcast());
       dispatch(fetchPressRelease());
+      dispatch(fetchVideoUrl());
       dispatch(fetchMaster());
     } catch (error) {
       console.error("Error in fetching:", error);

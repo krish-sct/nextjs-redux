@@ -351,6 +351,28 @@ export const getFaqById = async (faqsId) => {
   }
 };
 
+//Videos
+export const getVideosUrl = async (page, limit) => {
+  try {
+    const response = await fetch(
+      `${configs.baseURL}/videos?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      console.error(`Failed to fatch videos:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getvideo", error.message);
+    throw error;
+  }
+};
+
 //ContactUs
 
 export const addContactForm = async (data) => {

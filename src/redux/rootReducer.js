@@ -10,6 +10,7 @@ import eventTradeShowsReducer from "./slices/eventTradeShowsSlice";
 import faqReducer from "./slices/faqSlice";
 import contactusReducer from "./slices/contactUsSlice";
 import masterReducer from "./slices/masterSlice";
+import videoReducer from "./slices/videoSlice";
 
 const rootReducer = combineReducers({
   testimonialData: testimonialReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   podcastData: podcastReducer,
   eventTradeShowsData: eventTradeShowsReducer,
   faqData: faqReducer,
+  videoInfo: videoReducer,
   contactusData: contactusReducer,
   masterData: masterReducer,
 });
