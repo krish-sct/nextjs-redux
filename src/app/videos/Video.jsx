@@ -6,15 +6,17 @@ import Videos from "../components/Videos";
 const Video = () => {
   const videos = useSelector((state) => state?.videoInfo?.videos?.video);
   const [category, setCategory] = useState([]);
-
-  const handleVideoData = (data) => {
+  const [selected, setSelected] = useState('All')
+  const handleVideoData = (data, selected) => {
     let video = {};
     data?.map((e, i) => {
       if (e.key === "title") video.title = e.value;
       if (e.key === "url") video.url = e.value;
       if (e.key === "category") video.category = e.value;
     });
+    if (selected === 'All' || video.category === selected)
     return video;
+    else return null
   };
   const handleCategory = () => {
     let data = videos?.map((e) => {
@@ -23,7 +25,7 @@ const Video = () => {
 
     let set = new Set(data);
     set = Array.from(set);
-    setCategory(set);
+    setCategory(['All', ...set]);
   };
   useEffect(() => {
     if (videos?.length) {
@@ -36,16 +38,17 @@ const Video = () => {
       <ul>
         <li className="menu-class">
           {category?.map((category, i) => (
-            <div key={i}>{category}</div>
+            <div key={i} className={`menu-category ${selected === category ? 'menu-selected' : ''}`} onClick={() => { setSelected(category) }}>{category}</div>
           ))}
         </li>
       </ul>
       <div className="flex-container">
-        {videos?.map((video, i) => (
-          <div key={i} className="card">
-            <Videos data={handleVideoData(video?.components)} />
-          </div>
-        ))}
+        {videos?.map((video, i) => {
+          let data = handleVideoData(video?.components, selected)
+          return data ? <div key={i}>
+            <Videos data={data} />
+          </div> : ''
+        })}
       </div>
     </div>
   );

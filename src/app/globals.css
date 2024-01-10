@@ -208,7 +208,7 @@ body {
 
   .description{
     font-size: 14px;
-    color: gray;
+    color: wheat;
   }
 
   .menu-class{
@@ -217,3 +217,16 @@ body {
     gap:10px;
     cursor: pointer;
   }
+.menu-category {
+    padding: 10px;
+    background-color: whitesmoke;
+    color: black;
+}
+
+.menu-category:hover {
+    background-color: grey;
+}
+
+.menu-selected {
+    background-color: wheat;
+}
