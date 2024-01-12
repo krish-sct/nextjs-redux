@@ -15,16 +15,22 @@ const Testimonial = ({ testimonials }) => {
     <ul>
       {testimonials?.testimonial?.map((testimonial, i) => (
         <div key={i} className="card">
+          <p>
+
           <li>
-            {
-              testimonial?.components?.filter(
-                (e) => e.key === "description"
-              )?.[0]?.value
-            }
-            <p className="f-r lightseagreen">
+              <div>
+                {
+                  testimonial?.components?.filter(
+                    (e) => e.key === "description"
+                  )?.[0]?.value
+                }
+
+              </div>
+              <div className="f-r lightseagreen">
               {handleDate(testimonial.createdAt)}
-            </p>
+              </div>
           </li>
+          </p>
         </div>
       ))}
     </ul>

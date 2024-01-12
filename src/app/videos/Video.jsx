@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Videos from "../components/Videos";
+import SEO from "../components/SEO";
 
 const Video = () => {
   const videos = useSelector((state) => state?.videoInfo?.videos?.video);
@@ -13,14 +14,15 @@ const Video = () => {
       if (e.key === "title") video.title = e.value;
       if (e.key === "url") video.url = e.value;
       if (e.key === "category") video.category = e.value;
+      if (e.key === "seo") video.seo = e.value;
     });
     if (selected === 'All' || video.category === selected)
     return video;
     else return null
   };
-  const handleCategory = () => {
-    let data = videos?.map((e) => {
-      return handleVideoData(e?.components)?.category;
+  const handleCategory = (videoData) => {
+    let data = videoData?.map((e) => {
+      return handleVideoData(e?.components, selected)?.category;
     });
 
     let set = new Set(data);
@@ -29,8 +31,9 @@ const Video = () => {
   };
   useEffect(() => {
     if (videos?.length) {
-      handleCategory();
+      handleCategory(videos);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videos]);
 
   return (
@@ -47,6 +50,7 @@ const Video = () => {
           let data = handleVideoData(video?.components, selected)
           return data ? <div key={i}>
             <Videos data={data} />
+            <SEO data={data.seo} title={'Videos'} />
           </div> : ''
         })}
       </div>
