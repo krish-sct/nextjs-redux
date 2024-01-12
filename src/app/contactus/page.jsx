@@ -6,8 +6,11 @@ import { addContactForm } from "../../utils/apis";
 import styles from "./contactus.module.css";
 import { CountrySelect } from "react-country-state-city";
 import "react-country-state-city/dist/react-country-state-city.css";
+import { useDispatch } from "react-redux";
+import { fetchMaster } from "../../redux/slices/masterSlice";
 
 const ContactPage = () => {
+  const dispatch = useDispatch();
   const masters = useSelector((state) => state?.masterData?.masterData);
   const [formData, setFormData] = useState([]);
 
@@ -17,6 +20,10 @@ const ContactPage = () => {
     )[0];
     setFormData(data?.formData || []);
   };
+
+  useEffect(() => {
+    dispatch(fetchMaster());
+  }, []);
 
   useEffect(() => {
     if (masters?.length) {
