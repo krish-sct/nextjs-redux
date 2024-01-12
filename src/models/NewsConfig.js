@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const articlesConfigSchema = new Schema(
+const newsConfigSchema = new Schema(
   {
     data: {
       type: Object,
@@ -12,5 +12,5 @@ const articlesConfigSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.ArticlesConfig ||
-  mongoose.model("ArticlesConfig", articlesConfigSchema);
+export default mongoose.models.NewsConfig ||
+  mongoose.model("NewsConfig", newsConfigSchema);

@@ -416,7 +416,7 @@ export const addMaster = async (data) => {
   return res.json();
 };
 
-//articlesConfigs
+//careersConfig
 export const getArticlesConfig = async () => {
   try {
     const response = await fetch(`${configs.baseURL}/articlesConfig`, {
@@ -428,6 +428,144 @@ export const getArticlesConfig = async () => {
     return response.json();
   } catch (error) {
     console.error("Error in getArticlesConfig:", error.message);
+    throw error;
+  }
+};
+
+//careersConfig
+export const getCareersConfig = async () => {
+  try {
+    const response = await fetch(`${configs.baseURL}/careersConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch careersConfig:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getCareersConfig:", error.message);
+    throw error;
+  }
+};
+
+//faqsConfig
+export const getFaqsConfig = async () => {
+  try {
+    const response = await fetch(`${configs.baseURL}/faqsConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch faqsConfig:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getFaqsConfig:", error.message);
+    throw error;
+  }
+};
+
+//testimonialsConfig
+export const getTestimonialsConfig = async () => {
+  try {
+    const response = await fetch(`${configs.baseURL}/testimonialsConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch testimonialsConfig:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getTestimonialsConfig:", error.message);
+    throw error;
+  }
+};
+//eventTradeShowsConfig
+export const getEventTradeShowsConfig = async () => {
+  try {
+    const response = await fetch(`${configs.baseURL}/eventTradeShowsConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch eventTradeShowsConfig:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getEventTradeShowsConfig:", error.message);
+    throw error;
+  }
+};
+//newsConfig
+export const getNewsConfig = async () => {
+  try {
+    const response = await fetch(`${configs.baseURL}/newsConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch newsConfig:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getNewsConfig:", error.message);
+    throw error;
+  }
+};
+//newsLettersConfig
+export const getNewsLettersConfig = async () => {
+  try {
+    const response = await fetch(`${configs.baseURL}/newsLettersConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch newsLettersConfig:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getNewsLettersConfig:", error.message);
+    throw error;
+  }
+};
+//podcastsConfig
+export const getPodcastsConfig = async () => {
+  try {
+    const response = await fetch(`${configs.baseURL}/podcastsConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch podcastsConfig:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getPodcastsConfig:", error.message);
+    throw error;
+  }
+};
+//pressReleasesConfig
+export const getPressReleasesConfig = async () => {
+  try {
+    const response = await fetch(`${configs.baseURL}/pressReleasesConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch pressReleasesConfig:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getPressReleasesConfig:", error.message);
+    throw error;
+  }
+};
+//videosConfig
+export const getVideosConfig = async () => {
+  try {
+    const response = await fetch(`${configs.baseURL}/videosConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch videosConfig:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getVideosConfig:", error.message);
     throw error;
   }
 };

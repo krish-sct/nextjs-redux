@@ -1,8 +1,12 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { handleDate } from "../../utils/common";
+import { useDispatch } from "react-redux";
+import { fetchTestimonial } from "../../redux/slices/testimonialSlice";
 
 const Testimonial = ({ testimonials }) => {
+  const dispatch = useDispatch();
   const testimonial = useSelector(
     (state) => state?.testimonialData?.testimonials
   );
@@ -11,26 +15,25 @@ const Testimonial = ({ testimonials }) => {
     return header.value || "";
   };
 
+  useEffect(() => {
+    dispatch(fetchTestimonial());
+  }, []);
   return (
     <ul>
       {testimonials?.testimonial?.map((testimonial, i) => (
         <div key={i} className="card">
-          <p>
-
           <li>
-              <div>
-                {
-                  testimonial?.components?.filter(
-                    (e) => e.key === "description"
-                  )?.[0]?.value
-                }
-
-              </div>
-              <div className="f-r lightseagreen">
+            <div>
+              {
+                testimonial?.components?.filter(
+                  (e) => e.key === "description"
+                )?.[0]?.value
+              }
+            </div>
+            <div className="f-r lightseagreen">
               {handleDate(testimonial.createdAt)}
-              </div>
+            </div>
           </li>
-          </p>
         </div>
       ))}
     </ul>

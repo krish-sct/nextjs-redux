@@ -2,7 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TemplatePreview from "../../components/TemplatePreview";
-import { fetchPodcastById } from "../../../redux/slices/podcastSlice";
+import {
+  fetchPodcastById,
+  fetchPodcast,
+} from "../../../redux/slices/podcastSlice";
 
 const PodcastsDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -23,6 +26,10 @@ const PodcastsDetails = ({ params }) => {
   const getDetailsById = () => {
     dispatch(fetchPodcastById(params.podcastsId));
   };
+
+  useEffect(() => {
+    dispatch(fetchPodcast());
+  }, []);
 
   useEffect(() => {
     if (podcasts?.length && params) {

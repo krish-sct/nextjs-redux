@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { handleDate } from "../../utils/common";
+import { useDispatch } from "react-redux";
+import { fetchEventTradeShow } from "../../redux/slices/eventTradeShowsSlice";
 
 const EventTradeShows = ({ eventTradeShows }) => {
+  const dispatch = useDispatch();
   const eventTradeShow = useSelector(
     (state) => state?.eventTradeShowsData?.eventTradeShows?.eventTradeShows
   );
@@ -10,6 +13,10 @@ const EventTradeShows = ({ eventTradeShows }) => {
   const getHeader = (header) => {
     return header.value || "";
   };
+
+  useEffect(() => {
+    dispatch(fetchEventTradeShow());
+  }, []);
 
   return (
     <ul>

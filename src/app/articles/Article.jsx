@@ -1,13 +1,22 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchArticle } from "../../redux/slices/articleSlice";
 import { useSelector } from "react-redux";
 import { handleDate } from "../../utils/common";
 
 const Articles = ({ articles }) => {
+  const dispatch = useDispatch();
+
   const article = useSelector((state) => state?.articleData?.articles);
 
   const getHeader = (header) => {
     return header.value || "";
   };
+
+  useEffect(() => {
+    dispatch(fetchArticle());
+  }, []);
 
   return (
     <ul>

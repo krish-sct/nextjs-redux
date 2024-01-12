@@ -2,7 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TemplatePreview from "../../components/TemplatePreview";
-import { fetchPressReleaseById } from "../../../redux/slices/pressReleaseSlice";
+import {
+  fetchPressReleaseById,
+  fetchPressRelease,
+} from "../../../redux/slices/pressReleaseSlice";
 
 const PressReleasesDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -27,6 +30,10 @@ const PressReleasesDetails = ({ params }) => {
   const getDetailsById = () => {
     dispatch(fetchPressReleaseById(params.pressReleasesId));
   };
+
+  useEffect(() => {
+    dispatch(fetchPressRelease());
+  }, []);
 
   useEffect(() => {
     if (pressRelease?.length && params) {

@@ -2,7 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TemplatePreview from "../../components/TemplatePreview";
-import { fetchEventTradeShowById } from "../../../redux/slices/eventTradeShowsSlice";
+import {
+  fetchEventTradeShowById,
+  fetchEventTradeShow,
+} from "../../../redux/slices/eventTradeShowsSlice";
 
 const EventTradeShowsDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -27,6 +30,10 @@ const EventTradeShowsDetails = ({ params }) => {
   const getDetailsById = () => {
     dispatch(fetchEventTradeShowById(params.eventTradeShowsId));
   };
+
+  useEffect(() => {
+    dispatch(fetchEventTradeShow());
+  }, []);
 
   useEffect(() => {
     if (eventTradeShow?.length && params) {

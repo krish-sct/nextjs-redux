@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { handleDate } from "../../utils/common";
+import { useDispatch } from "react-redux";
+import { fetchPressRelease } from "../../redux/slices/pressReleaseSlice";
 
 const PressReleases = ({ pressReleases }) => {
+  const dispatch = useDispatch();
   const pressRelease = useSelector(
     (state) => state?.pressReleaseData?.pressReleases
   );
@@ -10,6 +13,11 @@ const PressReleases = ({ pressReleases }) => {
   const getHeader = (header) => {
     return header.value || "";
   };
+
+  useEffect(() => {
+    dispatch(fetchPressRelease());
+  }, []);
+
   return (
     <ul>
       {pressReleases?.pressReleases?.map((pressRelease, i) => (

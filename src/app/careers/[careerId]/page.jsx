@@ -2,7 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TemplatePreview from "../../components/TemplatePreview";
-import { fetchCareerById } from "../../../redux/slices/careerSlice";
+import {
+  fetchCareerById,
+  fetchCareer,
+} from "../../../redux/slices/careerSlice";
 
 const CareerDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -21,6 +24,10 @@ const CareerDetails = ({ params }) => {
   const getDetailsById = () => {
     dispatch(fetchCareerById(params.careerId));
   };
+
+  useEffect(() => {
+    dispatch(fetchCareer());
+  }, []);
 
   useEffect(() => {
     if (career?.length && params) {

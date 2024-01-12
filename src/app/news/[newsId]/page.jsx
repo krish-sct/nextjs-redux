@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TemplatePreview from "../../components/TemplatePreview";
-import { fetchNewsById } from "../../../redux/slices/newsSlice";
+import { fetchNewsById, fetchNews } from "../../../redux/slices/newsSlice";
 
 const NewsDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -21,6 +21,10 @@ const NewsDetails = ({ params }) => {
   const getDetailsById = () => {
     dispatch(fetchNewsById(params.newsId));
   };
+
+  useEffect(() => {
+    dispatch(fetchNews());
+  }, []);
 
   useEffect(() => {
     if (newses?.length && params) {

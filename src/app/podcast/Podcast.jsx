@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { handleDate } from "../../utils/common";
+import { useDispatch } from "react-redux";
+import { fetchPodcast } from "../../redux/slices/podcastSlice";
+
 const Podcasts = ({ podcasts }) => {
+  const dispatch = useDispatch();
   const podcast = useSelector((state) => state?.podcastData?.podcasts);
 
   const getHeader = (header) => {
     return header.value || "";
   };
+
+  useEffect(() => {
+    dispatch(fetchPodcast());
+  }, []);
+
   return (
     <ul>
       {podcasts?.podcasts?.map((podcast, i) => (
