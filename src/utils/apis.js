@@ -415,3 +415,19 @@ export const addMaster = async (data) => {
   });
   return res.json();
 };
+
+//articlesConfigs
+export const getArticlesConfig = async () => {
+  try {
+    const response = await fetch(`${configs.baseURL}/articlesConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch articleConfigs:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getArticlesConfig:", error.message);
+    throw error;
+  }
+};

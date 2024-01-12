@@ -11,6 +11,7 @@ import faqReducer from "./slices/faqSlice";
 import contactusReducer from "./slices/contactUsSlice";
 import masterReducer from "./slices/masterSlice";
 import videoReducer from "./slices/videoSlice";
+import articlesConfigReducer from "./slices/articlesConfigSlice";
 
 const rootReducer = combineReducers({
   testimonialData: testimonialReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   videoInfo: videoReducer,
   contactusData: contactusReducer,
   masterData: masterReducer,
+  articlesConfigData: articlesConfigReducer,
 });
 
 export default rootReducer;
