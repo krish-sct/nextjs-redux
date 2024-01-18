@@ -16,7 +16,7 @@ export async function GET(req, res) {
       const total = await Podcast.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const podcasts = await Podcast.find()
+      const podcasts = await Podcast.find({ components: { $ne: [] } })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
@@ -33,19 +33,19 @@ export async function GET(req, res) {
 export async function PUT(req, res) {
   const body = await req.json();
   // console.log({ body });
-  const { _id, updatedPodcast } = body;
+  const { _id, updatedData } = body;
   try {
     await connect();
     const res = await Podcast.findByIdAndUpdate(
       _id,
-      { ...updatedPodcast },
+      { ...updatedData },
       { new: true }
     );
     if (!res) {
       return NextResponse.json({ message: "Podcast not found" });
     }
     return NextResponse.json(
-      { podcast: updatedPodcast, message: "podcast Updated", status: 200 },
+      { data: res, message: "podcast Updated", status: 200 },
       { status: 200 }
     );
   } catch (error) {

@@ -16,7 +16,7 @@ export async function GET(req, res) {
       const total = await Testimonial.countDocuments(); // Total number of data
       const totalPages = Math.ceil(total / limit); // Calculate total pages
       const offset = (page - 1) * limit;
-      const testimonial = await Testimonial.find()
+      const testimonial = await Testimonial.find({ components: { $ne: [] } })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
@@ -33,12 +33,12 @@ export async function GET(req, res) {
 export async function PUT(req, res) {
   const body = await req.json();
   // console.log({ body });
-  const { _id, updatedTestimonial } = body;
+  const { _id, updatedData } = body;
   try {
     await connect();
     const res = await Testimonial.findByIdAndUpdate(
       _id,
-      { ...updatedTestimonial },
+      { ...updatedData },
       { new: true }
     );
     if (!res) {
@@ -46,7 +46,7 @@ export async function PUT(req, res) {
     }
     return NextResponse.json(
       {
-        testimonial: updatedTestimonial,
+        data: res,
         message: "Testimonial Updated",
         status: 200,
       },

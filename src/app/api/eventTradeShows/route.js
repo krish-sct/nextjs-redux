@@ -15,7 +15,9 @@ export async function GET(req, res) {
       const total = await EventTradeShows.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const eventTradeShows = await EventTradeShows.find()
+      const eventTradeShows = await EventTradeShows.find({
+        components: { $ne: [] },
+      })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
@@ -32,12 +34,12 @@ export async function GET(req, res) {
 export async function PUT(req, res) {
   const body = await req.json();
   // console.log({ body });
-  const { _id, updatedEventTradeShow } = body;
+  const { _id, updatedData } = body;
   try {
     await connect();
     const res = await EventTradeShows.findByIdAndUpdate(
       _id,
-      { ...updatedEventTradeShow },
+      { ...updatedData },
       { new: true }
     );
     if (!res) {
@@ -45,7 +47,7 @@ export async function PUT(req, res) {
     }
     return NextResponse.json(
       {
-        eventTradeShow: updatedEventTradeShow,
+        data: res,
         message: "EventTradeShows Updated",
         status: 200,
       },

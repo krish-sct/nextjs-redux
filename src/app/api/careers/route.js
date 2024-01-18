@@ -15,7 +15,7 @@ export async function GET(req, res) {
       const total = await Career.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const careers = await Career.find()
+      const careers = await Career.find({ components: { $ne: [] } })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
@@ -33,19 +33,19 @@ export async function PUT(req, res) {
   const body = await req.json();
   // console.log({ body });
 
-  const { _id, updatedCareer } = body;
+  const { _id, updatedData } = body;
   try {
     await connect();
     const res = await Career.findByIdAndUpdate(
       _id,
-      { ...updatedCareer },
+      { ...updatedData },
       { new: true }
     );
     if (!res) {
       return NextResponse.json({ message: "Career not found" });
     }
     return NextResponse.json(
-      { career: updatedCareer, message: "Career Updated", status: 200 },
+      { data: res, message: "Career Updated", status: 200 },
       { status: 200 }
     );
   } catch (error) {

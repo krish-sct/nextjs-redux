@@ -15,7 +15,7 @@ export async function GET(req, res) {
       const total = await Article.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const articles = await Article.find()
+      const articles = await Article.find({ components: { $ne: [] } })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
@@ -31,15 +31,15 @@ export async function GET(req, res) {
 
 export async function PUT(req, res) {
   const body = await req.json();
-  // console.log({ body });
+  //console.log({ body });
 
-  const { _id, updatedArticle } = body;
+  const { _id, updatedData } = body;
   try {
     await connect();
     const res = await Article.findByIdAndUpdate(
       _id,
       {
-        ...updatedArticle,
+        ...updatedData,
       },
       { new: true }
     );

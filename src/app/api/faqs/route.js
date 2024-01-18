@@ -15,7 +15,7 @@ export async function GET(req, res) {
       const total = await Faq.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const faqs = await Faq.find()
+      const faqs = await Faq.find({ components: { $ne: [] } })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
@@ -32,19 +32,19 @@ export async function GET(req, res) {
 export async function PUT(req, res) {
   const body = await req.json();
   // console.log({ body });
-  const { _id, updatedFaq } = body;
+  const { _id, updatedData } = body;
   try {
     await connect();
     const res = await Faq.findByIdAndUpdate(
       _id,
-      { ...updatedFaq },
+      { ...updatedData },
       { new: true }
     );
     if (!res) {
       return NextResponse.json({ message: "Faqs not found" });
     }
     return NextResponse.json(
-      { faq: updatedFaq, message: "Faq Updated", status: 200 },
+      { data: res, message: "Faq Updated", status: 200 },
       { status: 200 }
     );
   } catch (error) {

@@ -1,8 +1,8 @@
 import configs from "./configs";
 let defaultPage = 1;
 let defaultLimit = 10;
-const templateData = "podcasts";
-let id = "659bc8ff462f1c72bca3822a";
+const templateData = "articles";
+let id = "659bbfc0bf7615183f7c0b21";
 
 //Testimonial
 export const getTestimonials = async (page, limit) => {
@@ -574,7 +574,7 @@ export const getVideosConfig = async () => {
 };
 
 //dynamicTemplatePreview
-export const getDynamicTemplatePreview = async () => {
+export const getDynamicTemplatePreview = async (templateData, id) => {
   try {
     const response = await fetch(
       `${configs.baseURL}/${templateData}?id=${id}`,
@@ -605,9 +605,11 @@ export const updateTemplateStaging = async ({ data, templateData }) => {
       cache: "no-store",
     });
     if (!response.ok) {
+      const errorData = await response.json();
       console.error(
         `Failed to fetch preview data from ${templateData}:${response.status}`
       );
+      throw new Error(errorData.message);
     }
     return response.json();
   } catch (error) {

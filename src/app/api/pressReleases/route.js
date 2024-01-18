@@ -16,7 +16,7 @@ export async function GET(req, res) {
       const total = await PressRelease.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const pressReleases = await PressRelease.find()
+      const pressReleases = await PressRelease.find({ components: { $ne: [] } })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
@@ -33,12 +33,12 @@ export async function GET(req, res) {
 export async function PUT(req, res) {
   const body = await req.json();
   // console.log({ body });
-  const { _id, updatedPressRelease } = body;
+  const { _id, updatedData } = body;
   try {
     await connect();
     const res = await PressRelease.findByIdAndUpdate(
       _id,
-      { ...updatedPressRelease },
+      { ...updatedData },
       { new: true }
     );
     if (!res) {
@@ -46,7 +46,7 @@ export async function PUT(req, res) {
     }
     return NextResponse.json(
       {
-        pressRelease: updatedPressRelease,
+        data: res,
         message: "PressRelease Updated",
         status: 200,
       },

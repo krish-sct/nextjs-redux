@@ -12,7 +12,7 @@ export async function GET(req, res) {
       const newses = await News.findById(id);
       return NextResponse.json({ newses }, { status: 200 });
     } else {
-      const total = await News.countDocuments();
+      const total = await News.countDocuments({ components: { $ne: [] } });
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
       const news = await News.find()
@@ -32,19 +32,19 @@ export async function GET(req, res) {
 export async function PUT(req, res) {
   const body = await req.json();
   // console.log({ body });
-  const { _id, updatedNewses } = body;
+  const { _id, updatedData } = body;
   try {
     await connect();
     const res = await News.findByIdAndUpdate(
       _id,
-      { ...updatedNewses },
+      { ...updatedData },
       { new: true }
     );
     if (!res) {
       return NextResponse.json({ message: "News not found" });
     }
     return NextResponse.json(
-      { newses: updatedNewses, message: "News Updated", status: 200 },
+      { data: res, message: "News Updated", status: 200 },
       { status: 200 }
     );
   } catch (error) {

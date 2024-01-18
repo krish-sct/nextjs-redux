@@ -15,7 +15,7 @@ export async function GET(req, res) {
       const total = await Video.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const video = await Video.find()
+      const video = await Video.find({ components: { $ne: [] } })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
@@ -32,19 +32,19 @@ export async function GET(req, res) {
 export async function PUT(req, res) {
   const body = await req.json();
   // console.log({ body });
-  const { _id, updatedVideo } = body;
+  const { _id, updatedData } = body;
   try {
     await connect();
     const res = await Video.findByIdAndUpdate(
       _id,
-      { ...updatedVideo },
+      { ...updatedData },
       { new: true }
     );
     if (!res) {
       return NextResponse.json({ message: "video not found" });
     }
     return NextResponse.json(
-      { video: updatedVideo, message: "Video Updated", status: 200 },
+      { data: res, message: "Video Updated", status: 200 },
       { status: 200 }
     );
   } catch (error) {

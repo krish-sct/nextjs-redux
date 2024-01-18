@@ -15,7 +15,7 @@ export async function GET(req, res) {
       const total = await NewsLetter.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const newsLetter = await NewsLetter.find()
+      const newsLetter = await NewsLetter.find({ components: { $ne: [] } })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
@@ -32,12 +32,12 @@ export async function GET(req, res) {
 export async function PUT(req, res) {
   const body = await req.json();
   // console.log({ body });
-  const { _id, updatedNewsLetters } = body;
+  const { _id, updatedData } = body;
   try {
     await connect();
     const res = await NewsLetter.findByIdAndUpdate(
       _id,
-      { ...updatedNewsLetters },
+      { ...updatedData },
       { new: true }
     );
     if (!res) {
@@ -45,7 +45,7 @@ export async function PUT(req, res) {
     }
     return NextResponse.json(
       {
-        newsLetters: updatedNewsLetters,
+        data: res,
         message: "NewsLetter Updated",
         status: 200,
       },
