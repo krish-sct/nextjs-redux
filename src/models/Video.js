@@ -8,6 +8,10 @@ const videourlSchema = new Schema(
       type: Object,
       default: {},
     },
+    staging: {
+      type: Object,
+      default: {},
+    },
   },
   { timestamps: true }
 );

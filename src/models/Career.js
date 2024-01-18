@@ -7,6 +7,10 @@ const careerSchema = new Schema({
     type: Object,
     default: {},
   },
+  staging: {
+    type: Object,
+    default: {},
+  },
 });
 
 export default mongoose.models.Career || mongoose.model("Career", careerSchema);

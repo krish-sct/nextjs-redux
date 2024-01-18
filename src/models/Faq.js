@@ -7,6 +7,10 @@ const faqSchema = new Schema({
     type: Object,
     default: {},
   },
+  staging: {
+    type: Object,
+    default: {},
+  },
 });
 
 export default mongoose.models.Faq || mongoose.model("Faq", faqSchema);

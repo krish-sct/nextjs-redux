@@ -7,6 +7,10 @@ const newsLetterSchema = new Schema({
     type: Object,
     default: {},
   },
+  staging: {
+    type: Object,
+    default: {},
+  },
 });
 
 export default mongoose.models.NewsLetter ||

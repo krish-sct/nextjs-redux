@@ -7,6 +7,10 @@ const newsSchema = new Schema({
     type: Object,
     default: {},
   },
+  staging: {
+    type: Object,
+    default: {},
+  },
 });
 
 export default mongoose.models.News || mongoose.model("News", newsSchema);

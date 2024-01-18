@@ -1,6 +1,9 @@
 import configs from "./configs";
 let defaultPage = 1;
 let defaultLimit = 10;
+const templateData = "podcasts";
+let id = "659bc8ff462f1c72bca3822a";
+
 //Testimonial
 export const getTestimonials = async (page, limit) => {
   const response = await fetch(
@@ -566,6 +569,49 @@ export const getVideosConfig = async () => {
     return response.json();
   } catch (error) {
     console.error("Error in getVideosConfig:", error.message);
+    throw error;
+  }
+};
+
+//dynamicTemplatePreview
+export const getDynamicTemplatePreview = async () => {
+  try {
+    const response = await fetch(
+      `${configs.baseURL}/${templateData}?id=${id}`,
+      {
+        cache: "no-store",
+      }
+    );
+    if (!response.ok) {
+      console.error(
+        `Failed to fetch preview data from ${templateData}:${response.status}`
+      );
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error", error.message);
+    throw error;
+  }
+};
+
+export const updateTemplateStaging = async ({ data, templateData }) => {
+  try {
+    const response = await fetch(`${configs.baseURL}/${templateData}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(
+        `Failed to fetch preview data from ${templateData}:${response.status}`
+      );
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error", error.message);
     throw error;
   }
 };

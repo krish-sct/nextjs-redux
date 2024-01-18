@@ -28,3 +28,26 @@ export async function GET(req, res) {
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 }
+
+export async function PUT(req, res) {
+  const body = await req.json();
+  // console.log({ body });
+  const { _id, updatedFaq } = body;
+  try {
+    await connect();
+    const res = await Faq.findByIdAndUpdate(
+      _id,
+      { ...updatedFaq },
+      { new: true }
+    );
+    if (!res) {
+      return NextResponse.json({ message: "Faqs not found" });
+    }
+    return NextResponse.json(
+      { faq: updatedFaq, message: "Faq Updated", status: 200 },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json({ error: "Database" }, { status: 500 });
+  }
+}

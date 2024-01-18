@@ -29,3 +29,26 @@ export async function GET(req, res) {
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 }
+
+export async function PUT(req, res) {
+  const body = await req.json();
+  // console.log({ body });
+  const { _id, updatedPodcast } = body;
+  try {
+    await connect();
+    const res = await Podcast.findByIdAndUpdate(
+      _id,
+      { ...updatedPodcast },
+      { new: true }
+    );
+    if (!res) {
+      return NextResponse.json({ message: "Podcast not found" });
+    }
+    return NextResponse.json(
+      { podcast: updatedPodcast, message: "podcast Updated", status: 200 },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json({ error: "Database" }, { status: 500 });
+  }
+}
