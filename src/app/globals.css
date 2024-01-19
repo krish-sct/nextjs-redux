@@ -230,3 +230,7 @@ body {
 .menu-selected {
     background-color: wheat;
 }
+
+.text-class{
+    color: yellow;
+}

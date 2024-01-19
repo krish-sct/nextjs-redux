@@ -4,6 +4,7 @@ import { getDynamicTemplatePreview } from "../../../../../utils/apis";
 import TemplatePreview from "../../../../components/TemplatePreview";
 import Stage from "../../../../components/Stage";
 import SEOPreview from "../../../../components/SEOPreview";
+import TestPreview from "../../../../components/TestPreview";
 
 const PreviewPage = ({ params }) => {
   const [stagingData, setStagingData] = useState(null);
@@ -49,7 +50,24 @@ const PreviewPage = ({ params }) => {
             <div>Time out </div>
           ) : role === "seo" ? (
             <div>
-              <SEOPreview />
+              <SEOPreview
+                seoData={
+                  stagingData?.[templateData?.slice(0, -1)]?.components?.filter(
+                    (e) => e.key === "seo"
+                  )?.[0]
+                }
+              />
+            </div>
+          ) : role === "test" ? (
+            <div>
+              <TestPreview
+                testData={
+                  stagingData?.[templateData?.slice(0, -1)]?.staging?.isPublish
+                    ? stagingData?.[templateData?.slice(0, -1)]?.components
+                    : stagingData?.[templateData?.slice(0, -1)]?.staging
+                        ?.previewComponent
+                }
+              />
             </div>
           ) : (
             <>
