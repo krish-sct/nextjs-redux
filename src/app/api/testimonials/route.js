@@ -16,7 +16,10 @@ export async function GET(req, res) {
       const total = await Testimonial.countDocuments(); // Total number of data
       const totalPages = Math.ceil(total / limit); // Calculate total pages
       const offset = (page - 1) * limit;
-      const testimonial = await Testimonial.find({ components: { $ne: [] } })
+      const testimonial = await Testimonial.find({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);

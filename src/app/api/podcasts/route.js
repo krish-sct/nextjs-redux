@@ -16,7 +16,10 @@ export async function GET(req, res) {
       const total = await Podcast.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const podcasts = await Podcast.find({ components: { $ne: [] } })
+      const podcasts = await Podcast.find({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);

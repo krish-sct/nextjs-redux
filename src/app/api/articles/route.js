@@ -15,7 +15,10 @@ export async function GET(req, res) {
       const total = await Article.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const articles = await Article.find({ components: { $ne: [] } })
+      const articles = await Article.find({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);

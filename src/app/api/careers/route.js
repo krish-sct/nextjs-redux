@@ -15,7 +15,10 @@ export async function GET(req, res) {
       const total = await Career.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const careers = await Career.find({ components: { $ne: [] } })
+      const careers = await Career.find({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);

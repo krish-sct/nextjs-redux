@@ -9,18 +9,18 @@ export async function GET(req, res) {
   try {
     await connect();
     if (id) {
-      const newsLetters = await NewsLetter.findById(id);
-      return NextResponse.json({ newsLetters }, { status: 200 });
+      const newsLetter = await NewsLetter.findById(id);
+      return NextResponse.json({ newsLetter }, { status: 200 });
     } else {
       const total = await NewsLetter.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const newsLetter = await NewsLetter.find({ components: { $ne: [] } })
+      const newsLetters = await NewsLetter.find({ components: { $ne: [] } })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
       return NextResponse.json(
-        { newsLetter, totalPages, currentPage: page },
+        { newsLetters, totalPages, currentPage: page },
         { status: 200 }
       );
     }

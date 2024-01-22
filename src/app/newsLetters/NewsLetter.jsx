@@ -4,9 +4,9 @@ import { handleDate } from "../../utils/common";
 import { useDispatch } from "react-redux";
 import { fetchNewsLetter } from "../../redux/slices/newsLetterSlice";
 
-const NewsLetter = ({ newsLetter }) => {
+const NewsLetter = ({ newsLetters }) => {
   const dispatch = useDispatch();
-  const newsLetters = useSelector((state) => state?.newsLetterData?.newsLetter);
+  const newsLetter = useSelector((state) => state?.newsLetterData?.newsLetters);
 
   const getHeader = (header) => {
     return header.value || "";
@@ -18,17 +18,17 @@ const NewsLetter = ({ newsLetter }) => {
 
   return (
     <ul>
-      {newsLetter?.newsLetter?.map((newsLetters, i) => (
+      {newsLetters?.newsLetters?.map((newsLetter, i) => (
         <div key={i} className="card">
           <li>
-            <a href={`/newsLetter/${newsLetters._id}`}>
+            <a href={`/newsLetters/${newsLetter._id}`}>
               {
-                newsLetters?.components?.filter((e) => e.key === "header")?.[0]
+                newsLetter?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value
               }
             </a>
             <p className="f-r lightseagreen">
-              {handleDate(newsLetters.createdAt)}
+              {handleDate(newsLetter.createdAt)}
             </p>
           </li>
         </div>

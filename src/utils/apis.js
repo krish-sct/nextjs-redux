@@ -1,13 +1,13 @@
 import configs from "./configs";
 let defaultPage = 1;
 let defaultLimit = 10;
-const templateData = "articles";
-let id = "659bbfc0bf7615183f7c0b21";
+
+const baseURL = configs.baseURL;
 
 //Testimonial
 export const getTestimonials = async (page, limit) => {
   const response = await fetch(
-    `${configs.baseURL}/testimonials?page=${page || defaultPage}&limit=${
+    `${baseURL}/testimonials?page=${page || defaultPage}&limit=${
       limit || defaultLimit
     }`,
     {
@@ -20,7 +20,7 @@ export const getTestimonials = async (page, limit) => {
 export const getTestimonialById = async (testimonialId) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/testimonials?id=${testimonialId}`,
+      `${baseURL}/testimonials?id=${testimonialId}`,
       {
         cache: "no-store",
       }
@@ -39,7 +39,7 @@ export const getTestimonialById = async (testimonialId) => {
 export const getArticles = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/articles?page=${page || defaultPage}&limit=${
+      `${baseURL}/articles?page=${page || defaultPage}&limit=${
         limit || defaultLimit
       }`,
       {
@@ -59,12 +59,9 @@ export const getArticles = async (page, limit) => {
 
 export const getArticleById = async (articleId) => {
   try {
-    const response = await fetch(
-      `${configs.baseURL}/articles?id=${articleId}`,
-      {
-        cache: "no-store",
-      }
-    );
+    const response = await fetch(`${baseURL}/articles?id=${articleId}`, {
+      cache: "no-store",
+    });
     if (!response.ok) {
       console.error(`Failed to fetch article:${response.status}`);
     }
@@ -80,7 +77,7 @@ export const getArticleById = async (articleId) => {
 export const getCareers = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/careers?page=${page || defaultPage}&limit=${
+      `${baseURL}/careers?page=${page || defaultPage}&limit=${
         limit || defaultLimit
       }`,
       {
@@ -100,7 +97,7 @@ export const getCareers = async (page, limit) => {
 
 export const getCareerById = async (careerId) => {
   try {
-    const response = await fetch(`${configs.baseURL}/careers?id=${careerId}`, {
+    const response = await fetch(`${baseURL}/careers?id=${careerId}`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -118,7 +115,7 @@ export const getCareerById = async (careerId) => {
 export const getNews = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/news?page=${page || defaultPage}&limit=${
+      `${baseURL}/news?page=${page || defaultPage}&limit=${
         limit || defaultLimit
       }`,
       {
@@ -138,7 +135,7 @@ export const getNews = async (page, limit) => {
 
 export const getNewsById = async (newsId) => {
   try {
-    const response = await fetch(`${configs.baseURL}/news?id=${newsId}`, {
+    const response = await fetch(`${baseURL}/news?id=${newsId}`, {
       cache: "no-store",
     });
 
@@ -157,7 +154,7 @@ export const getNewsById = async (newsId) => {
 export const getNewsLetters = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/newsLetters?page=${page || defaultPage}&limit=${
+      `${baseURL}/newsLetter?page=${page || defaultPage}&limit=${
         limit || defaultLimit
       }`,
       {
@@ -166,7 +163,7 @@ export const getNewsLetters = async (page, limit) => {
     );
 
     if (!response.ok) {
-      console.error(`Failed to fetch newsLetter: ${response.status}`);
+      console.error(`Failed to fetch newsLetters: ${response.status}`);
     }
     return response.json();
   } catch (error) {
@@ -177,15 +174,12 @@ export const getNewsLetters = async (page, limit) => {
 
 export const getNewsLetterById = async (newsLetterId) => {
   try {
-    const response = await fetch(
-      `${configs.baseURL}/newsLetters?id=${newsLetterId}`,
-      {
-        cache: "no-store",
-      }
-    );
+    const response = await fetch(`${baseURL}/newsLetter?id=${newsLetterId}`, {
+      cache: "no-store",
+    });
 
     if (!response.ok) {
-      console.error(`Failed to fetch newsLetter:${response.status}`);
+      console.error(`Failed to fetch newsLetters:${response.status}`);
     }
     return response.json();
   } catch (error) {
@@ -199,7 +193,7 @@ export const getNewsLetterById = async (newsLetterId) => {
 export const getPressReleases = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/pressReleases?page=${page || defaultPage}&limit=${
+      `${baseURL}/pressReleases?page=${page || defaultPage}&limit=${
         limit || defaultLimit
       }`,
       {
@@ -220,7 +214,7 @@ export const getPressReleases = async (page, limit) => {
 export const getPressReleasesById = async (pressReleasesId) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/pressReleases?id=${pressReleasesId}`,
+      `${baseURL}/pressReleases?id=${pressReleasesId}`,
       {
         cache: "no-store",
       }
@@ -241,7 +235,7 @@ export const getPressReleasesById = async (pressReleasesId) => {
 export const getPodcasts = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/podcasts?page=${page || defaultPage}&limit=${
+      `${baseURL}/podcasts?page=${page || defaultPage}&limit=${
         limit || defaultLimit
       }`,
       {
@@ -261,12 +255,9 @@ export const getPodcasts = async (page, limit) => {
 
 export const getPodcastById = async (podcastsId) => {
   try {
-    const response = await fetch(
-      `${configs.baseURL}/podcasts?id=${podcastsId}`,
-      {
-        cache: "no-store",
-      }
-    );
+    const response = await fetch(`${baseURL}/podcasts?id=${podcastsId}`, {
+      cache: "no-store",
+    });
 
     if (!response.ok) {
       console.error(`Failed to fetch podcasts:${response.status}`);
@@ -281,7 +272,7 @@ export const getPodcastById = async (podcastsId) => {
 export const getEventTradeShows = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/eventTradeShows?page=${page || defaultPage}&limit=${
+      `${baseURL}/eventTradeShows?page=${page || defaultPage}&limit=${
         limit || defaultLimit
       }`,
       {
@@ -302,7 +293,7 @@ export const getEventTradeShows = async (page, limit) => {
 export const getEventTradeShowsById = async (eventTradeShowsId) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/eventTradeShows?id=${eventTradeShowsId}`,
+      `${baseURL}/eventTradeShows?id=${eventTradeShowsId}`,
       {
         cache: "no-store",
       }
@@ -321,7 +312,7 @@ export const getEventTradeShowsById = async (eventTradeShowsId) => {
 export const getFaqs = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/faqs?page=${page || defaultPage}&limit=${
+      `${baseURL}/faqs?page=${page || defaultPage}&limit=${
         limit || defaultLimit
       }`,
       {
@@ -341,7 +332,7 @@ export const getFaqs = async (page, limit) => {
 
 export const getFaqById = async (faqsId) => {
   try {
-    const response = await fetch(`${configs.baseURL}/faqs?id=${faqsId}`, {
+    const response = await fetch(`${baseURL}/faqs?id=${faqsId}`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -358,7 +349,7 @@ export const getFaqById = async (faqsId) => {
 export const getVideosUrl = async (page, limit) => {
   try {
     const response = await fetch(
-      `${configs.baseURL}/videos?page=${page || defaultPage}&limit=${
+      `${baseURL}/videos?page=${page || defaultPage}&limit=${
         limit || defaultLimit
       }`,
       {
@@ -380,7 +371,7 @@ export const getVideosUrl = async (page, limit) => {
 
 export const addContactForm = async (data) => {
   console.log({ data });
-  const response = await fetch(`${configs.baseURL}/contactus`, {
+  const response = await fetch(`${baseURL}/contactus`, {
     cache: "no-store",
     method: "POST",
     headers: {
@@ -394,7 +385,7 @@ export const addContactForm = async (data) => {
 //master
 export const getMaster = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/master`, {
+    const response = await fetch(`${baseURL}/master`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -408,7 +399,7 @@ export const getMaster = async () => {
 };
 
 export const addMaster = async (data) => {
-  const res = await fetch(`${configs.baseURL}/master`, {
+  const res = await fetch(`${baseURL}/master`, {
     cache: "no-store",
     method: "POST",
     headers: {
@@ -422,7 +413,7 @@ export const addMaster = async (data) => {
 //careersConfig
 export const getArticlesConfig = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/articlesConfig`, {
+    const response = await fetch(`${baseURL}/articlesConfig`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -438,7 +429,7 @@ export const getArticlesConfig = async () => {
 //careersConfig
 export const getCareersConfig = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/careersConfig`, {
+    const response = await fetch(`${baseURL}/careersConfig`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -454,7 +445,7 @@ export const getCareersConfig = async () => {
 //faqsConfig
 export const getFaqsConfig = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/faqsConfig`, {
+    const response = await fetch(`${baseURL}/faqsConfig`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -470,7 +461,7 @@ export const getFaqsConfig = async () => {
 //testimonialsConfig
 export const getTestimonialsConfig = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/testimonialsConfig`, {
+    const response = await fetch(`${baseURL}/testimonialsConfig`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -485,7 +476,7 @@ export const getTestimonialsConfig = async () => {
 //eventTradeShowsConfig
 export const getEventTradeShowsConfig = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/eventTradeShowsConfig`, {
+    const response = await fetch(`${baseURL}/eventTradeShowsConfig`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -500,7 +491,7 @@ export const getEventTradeShowsConfig = async () => {
 //newsConfig
 export const getNewsConfig = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/newsConfig`, {
+    const response = await fetch(`${baseURL}/newsConfig`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -515,7 +506,7 @@ export const getNewsConfig = async () => {
 //newsLettersConfig
 export const getNewsLettersConfig = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/newsLettersConfig`, {
+    const response = await fetch(`${baseURL}/newsLettersConfig`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -530,7 +521,7 @@ export const getNewsLettersConfig = async () => {
 //podcastsConfig
 export const getPodcastsConfig = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/podcastsConfig`, {
+    const response = await fetch(`${baseURL}/podcastsConfig`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -545,7 +536,7 @@ export const getPodcastsConfig = async () => {
 //pressReleasesConfig
 export const getPressReleasesConfig = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/pressReleasesConfig`, {
+    const response = await fetch(`${baseURL}/pressReleasesConfig`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -560,7 +551,7 @@ export const getPressReleasesConfig = async () => {
 //videosConfig
 export const getVideosConfig = async () => {
   try {
-    const response = await fetch(`${configs.baseURL}/videosConfig`, {
+    const response = await fetch(`${baseURL}/videosConfig`, {
       cache: "no-store",
     });
     if (!response.ok) {
@@ -576,12 +567,9 @@ export const getVideosConfig = async () => {
 //dynamicTemplatePreview
 export const getDynamicTemplatePreview = async (templateData, id) => {
   try {
-    const response = await fetch(
-      `${configs.baseURL}/${templateData}?id=${id}`,
-      {
-        cache: "no-store",
-      }
-    );
+    const response = await fetch(`${baseURL}/${templateData}?id=${id}`, {
+      cache: "no-store",
+    });
     if (!response.ok) {
       console.error(
         `Failed to fetch preview data from ${templateData}:${response.status}`
@@ -596,7 +584,7 @@ export const getDynamicTemplatePreview = async (templateData, id) => {
 
 export const updateTemplateStaging = async ({ data, templateData }) => {
   try {
-    const response = await fetch(`${configs.baseURL}/${templateData}`, {
+    const response = await fetch(`${baseURL}/${templateData}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

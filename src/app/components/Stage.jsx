@@ -88,10 +88,8 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
 
       const updatedData = {
         _id: stagingData?._id,
-        components: stagingData?.staging?.previewComponent,
         staging: {
           ...stagingData?.staging,
-          previewComponent: [],
           isPreview: true,
           previewSessionTime: null,
           publishSessionTime: Date.now(),
@@ -114,17 +112,12 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
     }
   };
 
-  const handleSEO = async () => {};
-
   const handleStage = async () => {
     if (stageStatus == "preview") {
       handlePreview();
     }
     if (stageStatus == "publish") {
       handlePublish();
-    }
-    if (stageStatus == "seo") {
-      handleSEO();
     }
   };
 
@@ -148,14 +141,18 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
 
       {isSuggest && (
         <div>
-          <textarea
-            type="text"
-            placeholder="Suggestion...."
-            value={suggestionMsg}
-            onChange={(e) => setSuggestionMsg(e.target.value)}
-          />
-          <button onClick={handleConfirm}>Confirm</button>
-          <button onClick={handleCancel}>Cancel</button>
+          {stageStatus === "preview" && (
+            <div>
+              <textarea
+                type="text"
+                placeholder="Suggestion...."
+                value={suggestionMsg}
+                onChange={(e) => setSuggestionMsg(e.target.value)}
+              />
+              <button onClick={handleConfirm}>Confirm</button>
+              <button onClick={handleCancel}>Cancel</button>
+            </div>
+          )}
         </div>
       )}
     </div>

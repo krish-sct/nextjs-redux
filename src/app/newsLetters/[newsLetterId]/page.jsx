@@ -9,19 +9,19 @@ import {
 
 const NewsLetterDetails = ({ params }) => {
   const dispatch = useDispatch();
-  const newsLetters = useSelector(
-    (state) => state?.newsLetterData?.newsLetter?.newsLetter
+  const newsLetter = useSelector(
+    (state) => state?.newsLetterData?.newsLetters?.newsLetters
   );
 
   const newsLetterPageDetails = useSelector(
     (state) =>
-      state?.newsLetterData?.newsLetter?.newsLetterDetails?.newsLetters
+      state?.newsLetterData?.newsLetters?.newsLetterDetails?.newsLetter
         ?.components
   );
 
   const [newsLetterDetails, setNewsLetterDetails] = useState([]);
   const handleNewsLetterDetails = () => {
-    let data = newsLetters?.filter((e) => e?._id === params?.newsLetterId)[0];
+    let data = newsLetter?.filter((e) => e?._id === params?.newsLetterId)[0];
     setNewsLetterDetails(data?.components || []);
   };
 
@@ -34,11 +34,11 @@ const NewsLetterDetails = ({ params }) => {
   }, []);
 
   useEffect(() => {
-    if (newsLetters?.length && params) {
+    if (newsLetter?.length && params) {
       handleNewsLetterDetails();
       getDetailsById();
     }
-  }, [newsLetters]);
+  }, [newsLetter]);
 
   useEffect(() => {
     if (newsLetterPageDetails?.length) {

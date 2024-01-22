@@ -17,6 +17,7 @@ export async function GET(req, res) {
       const offset = (page - 1) * limit;
       const eventTradeShows = await EventTradeShows.find({
         components: { $ne: [] },
+        "staging.isSEOVerified": true,
       })
         .sort({ createdAt: -1 })
         .skip(offset)

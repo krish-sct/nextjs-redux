@@ -1,6 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import { updateTemplateStaging } from "../../utils/apis";
 
-const SEOPreview = ({ seoData }) => {
+const SEOPreview = ({ seoData, stagingData, templateData }) => {
+  // console.log({ stagingData, templateData });
+  const [seoSuggestionMsg, setSEOSuggestionMsg] = useState("");
+  const [isSEOVerified, setIsSEOVerified] = useState(true);
+
+  const handleSEO = async () => {
+    setIsSEOVerified(true);
+    try {
+      const id = stagingData?._id;
+      const updatedData = {
+        _id: stagingData?._id,
+        staging: {
+          ...stagingData?.staging,
+          isSEOVerified: true,
+          seoMsg: { msg: seoSuggestionMsg || "seo msg" },
+        },
+      };
+      setSEOSuggestionMsg("");
+      // console.log(updatedData);
+      const response = await updateTemplateStaging({
+        data: { _id: stagingData?._id, updatedData },
+        templateData,
+      });
+      console.log("Template staging ", response);
+    } catch (error) {
+      console.error("Error in template staging:", error);
+    }
+  };
+
+  const handleCancel = async () => {
+    setIsSEOVerified(false);
+  };
   return (
     <div className="preview-wrapper">
       <h3>SEO Preview</h3>
@@ -32,6 +64,21 @@ const SEOPreview = ({ seoData }) => {
             {e}
           </p>
         )) || "No Keywords"}
+      </div>
+
+      <div>
+        {isSEOVerified && (
+          <div>
+            <textarea
+              type="text"
+              placeholder="SEO Suggestion...."
+              value={seoSuggestionMsg}
+              onChange={(e) => setSEOSuggestionMsg(e.target.value)}
+            />
+            <button onClick={handleSEO}>Verify</button>
+            <button onClick={handleCancel}>Cancel</button>
+          </div>
+        )}
       </div>
     </div>
   );

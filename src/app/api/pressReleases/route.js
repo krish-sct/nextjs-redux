@@ -16,7 +16,10 @@ export async function GET(req, res) {
       const total = await PressRelease.countDocuments();
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const pressReleases = await PressRelease.find({ components: { $ne: [] } })
+      const pressReleases = await PressRelease.find({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);

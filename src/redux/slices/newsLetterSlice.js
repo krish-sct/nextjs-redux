@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getNewsLetterById, getNewsLetters } from "../../utils/apis";
 
 const initialState = {
-  newsLetter: {
+  newsLetters: {
     totalPages: 0,
     currentPage: 0,
-    newsLetter: [],
+    newsLetters: [],
     newsLetterDetails: {},
   },
   loading: false,
@@ -13,7 +13,7 @@ const initialState = {
 };
 
 export const fetchNewsLetter = createAsyncThunk(
-  "newsLetter/fetchNewsLetter",
+  "newsLetters/fetchNewsLetter",
   async (data) => {
     let page = data?.page;
     let limit = data?.limit;
@@ -27,7 +27,7 @@ export const fetchNewsLetter = createAsyncThunk(
 );
 
 export const fetchNewsLetterById = createAsyncThunk(
-  "newsLetter/fetchNewsLetterById",
+  "newsLetters/fetchNewsLetterById",
   async (newsLetterId) => {
     try {
       const response = await getNewsLetterById(newsLetterId);
@@ -39,11 +39,11 @@ export const fetchNewsLetterById = createAsyncThunk(
 );
 
 export const newsLetterSlice = createSlice({
-  name: "newsLetter",
+  name: "newsLetters",
   initialState,
   reducers: {
     setNewsLetter: (state, action) => {
-      state.newsLetter = { ...action.payload };
+      state.newsLetters = { ...action.payload };
     },
   },
   extraReducers: (builder) => {
@@ -54,7 +54,7 @@ export const newsLetterSlice = createSlice({
       })
       .addCase(fetchNewsLetter.fulfilled, (state, action) => {
         state.loading = false;
-        state.newsLetter = action.payload;
+        state.newsLetters = action.payload;
       })
       .addCase(fetchNewsLetter.rejected, (state, action) => {
         state.loading = false;
@@ -66,7 +66,7 @@ export const newsLetterSlice = createSlice({
       })
       .addCase(fetchNewsLetterById.fulfilled, (state, action) => {
         state.loading = false;
-        state.newsLetter.newsLetterDetails = action.payload;
+        state.newsLetters.newsLetterDetails = action.payload;
       })
       .addCase(fetchNewsLetterById.rejected, (state, action) => {
         state.loading = false;

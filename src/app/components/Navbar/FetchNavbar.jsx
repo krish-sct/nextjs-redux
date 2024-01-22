@@ -44,7 +44,7 @@ const links = [
   {
     id: 6,
     title: "NewsLetter",
-    url: "/newsLetter",
+    url: "/newLetters",
   },
   {
     id: 7,

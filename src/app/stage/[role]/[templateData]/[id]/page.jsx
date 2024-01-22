@@ -5,6 +5,7 @@ import TemplatePreview from "../../../../components/TemplatePreview";
 import Stage from "../../../../components/Stage";
 import SEOPreview from "../../../../components/SEOPreview";
 import TestPreview from "../../../../components/TestPreview";
+import { handleCase } from "../../../../../utils/common";
 
 const PreviewPage = ({ params }) => {
   const [stagingData, setStagingData] = useState(null);
@@ -52,25 +53,27 @@ const PreviewPage = ({ params }) => {
             <div>
               <SEOPreview
                 seoData={
-                  stagingData?.[templateData?.slice(0, -1)]?.staging?.isPublish
+                  stagingData?.[handleCase(templateData)]?.staging?.isPublish
                     ? stagingData?.[
-                        templateData?.slice(0, -1)
-                      ]?.staging?.oldComponent?.filter(
+                        handleCase(templateData)
+                      ]?.components?.filter((e) => e.key === "seo")?.[0]
+                    : stagingData?.[
+                        handleCase(templateData)
+                      ]?.staging?.previewComponent?.filter(
                         (e) => e.key === "seo"
                       )?.[0]
-                    : stagingData?.[
-                        templateData?.slice(0, -1)
-                      ]?.components?.filter((e) => e.key === "seo")?.[0]
                 }
+                templateData={params.templateData}
+                stagingData={stagingData?.[handleCase(templateData)]}
               />
             </div>
           ) : role === "test" ? (
             <div>
               <TestPreview
                 testData={
-                  stagingData?.[templateData?.slice(0, -1)]?.staging?.isPublish
-                    ? stagingData?.[templateData?.slice(0, -1)]?.components
-                    : stagingData?.[templateData?.slice(0, -1)]?.staging
+                  stagingData?.[handleCase(templateData)]?.staging?.isPublish
+                    ? stagingData?.[handleCase(templateData)]?.components
+                    : stagingData?.[handleCase(templateData)]?.staging
                         ?.previewComponent
                 }
               />
@@ -81,16 +84,16 @@ const PreviewPage = ({ params }) => {
                 title={"Dynamic Template Preview"}
                 templateData={
                   role === "preview" &&
-                  stagingData?.[templateData?.slice(0, -1)]?.staging?.isPreview
+                  stagingData?.[handleCase(templateData)]?.staging?.isPreview
                     ? []
-                    : stagingData?.[templateData?.slice(0, -1)]?.staging
+                    : stagingData?.[handleCase(templateData)]?.staging
                         ?.previewComponent || []
                 }
               />
               <Stage
                 stageStatus={params.role}
                 templateData={params.templateData}
-                stagingData={stagingData?.[templateData?.slice(0, -1)]}
+                stagingData={stagingData?.[handleCase(templateData)]}
               />
             </>
           )}
