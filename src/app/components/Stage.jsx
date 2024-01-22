@@ -6,6 +6,8 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
 
   const [denyMsg, setDenyMsg] = useState("");
   const [isDeny, setIsDeny] = useState(false);
+  const [suggestionMsg, setSuggestionMsg] = useState("");
+  const [isSuggest, setIsSuggest] = useState(false);
 
   const handleDeny = async () => {
     setIsDeny(true);
@@ -13,9 +15,10 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
 
   const handleCancel = async () => {
     setIsDeny(false);
+    setIsSuggest(false);
   };
 
-  const handleOk = async () => {
+  const handleSubmit = async () => {
     setIsDeny(true);
     try {
       const id = stagingData?._id;
@@ -29,7 +32,6 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
         },
       };
       setDenyMsg("");
-      // alert(updatedData.staging.denyMsg.msg);
       console.log(updatedData);
 
       const response = await updateTemplateStaging({
@@ -43,35 +45,12 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
   };
 
   const handlePreview = async () => {
-    try {
-      const id = stagingData?._id;
-      // console.log(id);
-
-      const updatedData = {
-        _id: stagingData?._id,
-        staging: {
-          ...stagingData?.staging,
-          isPreview: true,
-          previewSessionTime: null,
-          publishSessionTime: Date.now(),
-        },
-      };
-      // console.log({ updatedData });
-
-      const response = await updateTemplateStaging({
-        data: { _id: stagingData?._id, updatedData },
-        templateData,
-      });
-      console.log("Template staging updated:", response);
-    } catch (error) {
-      console.error("Error in template staging:", error);
-    }
+    setIsSuggest(true);
   };
 
   const handlePublish = async () => {
     try {
       const id = stagingData?._id;
-      // console.log(id);
       const updatedData = {
         _id: stagingData?._id,
         components: stagingData?.staging?.previewComponent,
@@ -81,6 +60,13 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
           isPublish: true,
           publishSessionTime: null,
           oldComponent: stagingData.components,
+          suggestion: {
+            newSuggestion: { msg: "" || "" },
+            oldSuggestion: {
+              msg: stagingData.staging.suggestion.newSuggestion,
+            },
+            liveSuggestion: { msg: "" || "" },
+          },
         },
       };
 
@@ -94,9 +80,41 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
     }
   };
 
-  const handleSEO = async () => {
-    console.log("SEO");
+  const handleConfirm = async () => {
+    setIsSuggest(true);
+    try {
+      const id = stagingData?._id;
+      // console.log(id);
+
+      const updatedData = {
+        _id: stagingData?._id,
+        components: stagingData?.staging?.previewComponent,
+        staging: {
+          ...stagingData?.staging,
+          previewComponent: [],
+          isPreview: true,
+          previewSessionTime: null,
+          publishSessionTime: Date.now(),
+          suggestion: {
+            newSuggestion: { msg: suggestionMsg || "" },
+            oldSuggestion: { msg: "" || "" },
+            liveSuggestion: { msg: "" || "" },
+          },
+        },
+      };
+      setSuggestionMsg("");
+      console.log({ updatedData });
+      const response = await updateTemplateStaging({
+        data: { _id: stagingData?._id, updatedData },
+        templateData,
+      });
+      console.log("Template staging updated:", response);
+    } catch (error) {
+      console.error("Error in template staging:", error);
+    }
   };
+
+  const handleSEO = async () => {};
 
   const handleStage = async () => {
     if (stageStatus == "preview") {
@@ -124,7 +142,20 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
             onChange={(e) => setDenyMsg(e.target.value)}
           />
           <button onClick={handleCancel}>Cancel</button>
-          <button onClick={handleOk}>Ok</button>
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
+      )}
+
+      {isSuggest && (
+        <div>
+          <textarea
+            type="text"
+            placeholder="Suggestion...."
+            value={suggestionMsg}
+            onChange={(e) => setSuggestionMsg(e.target.value)}
+          />
+          <button onClick={handleConfirm}>Confirm</button>
+          <button onClick={handleCancel}>Cancel</button>
         </div>
       )}
     </div>

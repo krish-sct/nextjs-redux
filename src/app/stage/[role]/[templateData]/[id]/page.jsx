@@ -52,9 +52,15 @@ const PreviewPage = ({ params }) => {
             <div>
               <SEOPreview
                 seoData={
-                  stagingData?.[templateData?.slice(0, -1)]?.components?.filter(
-                    (e) => e.key === "seo"
-                  )?.[0]
+                  stagingData?.[templateData?.slice(0, -1)]?.staging?.isPublish
+                    ? stagingData?.[
+                        templateData?.slice(0, -1)
+                      ]?.staging?.oldComponent?.filter(
+                        (e) => e.key === "seo"
+                      )?.[0]
+                    : stagingData?.[
+                        templateData?.slice(0, -1)
+                      ]?.components?.filter((e) => e.key === "seo")?.[0]
                 }
               />
             </div>
