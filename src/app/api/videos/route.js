@@ -12,7 +12,10 @@ export async function GET(req, res) {
       const video = await Video.findById(id);
       return NextResponse.json({ video }, { status: 200 });
     } else {
-      const total = await Video.countDocuments();
+      const total = await Video.countDocuments({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      });
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
       const video = await Video.find({ components: { $ne: [] } })

@@ -6,7 +6,6 @@ import Career from "./Career";
 
 const List = () => {
   const careers = useSelector((state) => state?.careerData?.careers);
-  console.log(careers);
   return (
     <div>
       <h1>Careers</h1>

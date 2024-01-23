@@ -18,7 +18,10 @@ export async function GET(req, res) {
       });
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
-      const news = await News.find()
+      const news = await News.find({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      })
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);

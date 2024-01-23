@@ -1,7 +1,14 @@
+"use client";
 import React, { useState } from "react";
+import Videos from "./Videos";
 import { updateTemplateStaging } from "../../utils/apis";
 
-const Stage = ({ stageStatus, templateData, stagingData }) => {
+const VideoPreview = ({
+  videoData,
+  stagingData,
+  templateData,
+  stageStatus,
+}) => {
   const [denyMsg, setDenyMsg] = useState("");
   const [isDeny, setIsDeny] = useState(false);
   const [suggestionMsg, setSuggestionMsg] = useState("");
@@ -109,6 +116,16 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
       console.error("Error updating template staging:", error);
     }
   };
+  const handleVideoData = (data) => {
+    let video = {};
+    data?.map((e) => {
+      if (e.key === "title") video.title = e.value;
+      if (e.key === "url") video.url = e.value;
+      if (e.key === "category") video.category = e.value;
+      if (e.key === "seo") video.seo = e.value;
+    });
+    return video;
+  };
 
   const handleStage = async () => {
     if (stageStatus == "preview") {
@@ -121,40 +138,43 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
 
   return (
     <div>
-      <button onClick={handleDeny}>Deny</button>
-      <button onClick={handleStage}>{stageStatus}</button>
+      <div>
+        <Videos data={handleVideoData(videoData)} />
+        <button onClick={handleDeny}>Deny</button>
+        <button onClick={handleStage}>{stageStatus}</button>
 
-      {isDeny && (
-        <div>
-          <input
-            type="text"
-            placeholder="Type message"
-            value={denyMsg}
-            onChange={(e) => setDenyMsg(e.target.value)}
-          />
-          <button onClick={handleCancel}>Cancel</button>
-          <button onClick={handleSubmit}>Submit</button>
-        </div>
-      )}
-      {isSuggest && (
-        <div>
-          {stageStatus === "preview" && (
-            <div>
-              <textarea
-                type="text"
-                placeholder="Suggestion...."
-                value={suggestionMsg}
-                onChange={(e) => setSuggestionMsg(e.target.value)}
-              />
-              <br />
-              <button onClick={handleCancel}>Suggestion Cancel</button>
-              <br />
-            </div>
-          )}
-        </div>
-      )}
+        {isDeny && (
+          <div>
+            <input
+              type="text"
+              placeholder="Type message"
+              value={denyMsg}
+              onChange={(e) => setDenyMsg(e.target.value)}
+            />
+            <button onClick={handleCancel}>Cancel</button>
+            <button onClick={handleSubmit}>Submit</button>
+          </div>
+        )}
+        {isSuggest && (
+          <div>
+            {stageStatus === "preview" && (
+              <div>
+                <textarea
+                  type="text"
+                  placeholder="Suggestion...."
+                  value={suggestionMsg}
+                  onChange={(e) => setSuggestionMsg(e.target.value)}
+                />
+                <br />
+                <button onClick={handleCancel}>Suggestion Cancel</button>
+                <br />
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-export default Stage;
+export default VideoPreview;

@@ -12,7 +12,10 @@ export async function GET(req, res) {
       const career = await Career.findById(id);
       return NextResponse.json({ career }, { status: 200 });
     } else {
-      const total = await Career.countDocuments();
+      const total = await Career.countDocuments({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      });
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
       const careers = await Career.find({

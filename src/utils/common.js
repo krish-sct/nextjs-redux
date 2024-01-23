@@ -3,7 +3,7 @@ export const handleDate = (date) => {
   return data.toLocaleString();
 };
 
-export const handleCase = (templateData, newses) => {
+export const handleCase = (templateData) => {
   if (templateData.toLowerCase() === "news") {
     return templateData?.concat("es");
   } else {

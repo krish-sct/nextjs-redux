@@ -13,7 +13,10 @@ export async function GET(req, res) {
       const podcast = await Podcast.findById(id);
       return NextResponse.json({ podcast }, { status: 200 });
     } else {
-      const total = await Podcast.countDocuments();
+      const total = await Podcast.countDocuments({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      });
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
       const podcasts = await Podcast.find({

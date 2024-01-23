@@ -12,7 +12,10 @@ export async function GET(req, res) {
       const article = await Article.findById(id);
       return NextResponse.json({ article }, { status: 200 });
     } else {
-      const total = await Article.countDocuments();
+      const total = await Article.countDocuments({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      });
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
       const articles = await Article.find({

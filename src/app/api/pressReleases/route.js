@@ -13,7 +13,10 @@ export async function GET(req, res) {
       const pressRelease = await PressRelease.findById(id);
       return NextResponse.json({ pressRelease }, { status: 200 });
     } else {
-      const total = await PressRelease.countDocuments();
+      const total = await PressRelease.countDocuments({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      });
       const totalPages = Math.ceil(total / limit);
       const offset = (page - 1) * limit;
       const pressReleases = await PressRelease.find({

@@ -154,7 +154,7 @@ export const getNewsById = async (newsId) => {
 export const getNewsLetters = async (page, limit) => {
   try {
     const response = await fetch(
-      `${baseURL}/newsLetter?page=${page || defaultPage}&limit=${
+      `${baseURL}/newsLetters?page=${page || defaultPage}&limit=${
         limit || defaultLimit
       }`,
       {
@@ -174,7 +174,7 @@ export const getNewsLetters = async (page, limit) => {
 
 export const getNewsLetterById = async (newsLetterId) => {
   try {
-    const response = await fetch(`${baseURL}/newsLetter?id=${newsLetterId}`, {
+    const response = await fetch(`${baseURL}/newsLetters?id=${newsLetterId}`, {
       cache: "no-store",
     });
 

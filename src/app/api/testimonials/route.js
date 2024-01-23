@@ -13,7 +13,10 @@ export async function GET(req, res) {
       const testimonial = await Testimonial.findById(id);
       return NextResponse.json({ testimonial }, { status: 200 });
     } else {
-      const total = await Testimonial.countDocuments(); // Total number of data
+      const total = await Testimonial.countDocuments({
+        components: { $ne: [] },
+        "staging.isSEOVerified": true,
+      }); // Total number of data
       const totalPages = Math.ceil(total / limit); // Calculate total pages
       const offset = (page - 1) * limit;
       const testimonial = await Testimonial.find({
