@@ -234,3 +234,9 @@ body {
 .text-class{
     color: yellow;
 }
+
+.text-done{
+    color:aquamarine;
+    font-size: x-large;
+    
+}

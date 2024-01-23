@@ -96,11 +96,7 @@ const TemplatePreview = ({ templateData, title }) => {
               ) : (
                 ""
               )}
-              {e?.key === "seo" ? (
-                <SEO data={e.value} title={title} />
-              ) : (
-                ""
-              )}
+              {e?.key === "seo" ? <SEO data={e.value} title={title} /> : ""}
             </div>
           );
         })}

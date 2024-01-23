@@ -7,7 +7,7 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
   const [denyMsg, setDenyMsg] = useState("");
   const [isDeny, setIsDeny] = useState(false);
   const [suggestionMsg, setSuggestionMsg] = useState("");
-  const [isSuggest, setIsSuggest] = useState(false);
+  const [isSuggest, setIsSuggest] = useState(true);
 
   const handleDeny = async () => {
     setIsDeny(true);
@@ -46,6 +46,37 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
 
   const handlePreview = async () => {
     setIsSuggest(true);
+    try {
+      const id = stagingData?._id;
+
+      const updatedData = {
+        _id: stagingData?._id,
+        staging: {
+          ...stagingData?.staging,
+          isPreview: true,
+          previewSessionTime: null,
+          publishSessionTime: Date.now(),
+          suggestion: {
+            newSuggestion: { msg: suggestionMsg || "" },
+            oldSuggestion: {
+              msg: stagingData?.staging?.suggestion?.liveSuggestion?.msg || "",
+            },
+            liveSuggestion: {
+              msg: stagingData?.staging?.suggestion?.newSuggestion?.msg || "",
+            },
+          },
+        },
+      };
+      setSuggestionMsg("");
+
+      const response = await updateTemplateStaging({
+        data: { _id: stagingData?._id, updatedData },
+        templateData,
+      });
+      console.log("Template staging updated:", response);
+    } catch (error) {
+      console.error("Error in template staging:", error);
+    }
   };
 
   const handlePublish = async () => {
@@ -63,9 +94,11 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
           suggestion: {
             newSuggestion: { msg: "" || "" },
             oldSuggestion: {
-              msg: stagingData.staging.suggestion.newSuggestion,
+              msg: stagingData?.staging?.suggestion?.liveSuggestion?.msg || "",
             },
-            liveSuggestion: { msg: "" || "" },
+            liveSuggestion: {
+              msg: stagingData?.staging?.suggestion?.newSuggestion?.msg || "",
+            },
           },
         },
       };
@@ -77,38 +110,6 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
       console.log("Template staging updated:", response);
     } catch (error) {
       console.error("Error updating template staging:", error);
-    }
-  };
-
-  const handleConfirm = async () => {
-    setIsSuggest(true);
-    try {
-      const id = stagingData?._id;
-      // console.log(id);
-
-      const updatedData = {
-        _id: stagingData?._id,
-        staging: {
-          ...stagingData?.staging,
-          isPreview: true,
-          previewSessionTime: null,
-          publishSessionTime: Date.now(),
-          suggestion: {
-            newSuggestion: { msg: suggestionMsg || "" },
-            oldSuggestion: { msg: "" || "" },
-            liveSuggestion: { msg: "" || "" },
-          },
-        },
-      };
-      setSuggestionMsg("");
-      console.log({ updatedData });
-      const response = await updateTemplateStaging({
-        data: { _id: stagingData?._id, updatedData },
-        templateData,
-      });
-      console.log("Template staging updated:", response);
-    } catch (error) {
-      console.error("Error in template staging:", error);
     }
   };
 
@@ -138,7 +139,6 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
           <button onClick={handleSubmit}>Submit</button>
         </div>
       )}
-
       {isSuggest && (
         <div>
           {stageStatus === "preview" && (
@@ -149,8 +149,9 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
                 value={suggestionMsg}
                 onChange={(e) => setSuggestionMsg(e.target.value)}
               />
-              <button onClick={handleConfirm}>Confirm</button>
-              <button onClick={handleCancel}>Cancel</button>
+              <br />
+              <button onClick={handleCancel}>Suggestion Cancel</button>
+              <br />
             </div>
           )}
         </div>

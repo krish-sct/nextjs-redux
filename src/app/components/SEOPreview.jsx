@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { updateTemplateStaging } from "../../utils/apis";
 
 const SEOPreview = ({ seoData, stagingData, templateData }) => {
-  // console.log({ stagingData, templateData });
   const [seoSuggestionMsg, setSEOSuggestionMsg] = useState("");
   const [isSEOVerified, setIsSEOVerified] = useState(true);
 
@@ -19,7 +18,6 @@ const SEOPreview = ({ seoData, stagingData, templateData }) => {
         },
       };
       setSEOSuggestionMsg("");
-      // console.log(updatedData);
       const response = await updateTemplateStaging({
         data: { _id: stagingData?._id, updatedData },
         templateData,

@@ -11,16 +11,35 @@ const PreviewPage = ({ params }) => {
   const [stagingData, setStagingData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isExpired, setIsExpired] = useState(false);
+  const [isDone, setIsDone] = useState(false);
 
   let { templateData, id, role } = params;
 
+  const handleRole = (staging) => {
+    if (role === "preview") {
+      return !staging?.isPreview;
+    }
+    if (role === "publish") {
+      return !staging?.isPublish;
+    }
+    if (role === "seo") {
+      return !staging?.isSEOVerified;
+    }
+    return true;
+  };
   const handleTemplatePreview = async () => {
     try {
       const data = await getDynamicTemplatePreview(templateData, id, role);
       console.log("Dynamic Template data", data);
-      setStagingData(data);
+      setIsLoading(false);
+      if (handleRole(data?.[handleCase(templateData)]?.staging)) {
+        setStagingData(data);
+      } else if (handleSessionTime(data?.[handleCase(templateData)]?.staging)) {
+      } else {
+        setIsDone(true);
+      }
     } catch (error) {
-      console.error("Error fetching dynamic template preview:", error);
+      console.error("Error in fetching:", error);
     }
   };
 
@@ -29,22 +48,23 @@ const PreviewPage = ({ params }) => {
     let expiryTime = sessionTime + process.env.SessionValidityTime;
     if (expiryTime < sessionTime) {
       setIsExpired(true);
-      setIsLoading(false);
     } else {
       console.log("valid ");
     }
   };
 
   useEffect(() => {
+    setIsLoading(true);
     handleTemplatePreview();
-    handleSessionTime();
   }, []);
 
   return (
     <div>
-      <h1>Page</h1>
+      <h1>Role Page</h1>
       {isLoading ? (
         <div className="spinner"></div>
+      ) : isDone ? (
+        <div className="text-done">{`Already ${role}ed`}</div>
       ) : (
         <>
           {isExpired ? (

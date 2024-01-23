@@ -1,19 +1,7 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./Navbar.module.css";
-// import { useDispatch } from "react-redux";
-// import { fetchTestimonial } from "../../../redux/slices/testimonialSlice";
-// import { fetchArticle } from "../../../redux/slices/articleSlice";
-// import { fetchCareer } from "../../../redux/slices/careerSlice";
-// import { fetchEventTradeShow } from "../../../redux/slices/eventTradeShowsSlice";
-// import { fetchFaq } from "../../../redux/slices/faqSlice";
-// import { fetchNews } from "../../../redux/slices/newsSlice";
-// import { fetchNewsLetter } from "../../../redux/slices/newsLetterSlice";
-// import { fetchPodcast } from "../../../redux/slices/podcastSlice";
-// import { fetchPressRelease } from "../../../redux/slices/pressReleaseSlice";
-// import { fetchMaster } from "../../../redux/slices/masterSlice";
-// import { fetchVideoUrl } from "../../../redux/slices/videoSlice";
 
 const links = [
   {
@@ -79,27 +67,6 @@ const links = [
 ];
 
 const Navbar = () => {
-  // const dispatch = useDispatch();
-  // const fetchAll = async () => {
-  //   try {
-  //     dispatch(fetchTestimonial());
-  //     dispatch(fetchArticle());
-  //     dispatch(fetchCareer());
-  //     dispatch(fetchEventTradeShow());
-  //     dispatch(fetchFaq());
-  //     dispatch(fetchNews());
-  //     dispatch(fetchNewsLetter());
-  //     dispatch(fetchPodcast());
-  //     dispatch(fetchPressRelease());
-  //     dispatch(fetchVideoUrl());
-  //     dispatch(fetchMaster());
-  //   } catch (error) {
-  //     console.error("Error in fetching:", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchAll();
-  // }, []);
   return (
     <div className={styles.container}>
       <Link className={styles.text} href="/">

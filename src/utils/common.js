@@ -5,8 +5,7 @@ export const handleDate = (date) => {
 
 export const handleCase = (templateData, newses) => {
   if (templateData.toLowerCase() === "news") {
-    //return templateData?.concat("es");
-    return newses;
+    return templateData?.concat("es");
   } else {
     return templateData?.slice(0, -1);
   }
