@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { updateTemplateStaging } from "../../utils/apis";
 
-const SEOPreview = ({ seoData, stagingData, templateData }) => {
+const SEOPreview = ({ seoData, stagingData, templateData, title }) => {
   const [seoSuggestionMsg, setSEOSuggestionMsg] = useState("");
   const [isSEOVerified, setIsSEOVerified] = useState(true);
 

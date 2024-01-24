@@ -6,7 +6,6 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
   const [isDeny, setIsDeny] = useState(false);
   const [suggestionMsg, setSuggestionMsg] = useState("");
   const [isSuggest, setIsSuggest] = useState(true);
-  const [isHandleSucceed, setIsHandleSucceed] = useState(false);
 
   const handleDeny = async () => {
     setIsDeny(true);
@@ -15,7 +14,6 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
   const handleCancel = async () => {
     setIsDeny(false);
     setIsSuggest(false);
-    setIsHandleSucceed(false);
   };
 
   const handleSubmit = async () => {
@@ -45,7 +43,6 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
 
   const handlePreview = async () => {
     setIsSuggest(true);
-    setIsHandleSucceed(true);
     try {
       const id = stagingData?._id;
 
@@ -68,7 +65,6 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
         },
       };
       setSuggestionMsg("");
-      alert("succeed");
 
       const response = await updateTemplateStaging({
         data: { _id: stagingData?._id, updatedData },
@@ -81,7 +77,6 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
   };
 
   const handlePublish = async () => {
-    setIsHandleSucceed(true);
     try {
       const id = stagingData?._id;
       const updatedData = {
@@ -104,7 +99,6 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
           },
         },
       };
-      alert("succeed");
       const response = await updateTemplateStaging({
         data: { _id: stagingData?._id, updatedData },
         templateData,

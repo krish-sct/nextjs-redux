@@ -14,7 +14,10 @@ const VideoTestPreview = ({ videoTestData }) => {
   };
   return (
     <div>
-      <Videos data={handleVideoData(videoTestData)} />
+      <Videos
+        data={handleVideoData(videoTestData)}
+        title={"Video Test Preview"}
+      />
     </div>
   );
 };

@@ -8,6 +8,7 @@ const VideoPreview = ({
   stagingData,
   templateData,
   stageStatus,
+  title,
 }) => {
   const [denyMsg, setDenyMsg] = useState("");
   const [isDeny, setIsDeny] = useState(false);
@@ -21,7 +22,6 @@ const VideoPreview = ({
   const handleCancel = async () => {
     setIsDeny(false);
     setIsSuggest(false);
-    setIsHandleSucceed(false);
   };
 
   const handleSubmit = async () => {
@@ -51,7 +51,6 @@ const VideoPreview = ({
 
   const handlePreview = async () => {
     setIsSuggest(true);
-    setIsHandleSucceed(true);
     try {
       const id = stagingData?._id;
 
@@ -74,7 +73,6 @@ const VideoPreview = ({
         },
       };
       setSuggestionMsg("");
-      alert("succeed");
 
       const response = await updateTemplateStaging({
         data: { _id: stagingData?._id, updatedData },
@@ -87,7 +85,6 @@ const VideoPreview = ({
   };
 
   const handlePublish = async () => {
-    setIsHandleSucceed(true);
     try {
       const id = stagingData?._id;
       const updatedData = {
@@ -110,7 +107,6 @@ const VideoPreview = ({
           },
         },
       };
-      alert("succeed");
 
       const response = await updateTemplateStaging({
         data: { _id: stagingData?._id, updatedData },

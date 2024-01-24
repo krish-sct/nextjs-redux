@@ -15,33 +15,40 @@ const PreviewPage = ({ params }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isExpired, setIsExpired] = useState(false);
   const [isDone, setIsDone] = useState(false);
+  const [isDeny, setIsDeny] = useState(false);
 
   let { templateData, id, role } = params;
 
+  const handleDenied = (staging) => {
+    return staging?.isDenied;
+  };
+
   const handleRole = (staging) => {
     if (role === "preview") {
-      return !staging?.isPreview;
+      return staging?.isPreview;
     }
     if (role === "publish") {
-      return !staging?.isPublish;
+      return staging?.isPublish;
     }
     if (role === "seo") {
-      return !staging?.isSEOVerified;
+      return staging?.isSEOVerified;
     }
-    return true;
+    return false;
   };
 
   const handleTemplatePreview = async () => {
     try {
       let Id = params?.id?.split("-")[0];
       const data = await getDynamicTemplatePreview(templateData, Id, role);
-      setIsLoading(false);
-      if (handleRole(data?.[handleCase(templateData)]?.staging)) {
-        setStagingData(data);
-      } else if (handleSessionTime(data?.[handleCase(templateData)]?.staging)) {
-        console.log("Handling sessionTime");
-      } else {
+      console.log("dynamic data", data);
+      if (handleSessionTime(data?.[handleCase(templateData)]?.staging)) {
+        setIsExpired(true);
+      } else if (handleDenied(data?.[handleCase(templateData)]?.staging)) {
+        setIsDeny(true);
+      } else if (handleRole(data?.[handleCase(templateData)]?.staging)) {
         setIsDone(true);
+      } else {
+        setStagingData(data);
       }
       setIsLoading(false);
     } catch (error) {
@@ -57,10 +64,10 @@ const PreviewPage = ({ params }) => {
     let expiryTime =
       sessionTime + Number(configs.SessionValidityTime) * 60 * 1000;
     if (currentTime < expiryTime) {
-      console.log("valid ");
+      return false;
     } else {
-      setIsExpired(true);
       console.log("Expired");
+      return true;
     }
   };
 
@@ -74,6 +81,11 @@ const PreviewPage = ({ params }) => {
       <h1>Role Page</h1>
       {isLoading ? (
         <div className="spinner"></div>
+      ) : isDeny ? (
+        <div className="text-done">{`Already ${templateData.slice(
+          0,
+          -1
+        )} denied`}</div>
       ) : isDone ? (
         <div className="text-done">{`Already ${role}ed`}</div>
       ) : (
@@ -96,6 +108,7 @@ const PreviewPage = ({ params }) => {
                 }
                 templateData={params.templateData}
                 stagingData={stagingData?.[handleCase(templateData)]}
+                title={"SEO"}
               />
             </div>
           ) : role === "test" && templateData === "videos" ? (
