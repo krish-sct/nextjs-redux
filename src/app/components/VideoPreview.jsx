@@ -140,7 +140,10 @@ const VideoPreview = ({
   return (
     <div>
       <div>
-        <Videos data={handleVideoData(videoData)} />
+        <Videos
+          data={handleVideoData(videoData)}
+          title={"Dynamic Template Preview"}
+        />
         <button onClick={handleDeny}>Deny</button>
         <button onClick={handleStage}>{stageStatus}</button>
 

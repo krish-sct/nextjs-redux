@@ -8,7 +8,7 @@ import TestPreview from "../../../../components/TestPreview";
 import { handleCase } from "../../../../../utils/common";
 import VideoPreview from "../../../../components/VideoPreview";
 import VideoTestPreview from "../../../../components/VideoTestPreview";
-import configs from "../../../../../utils/configs";
+// import configs from "../../../../../utils/configs";
 
 const PreviewPage = ({ params }) => {
   const [stagingData, setStagingData] = useState(null);
@@ -59,10 +59,10 @@ const PreviewPage = ({ params }) => {
 
   const handleSessionTime = () => {
     let currentTime = Date.now();
-    console.log("currentTime", currentTime);
     let sessionTime = params?.id?.split("-")[1];
-    let expiryTime =
-      sessionTime + Number(configs.SessionValidityTime) * 60 * 1000;
+    let expiryTime = Number(sessionTime) + Number(1800000);
+    //Number(sessionTime) + Number(Number(configs.SessionValidityTime) * 60 * 1000);
+
     if (currentTime < expiryTime) {
       return false;
     } else {
@@ -95,6 +95,7 @@ const PreviewPage = ({ params }) => {
           ) : role === "seo" ? (
             <div>
               <SEOPreview
+                title={"SEO"}
                 seoData={
                   stagingData?.[handleCase(templateData)]?.staging?.isPublish
                     ? stagingData?.[
@@ -108,7 +109,6 @@ const PreviewPage = ({ params }) => {
                 }
                 templateData={params.templateData}
                 stagingData={stagingData?.[handleCase(templateData)]}
-                title={"SEO"}
               />
             </div>
           ) : role === "test" && templateData === "videos" ? (

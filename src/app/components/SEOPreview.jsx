@@ -1,7 +1,8 @@
+"use client";
 import React, { useState } from "react";
 import { updateTemplateStaging } from "../../utils/apis";
 
-const SEOPreview = ({ seoData, stagingData, templateData, title }) => {
+const SEOPreview = ({ title, seoData, stagingData, templateData }) => {
   const [seoSuggestionMsg, setSEOSuggestionMsg] = useState("");
   const [isSEOVerified, setIsSEOVerified] = useState(true);
 
