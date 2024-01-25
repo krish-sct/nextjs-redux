@@ -31,8 +31,8 @@ const links = [
   },
   {
     id: 6,
-    title: "NewsLetter",
-    url: "/newLetters",
+    title: "NewsLetters",
+    url: "/newsLetters",
   },
   {
     id: 7,
