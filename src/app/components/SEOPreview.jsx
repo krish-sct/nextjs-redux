@@ -61,7 +61,7 @@ const SEOPreview = ({ title, seoData, stagingData, templateData }) => {
         <p className="text-class">{seoData?.value || "No value"}</p>
       </div>
 
-      <div>
+      <div className="">
         {isSEOVerified && (
           <div>
             <textarea

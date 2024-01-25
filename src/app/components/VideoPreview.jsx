@@ -9,6 +9,7 @@ const VideoPreview = ({
   templateData,
   stageStatus,
   title,
+  role,
 }) => {
   const [denyMsg, setDenyMsg] = useState("");
   const [isDeny, setIsDeny] = useState(false);
@@ -78,7 +79,7 @@ const VideoPreview = ({
         data: { _id: stagingData?._id, updatedData },
         templateData,
       });
-      alert("successful");
+      alert(`Confirm to ${role}?`);
       window.close();
       window.open(`/stage/${role}`);
       console.log("Template staging updated:", response);
@@ -115,7 +116,7 @@ const VideoPreview = ({
         data: { _id: stagingData?._id, updatedData },
         templateData,
       });
-      alert("successful");
+      alert(`Confirm to ${role}?`);
       window.close();
       window.open(`/stage/${role}`);
       console.log("Template staging updated:", response);
@@ -144,7 +145,7 @@ const VideoPreview = ({
   };
 
   return (
-    <div>
+    <div className="btn-container">
       <div>
         <Videos
           data={handleVideoData(videoData)}

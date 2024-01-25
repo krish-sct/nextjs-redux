@@ -86,8 +86,8 @@ const PreviewPage = ({ params }) => {
   }, []);
 
   return (
-    <div>
-      <h1>{role} Page</h1>
+    <div className="">
+      <h1 className="text-head">{role} Page</h1>
       {isLoading ? (
         <div className="spinner"></div>
       ) : isDeny ? (
@@ -156,6 +156,7 @@ const PreviewPage = ({ params }) => {
                 stageStatus={params.role}
                 templateData={params.templateData}
                 stagingData={stagingData?.[handleCase(templateData)]}
+                role={params.role}
               />
             </>
           ) : (

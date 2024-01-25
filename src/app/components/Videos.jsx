@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-const Videos = ({ data, title }) => {
+const Videos = ({ data, title, role }) => {
   const handleURL = () => {
     let url = data?.url?.split("/");
 

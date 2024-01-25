@@ -69,7 +69,7 @@ const Stage = ({ stageStatus, templateData, stagingData, role }) => {
         data: { _id: stagingData?._id, updatedData },
         templateData,
       });
-      alert("successful");
+      alert(`Confirm to ${role}?`);
       window.close();
       window.open(`/stage/${role}`);
       console.log("Template staging updated:", response);
@@ -105,7 +105,7 @@ const Stage = ({ stageStatus, templateData, stagingData, role }) => {
         data: { _id: stagingData?._id, updatedData },
         templateData,
       });
-      alert("successful");
+      alert(`Confirm to ${role}?`);
       window.close();
       window.open(`/stage/${role}`);
       console.log("Template staging updated:", response);
@@ -124,7 +124,7 @@ const Stage = ({ stageStatus, templateData, stagingData, role }) => {
   };
 
   return (
-    <div>
+    <div className="">
       <button onClick={handleDeny}>Deny</button>
       <button onClick={handleStage}>{stageStatus}</button>
 
