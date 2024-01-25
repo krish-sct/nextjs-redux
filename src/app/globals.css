@@ -288,3 +288,8 @@ body {
     text-align: center;
 }
 
+.not-applicable-text {
+    font-style: italic;
+    color: red;
+    font-size: 20px;
+  }

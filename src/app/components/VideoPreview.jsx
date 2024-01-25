@@ -44,6 +44,9 @@ const VideoPreview = ({
         data: { _id: stagingData?._id, updatedData },
         templateData,
       });
+      alert(`you Denied this ${templateData.slice(0, -1)} page.`);
+      window.close();
+      window.open(`/stage/${role}/${templateData}`);
       console.log("Template staging ", response);
     } catch (error) {
       console.error("Error in template staging:", error);

@@ -8,7 +8,7 @@ import TestPreview from "../../../../components/TestPreview";
 import { handleCase } from "../../../../../utils/common";
 import VideoPreview from "../../../../components/VideoPreview";
 import VideoTestPreview from "../../../../components/VideoTestPreview";
-// import configs from "../../../../../utils/configs";
+import configs from "../../../../../utils/configs";
 
 const PreviewPage = ({ params }) => {
   const [stagingData, setStagingData] = useState(null);
@@ -69,8 +69,9 @@ const PreviewPage = ({ params }) => {
     }
     let currentTime = Date.now();
     let sessionTime = params?.id?.split("-")[1];
-    let expiryTime = Number(sessionTime) + Number(1800000);
-    //Number(sessionTime) + Number(Number(configs.SessionValidityTime) * 60 * 1000);
+    let expiryTime =
+      Number(sessionTime) +
+      Number(Number(configs.SessionValidityTime) * 60 * 1000);
 
     if (currentTime < expiryTime) {
       return false;
@@ -118,6 +119,7 @@ const PreviewPage = ({ params }) => {
                 }
                 templateData={params.templateData}
                 stagingData={stagingData?.[handleCase(templateData)]}
+                role={params.role}
               />
             </div>
           ) : role === "test" && templateData === "videos" ? (
