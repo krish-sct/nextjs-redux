@@ -124,7 +124,7 @@ const Stage = ({ stageStatus, templateData, stagingData, role }) => {
   };
 
   return (
-    <div className="">
+    <div>
       <button onClick={handleDeny}>Deny</button>
       <button onClick={handleStage}>{stageStatus}</button>
 
