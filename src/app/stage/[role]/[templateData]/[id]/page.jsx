@@ -23,7 +23,7 @@ const PreviewPage = ({ params }) => {
     return staging?.isDenied;
   };
 
-  const handleRole = (staging) => {
+  const handleRole = (staging, role) => {
     if (role === "preview") {
       return staging?.isPreview;
     }
@@ -41,7 +41,10 @@ const PreviewPage = ({ params }) => {
       let Id = params?.id?.split("-")[0];
       const data = await getDynamicTemplatePreview(templateData, Id, role);
       console.log("dynamic data", data);
-      if (handleSessionTime(data?.[handleCase(templateData)]?.staging)) {
+      if (
+        role !== "test" &&
+        handleSessionTime(data?.[handleCase(templateData)]?.staging)
+      ) {
         setIsExpired(true);
       } else if (handleDenied(data?.[handleCase(templateData)]?.staging)) {
         setIsDeny(true);
@@ -58,6 +61,9 @@ const PreviewPage = ({ params }) => {
   };
 
   const handleSessionTime = () => {
+    if (role === "test") {
+      return false;
+    }
     let currentTime = Date.now();
     let sessionTime = params?.id?.split("-")[1];
     let expiryTime = Number(sessionTime) + Number(1800000);
