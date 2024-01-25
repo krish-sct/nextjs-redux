@@ -91,7 +91,7 @@ const PreviewPage = ({ params }) => {
       ) : (
         <>
           {isExpired ? (
-            <div>Time out </div>
+            <div className="text-timeout">Time out </div>
           ) : role === "seo" ? (
             <div>
               <SEOPreview
