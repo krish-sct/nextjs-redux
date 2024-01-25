@@ -78,6 +78,9 @@ const VideoPreview = ({
         data: { _id: stagingData?._id, updatedData },
         templateData,
       });
+      alert("successful");
+      window.close();
+      window.open(`/stage/${role}`);
       console.log("Template staging updated:", response);
     } catch (error) {
       console.error("Error in template staging:", error);
@@ -112,6 +115,9 @@ const VideoPreview = ({
         data: { _id: stagingData?._id, updatedData },
         templateData,
       });
+      alert("successful");
+      window.close();
+      window.open(`/stage/${role}`);
       console.log("Template staging updated:", response);
     } catch (error) {
       console.error("Error updating template staging:", error);

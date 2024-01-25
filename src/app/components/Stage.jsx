@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { updateTemplateStaging } from "../../utils/apis";
-
-const Stage = ({ stageStatus, templateData, stagingData }) => {
+const Stage = ({ stageStatus, templateData, stagingData, role }) => {
   const [denyMsg, setDenyMsg] = useState("");
   const [isDeny, setIsDeny] = useState(false);
   const [suggestionMsg, setSuggestionMsg] = useState("");
@@ -70,6 +69,9 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
         data: { _id: stagingData?._id, updatedData },
         templateData,
       });
+      alert("successful");
+      window.close();
+      window.open(`/stage/${role}`);
       console.log("Template staging updated:", response);
     } catch (error) {
       console.error("Error in template staging:", error);
@@ -103,6 +105,9 @@ const Stage = ({ stageStatus, templateData, stagingData }) => {
         data: { _id: stagingData?._id, updatedData },
         templateData,
       });
+      alert("successful");
+      window.close();
+      window.open(`/stage/${role}`);
       console.log("Template staging updated:", response);
     } catch (error) {
       console.error("Error updating template staging:", error);

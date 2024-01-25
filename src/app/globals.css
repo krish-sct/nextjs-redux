@@ -246,3 +246,18 @@ body {
     font-size: xx-large;
     font-family:cursive;
 }
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh; 
+  }
+  
+  .success-text {
+    font-size: 40px;
+    color: violet;
+    padding: 10px; 
+    border-radius: 10px; 
+    background-color: white;   
+  }
+  
