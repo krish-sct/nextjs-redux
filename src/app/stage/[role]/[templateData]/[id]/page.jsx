@@ -23,7 +23,10 @@ const PreviewPage = ({ params }) => {
     return staging?.isDenied;
   };
 
-  const handleRole = (staging, role) => {
+  const handleRole = (staging) => {
+    if (role === "test") {
+      return false;
+    }
     if (role === "preview") {
       return staging?.isPreview;
     }

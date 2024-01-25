@@ -58,11 +58,7 @@ const SEOPreview = ({ title, seoData, stagingData, templateData }) => {
       </div>
       <div>
         Keywords:
-        {seoData?.keywords?.map((e, i) => (
-          <p key={i} className="text-class">
-            {e}
-          </p>
-        )) || "No Keywords"}
+        <p className="text-class">{seoData?.value || "No value"}</p>
       </div>
 
       <div>
