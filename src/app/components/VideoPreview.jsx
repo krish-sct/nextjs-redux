@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Videos from "./Videos";
 import { updateTemplateStaging } from "../../utils/apis";
 
@@ -15,6 +15,10 @@ const VideoPreview = ({
   const [isDeny, setIsDeny] = useState(false);
   const [suggestionMsg, setSuggestionMsg] = useState("");
   const [isSuggest, setIsSuggest] = useState(true);
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
   const handleDeny = async () => {
     setIsDeny(true);

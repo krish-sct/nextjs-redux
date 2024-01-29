@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Videos from "./Videos";
 
-const VideoTestPreview = ({ videoTestData }) => {
+const VideoTestPreview = ({ videoTestData, title }) => {
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
   const handleVideoData = (data) => {
     let video = {};
     data?.map((e) => {
@@ -14,10 +18,7 @@ const VideoTestPreview = ({ videoTestData }) => {
   };
   return (
     <div>
-      <Videos
-        data={handleVideoData(videoTestData)}
-        title={"Video Test Preview"}
-      />
+      <Videos data={handleVideoData(videoTestData)} title={"Test Preview"} />
     </div>
   );
 };

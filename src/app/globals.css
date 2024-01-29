@@ -179,9 +179,19 @@ body {
 }
 
 .contactus{
-    background-color:#fff;
+    background-color:antiquewhite;
     align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    height: 30vh; 
+    width:max-content;
+    padding: 100px; 
+    text-align: center;
+    display:flex;
+    flex-direction:column;
 }
+
+
 @keyframes spin {
     to {
         transform: rotate(360deg);
@@ -224,11 +234,11 @@ body {
 }
 
 .menu-category:hover {
-    background-color: grey;
+    background-color: white;
 }
 
 .menu-selected {
-    background-color: wheat;
+    background-color: green;
 }
 
 .text-class{
@@ -293,3 +303,22 @@ body {
     color: red;
     font-size: 20px;
   }
+
+.contactPageContainer{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh; 
+}
+
+.contactPageButton {
+    background-color:white;
+    cursor: pointer;
+    border:none;
+    margin-top: 20px; 
+}
+
+.contactPageButton:hover {
+    background-color:aquamarine;
+}

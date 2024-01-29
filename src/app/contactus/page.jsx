@@ -66,9 +66,9 @@ const ContactPage = () => {
   };
 
   return (
-    <div className={styles.contactPageContainer}>
-      <h1>Contact Form</h1>
-      <div className="">
+    <div className="contactPageContainer">
+      <h1 className="text-head">Contact Form</h1>
+      <div className="contactus">
         {formData?.map((field, i) => (
           <div key={i}>
             {field.type === "select" && field.name === "country" ? (
@@ -97,7 +97,7 @@ const ContactPage = () => {
             )}
           </div>
         ))}
-        <button onClick={handleSubmit} className="">
+        <button onClick={handleSubmit} className="contactPageButton">
           Submit
         </button>
       </div>

@@ -1,10 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { updateTemplateStaging } from "../../utils/apis";
 
 const SEOPreview = ({ title, seoData, stagingData, templateData, role }) => {
   const [seoSuggestionMsg, setSEOSuggestionMsg] = useState("");
   const [isSEOVerified, setIsSEOVerified] = useState(true);
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
   const handleSEO = async () => {
     setIsSEOVerified(true);
@@ -37,7 +41,6 @@ const SEOPreview = ({ title, seoData, stagingData, templateData, role }) => {
   };
   return (
     <div className="preview-wrapper">
-      <h3>SEO Preview</h3>
       <div>
         value:
         <p className="text-class">{seoData?.value || "No value"}</p>

@@ -68,7 +68,7 @@ const Video = () => {
           return data ? (
             <div key={i}>
               <Videos data={data} />
-              <SEO data={data.seo} title={"Videos"} />
+              <SEO data={data?.seo} title={"Videos"} />
             </div>
           ) : (
             ""

@@ -105,7 +105,7 @@ const PreviewPage = ({ params }) => {
           ) : role === "seo" ? (
             <div>
               <SEOPreview
-                title={"SEO"}
+                title={"SEO "}
                 seoData={
                   stagingData?.[handleCase(templateData)]?.staging?.isPublish
                     ? stagingData?.[
@@ -131,6 +131,7 @@ const PreviewPage = ({ params }) => {
                     : stagingData?.[handleCase(templateData)]?.staging
                         ?.previewComponent
                 }
+                title={"Test Preview"}
               />
             </div>
           ) : role === "test" ? (
@@ -147,7 +148,7 @@ const PreviewPage = ({ params }) => {
           ) : templateData === "videos" ? (
             <>
               <VideoPreview
-                title={"Dynamic Template Preview"}
+                title={"Template Preview"}
                 videoData={
                   role === "preview" &&
                   stagingData?.[handleCase(templateData)]?.staging?.isPreview
@@ -164,7 +165,7 @@ const PreviewPage = ({ params }) => {
           ) : (
             <>
               <TemplatePreview
-                title={"Dynamic Template Preview"}
+                title={"Template Preview"}
                 templateData={
                   role === "preview" &&
                   stagingData?.[handleCase(templateData)]?.staging?.isPreview
