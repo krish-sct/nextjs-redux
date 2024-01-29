@@ -16,14 +16,13 @@ const DeniedPage = ({ params }) => {
           <h1 className="success-text">
             This {templateData.slice(0, -1)} Page Denied.
           </h1>
+          <div>
+            <p className="not-applicable-text">
+              Not applicable to {role} this page.
+            </p>
+          </div>
         </div>
       )}
-
-      <div>
-        <p className="not-applicable-text">
-          Not applicable to {role} this page.
-        </p>
-      </div>
     </div>
   );
 };
