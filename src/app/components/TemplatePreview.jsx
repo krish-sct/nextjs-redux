@@ -4,7 +4,6 @@ import SEO from "./SEO";
 const TemplatePreview = ({ templateData, title }) => {
   return (
     <div className="preview-wrapper">
-      <h4>Template Preview</h4>
       <div>
         {templateData?.map((e, i) => {
           return (

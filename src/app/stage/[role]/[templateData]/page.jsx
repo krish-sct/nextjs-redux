@@ -1,5 +1,9 @@
 import React from "react";
 
+export const metadata = {
+  title: "Page",
+};
+
 const DeniedPage = ({ params }) => {
   let { role, templateData } = params;
 

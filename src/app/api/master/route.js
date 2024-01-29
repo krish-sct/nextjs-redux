@@ -6,7 +6,6 @@ export async function GET(req, res) {
   try {
     await connect();
     const master = await Master.find();
-    //console.log("Debugging Info:", { master });
     return NextResponse.json(master, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: "Database error" }, { status: 500 });

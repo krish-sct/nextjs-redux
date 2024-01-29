@@ -370,7 +370,6 @@ export const getVideosUrl = async (page, limit) => {
 //ContactUs
 
 export const addContactForm = async (data) => {
-  console.log({ data });
   const response = await fetch(`${baseURL}/contactus`, {
     cache: "no-store",
     method: "POST",

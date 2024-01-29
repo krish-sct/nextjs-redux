@@ -37,7 +37,6 @@ export async function GET(req, res) {
 
 export async function PUT(req, res) {
   const body = await req.json();
-  // console.log({ body });
 
   const { _id, updatedData } = body;
   try {
