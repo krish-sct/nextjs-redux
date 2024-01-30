@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 const Careers = ({ careers }) => {
   const dispatch = useDispatch();
   const career = useSelector((state) => state?.careerData?.careers);
-  console.log(career);
 
   const getHeader = (header) => {
     return header.value || "";

@@ -31,11 +31,17 @@ const Testimonial = ({ testimonials }) => {
               }
             </div>
             <div className="f-r lightseagreen">
-              {testimonial?.components?.filter((e)=>e.key==="subTitle")?.[0]?.value}<br/>
-            </div><br/>
+              {
+                testimonial?.components?.filter(
+                  (e) => e.key === "subTitle"
+                )?.[0]?.value
+              }
+              <br />
+            </div>
+            <br />
             <div className="f-r lightseagreen">
-            {handleDate(testimonial.createdAt)}
-              </div>
+              {handleDate(testimonial.createdAt)}
+            </div>
           </li>
         </div>
       ))}

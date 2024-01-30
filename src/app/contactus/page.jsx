@@ -67,7 +67,9 @@ const ContactPage = () => {
 
   return (
     <div className="contactPageContainer">
-      <h1 className="text-head">Contact Form</h1>
+      <h1 className="text-head">
+        Contact Form <hr className="hr" />
+      </h1>
       <div className="contactus">
         {formData?.map((field, i) => (
           <div key={i}>
