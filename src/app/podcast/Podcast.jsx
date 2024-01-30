@@ -21,7 +21,7 @@ const Podcasts = ({ podcasts }) => {
       {podcasts?.podcasts?.map((podcast, i) => (
         <div key={i} className="card">
           <li>
-            <a href={`/podcast/${podcast._id}`}>
+            <a href={`/podcast/${podcast._id}`} className="temp-link">
               {
                 podcast?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value

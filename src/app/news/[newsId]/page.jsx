@@ -40,7 +40,7 @@ const NewsDetails = ({ params }) => {
   }, [newsPageDetails]);
   return (
     <div>
-      <h1>News</h1>
+      <h1 className="text-head">News</h1>
       <TemplatePreview templateData={newsDetails} title={"News"} />
     </div>
   );

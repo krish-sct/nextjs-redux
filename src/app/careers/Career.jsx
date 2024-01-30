@@ -23,7 +23,7 @@ const Careers = ({ careers }) => {
       {careers?.careers?.map((career, i) => (
         <div key={i} className="card">
           <li>
-            <a href={`/careers/${career._id}`}>
+            <a href={`/careers/${career._id}`} className="temp-link">
               {
                 career?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value

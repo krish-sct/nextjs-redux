@@ -37,7 +37,7 @@ const FaqsDetails = ({ params }) => {
 
   return (
     <div>
-      <h1>FAQ</h1>
+      <h1 className="text-head">FAQ</h1>
       <TemplatePreview templateData={faqDetails} title={"FAQ"} />
     </div>
   );

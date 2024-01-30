@@ -131,7 +131,7 @@ const PreviewPage = ({ params }) => {
                     : stagingData?.[handleCase(templateData)]?.staging
                         ?.previewComponent
                 }
-                title={"Test Preview"}
+                title={"TEST PREVIEW"}
               />
             </div>
           ) : role === "test" ? (
@@ -148,7 +148,9 @@ const PreviewPage = ({ params }) => {
           ) : templateData === "videos" ? (
             <>
               <VideoPreview
-                title={"Template Preview"}
+                title={`${templateData
+                  ?.slice(0, -1)
+                  .toUpperCase()} ${role.toUpperCase()}`}
                 videoData={
                   role === "preview" &&
                   stagingData?.[handleCase(templateData)]?.staging?.isPreview
@@ -165,7 +167,9 @@ const PreviewPage = ({ params }) => {
           ) : (
             <>
               <TemplatePreview
-                title={"Template Preview"}
+                title={`${templateData
+                  ?.slice(0, -1)
+                  .toUpperCase()} ${role.toUpperCase()}`}
                 templateData={
                   role === "preview" &&
                   stagingData?.[handleCase(templateData)]?.staging?.isPreview

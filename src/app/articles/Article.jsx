@@ -23,7 +23,7 @@ const Articles = ({ articles }) => {
       {articles?.articles?.map((article, i) => (
         <div key={i} className="card">
           <li>
-            <a href={`/articles/${article._id}`}>
+            <a href={`/articles/${article._id}`} className="temp-link">
               {
                 article?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value

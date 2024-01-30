@@ -137,6 +137,8 @@ body {
 }
 
 
+
+
 .testimonial .card h2 {
     margin-bottom: 0;
 }
@@ -169,6 +171,14 @@ body {
 .link {
     color: whitesmoke;
     text-decoration: none;
+}
+
+.temp-link{
+    color:rgb(14, 174, 238);
+    font-size:20px;
+}
+.temp-link:hover{
+    color:green;
 }
 
 .input {

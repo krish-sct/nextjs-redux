@@ -23,7 +23,10 @@ const EventTradeShows = ({ eventTradeShows }) => {
       {eventTradeShows?.eventTradeShows?.map((eventTradeShow, i) => (
         <div key={i} className="card">
           <li>
-            <a href={`/eventTradeShows/${eventTradeShow._id}`}>
+            <a
+              href={`/eventTradeShows/${eventTradeShow._id}`}
+              className="temp-link"
+            >
               {
                 eventTradeShow?.components?.filter(
                   (e) => e.key === "header"

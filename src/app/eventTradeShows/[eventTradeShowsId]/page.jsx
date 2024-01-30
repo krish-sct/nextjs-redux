@@ -50,9 +50,10 @@ const EventTradeShowsDetails = ({ params }) => {
 
   return (
     <div>
+      <h1 className="text-head">EventTradeShow</h1>
       <TemplatePreview
         templateData={eventTradeShowDetails}
-        title={"EventTradeShows"}
+        title={"EventTradeShow"}
       />
     </div>
   );

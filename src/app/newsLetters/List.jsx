@@ -11,7 +11,7 @@ const List = () => {
 
   return (
     <div>
-      <h1 className="text-head">NewsLetter</h1>
+      <h1 className="text-head">NewsLetters</h1>
       <NewsLetter newsLetters={newsLetters} />
       <br />
       <Pagination

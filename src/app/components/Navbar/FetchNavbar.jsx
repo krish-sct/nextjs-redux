@@ -74,9 +74,11 @@ const Navbar = () => {
       </Link>
       <div className={styles.links}>
         {links.map((link) => (
-          <Link key={link.id} href={link.url} className={styles.links}>
-            {link.title}
-          </Link>
+          <div key={link.id} className={styles.links}>
+            <Link className={styles.links} href={link.url}>
+              {link.title}
+            </Link>
+          </div>
         ))}
       </div>
     </div>

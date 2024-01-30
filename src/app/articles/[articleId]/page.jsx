@@ -48,7 +48,7 @@ const ArticleDetails = ({ params }) => {
 
   return (
     <div>
-      <h1>Article</h1>
+      <h1 className="text-head">Article</h1>
       <TemplatePreview templateData={articleDetails} title={"Article"} />
     </div>
   );

@@ -23,7 +23,7 @@ const PressReleases = ({ pressReleases }) => {
       {pressReleases?.pressReleases?.map((pressRelease, i) => (
         <div key={i} className="card">
           <li>
-            <a href={`/pressRelease/${pressRelease._id}`}>
+            <a href={`/pressRelease/${pressRelease._id}`} className="temp-link">
               {
                 pressRelease?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value

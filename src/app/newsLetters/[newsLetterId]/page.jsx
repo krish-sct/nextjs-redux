@@ -47,7 +47,7 @@ const NewsLetterDetails = ({ params }) => {
   }, [newsLetterPageDetails]);
   return (
     <div>
-      <h1>NewsLetter</h1>
+      <h1 className="text-head">NewsLetter</h1>
       <TemplatePreview templateData={newsLetterDetails} title={"NewsLetter"} />
     </div>
   );
