@@ -9,7 +9,10 @@ const List = () => {
 
   return (
     <div>
-      <h1 className="text-head">Podcasts</h1>
+      <h1 className="text-subhead text-black">Vision Vitals: The Podcast</h1>
+      <p className="text-gray">
+        Welcome to Vision Vitals - e-con Systems' exclusive podcast series.
+      </p>
       <Podcast podcasts={podcasts} />
       <br />
       <Pagination

@@ -8,7 +8,7 @@ const List = () => {
   const careers = useSelector((state) => state?.careerData?.careers);
   return (
     <div>
-      <h1 className="text-head">Careers</h1>
+      <h1 className="text-subhead">Careers</h1>
       <Career careers={careers} />
       <br />
       <Pagination total={careers?.totalPages} current={careers?.currentPage} />

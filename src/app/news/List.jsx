@@ -9,7 +9,7 @@ const List = () => {
 
   return (
     <div>
-      <h1 className="text-head">News</h1>
+      <h1 className="text-subhead">News</h1>
       <News news={news} />
       <br />
       <Pagination total={news?.totalPages} current={news?.currentPage} />

@@ -8,7 +8,7 @@ const List = () => {
   const articles = useSelector((state) => state?.articleData?.articles);
   return (
     <div>
-      <h1 className="text-head">Articles</h1>
+      <h1 className="text-subhead">Articles</h1>
       <Article articles={articles} />
       <br />
       <Pagination

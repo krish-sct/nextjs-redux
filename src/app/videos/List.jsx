@@ -8,7 +8,7 @@ const List = () => {
   const videos = useSelector((state) => state?.videoInfo?.videos);
   return (
     <div>
-      <h1 className="text-head">Videos</h1>
+      <h1 className="text-subhead">Videos</h1>
       <Video />
       <br />
       <Pagination total={videos?.totalPages} current={videos?.currentPage} />

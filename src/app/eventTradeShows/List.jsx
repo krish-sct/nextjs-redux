@@ -11,7 +11,7 @@ const List = () => {
 
   return (
     <div>
-      <h1 className="text-head">EventTradeShow</h1>
+      <h1 className="text-subhead">EventTradeShow</h1>
       <EventTradeShows eventTradeShows={eventTradeShows} />
       <br />
       <Pagination

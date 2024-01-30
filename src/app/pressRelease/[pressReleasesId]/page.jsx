@@ -53,7 +53,7 @@ const PressReleasesDetails = ({ params }) => {
       <h1 className="text-head">PressRelease</h1>
       <TemplatePreview
         templateData={pressReleaseDetails}
-        title={"PressRelease"}
+        title={"PressReleases"}
       />
     </div>
   );

@@ -11,7 +11,7 @@ const List = () => {
 
   return (
     <div>
-      <h1 className="text-head">Testimonials</h1>
+      <h1 className="text-subhead">Customer Testimonials</h1>
       <Testimonial testimonials={testimonials} />
       <br />
       <Pagination

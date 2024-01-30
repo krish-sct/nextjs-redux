@@ -3,8 +3,8 @@ body {
     margin: 0;
     padding: 0;
     font-size: 16px;
-    background-color: #333;
-    color: #fff;
+    background-color:white;
+    color: green;
     max-width: 90%;
     margin: auto;
 }
@@ -21,6 +21,11 @@ body {
 .h1{
     align-items: center;
 }
+
+.date{
+    color:gray
+}
+
 
 .btn {
     display: inline-block;
@@ -72,10 +77,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0047ab;
-    color: #fff;
+    color:blue ;
     padding: 1rem;
-    border-bottom: 5px solid #fff;
 }
 
 .search-form {
@@ -128,16 +131,9 @@ body {
 }
 
 .card {
-    border: 1px solid #ccc;
-    border-radius: 4px;
     padding: 1rem;
-    margin: 1rem;
-    background-color: #fff;
     color: #333;
 }
-
-
-
 
 .testimonial .card h2 {
     margin-bottom: 0;
@@ -228,7 +224,7 @@ body {
 
   .description{
     font-size: 14px;
-    color: wheat;
+    color: gray;
   }
 
   .menu-class{
@@ -252,11 +248,11 @@ body {
 }
 
 .text-class{
-    color: yellow;
+    color: black;
 }
 
 .text-done{
-    color:aquamarine;
+    color:red;
     font-size: x-large;
     
 }
@@ -275,12 +271,12 @@ body {
   }
   
   .success-text {
-    font-size: 40px;
+    font-size: 30px;
     color: violet;
     font-family:cursive;
     padding: 10px; 
     border-radius: 20px; 
-    background-color: white;   
+    background-color:cornsilk ;   
     opacity: 0;
     animation: anim 3s ease-in-out forwards ;
   }
@@ -338,4 +334,11 @@ body {
     border-width: 2px;
     border-style:solid;
     width: 10rem;
+}
+
+.text-subhead{
+   color:blue;
+   font-size: 30px;
+   font-weight: bold;
+   font-family: sans-serif;
 }

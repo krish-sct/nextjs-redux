@@ -8,7 +8,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: {
     template: "%s | Econ Systems",
-    //default: "Econ Systems",
   },
   description: "Econ Systems build experience for any stack",
 };
