@@ -3,7 +3,7 @@ import List from "./List";
 
 export const metadata = {
   title: {
-    absolute: "Articles | Econ Systems",
+    default: "Articles",
   },
   type: "article",
   description: "Articles build experience for any stack",
@@ -12,7 +12,7 @@ export const metadata = {
     email: false,
     telephone: false,
   },
-  metadataBase: new URL("https://localhost:3000"),
+  metadataBase: new URL("https://192.168.1.220:3000/"),
   alternates: {
     canonical: "/",
     languages: {
@@ -22,7 +22,6 @@ export const metadata = {
     },
   },
 };
-
 const Article = async () => {
   return <List />;
 };
