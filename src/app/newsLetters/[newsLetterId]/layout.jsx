@@ -12,12 +12,10 @@ export async function generateMetadata({ params }) {
   const title = newsLetter?.newsLetter?.components?.find(
     (e) => e.key === "header"
   )?.value;
-  console.log(title);
 
   const seo = newsLetter?.newsLetter?.components?.find(
     (e) => e.key === "seo"
   )?.value;
-  console.log(seo);
 
   return {
     title: `${title}`,

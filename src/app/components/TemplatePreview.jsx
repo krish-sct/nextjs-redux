@@ -3,11 +3,14 @@ import SEO from "./SEO";
 import { handleDateString } from "../../utils/common";
 
 const TemplatePreview = ({ templateData, title, createdAt }) => {
-  console.log(templateData);
   return (
     <div className="preview-wrapper">
-      <div className="f-r color-navy ">{handleDateString(createdAt)}</div>
       <div>
+        {createdAt && (
+          <div>
+            <p className="f-r color-navy">{handleDateString(createdAt)}</p>
+          </div>
+        )}
         {templateData?.map((e, i) => {
           return (
             <div key={i}>

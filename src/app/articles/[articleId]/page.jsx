@@ -30,7 +30,6 @@ const ArticleDetails = ({ params }) => {
 
   const createdAt = article?.filter((e) => e?._id === params?.articleId)[0]
     ?.createdAt;
-  console.log(createdAt);
 
   const [articleDetails, setArticleDetails] = useState([]);
 

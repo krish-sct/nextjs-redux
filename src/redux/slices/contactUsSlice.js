@@ -28,7 +28,7 @@ export const contactUSSlice = createSlice({
   initialState,
   reducers: {
     setContactForms: (state, action) => {
-      console.log({ action });
+      // console.log({ action });
       state.contactforms = { ...action.payload };
     },
   },
