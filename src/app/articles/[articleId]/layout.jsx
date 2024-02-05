@@ -15,11 +15,26 @@ export async function generateMetadata({ params }) {
     (e) => e.key === "header"
   )?.value;
 
-  const seo = article?.article?.components?.find((e) => e.key === "seo")?.value;
+  const seoDescription = article?.article?.components?.find(
+    (e) => e.key === "seo"
+  )?.value;
 
   return {
     title: `${title}`,
-    description: `${seo}`,
+    description: `${seoDescription}`,
+    formatDetection: {
+      email: false,
+      telephone: false,
+    },
+    metadataBase: new URL("https://192.168.1.220:3000/"),
+    alternates: {
+      canonical: "/",
+      languages: {
+        "en-US": "/en-US",
+        "ja-jp": "/ja-jp",
+        "en-gb": "/en-gb",
+      },
+    },
   };
 }
 

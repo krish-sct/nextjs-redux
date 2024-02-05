@@ -11,11 +11,14 @@ export async function generateMetadata({ params }) {
   const title = career?.career?.components?.find(
     (e) => e.key === "header"
   )?.value;
-  const seo = career?.career?.components?.find((e) => e.key === "seo")?.value;
+
+  const seoDescription = career?.career?.components?.find(
+    (e) => e.key === "seo"
+  )?.value;
 
   return {
     title: `${title}`,
-    description: `${seo}`,
+    description: `${seoDescription}`,
   };
 }
 

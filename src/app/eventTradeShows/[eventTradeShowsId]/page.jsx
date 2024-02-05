@@ -6,10 +6,19 @@ import {
   fetchEventTradeShowById,
   fetchEventTradeShow,
 } from "../../../redux/slices/eventTradeShowsSlice";
+import Breadcrumb from "../../components/Breadcrumb";
+import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
 
 const EventTradeShowsDetails = ({ params }) => {
   const dispatch = useDispatch();
+
+  const [eventTradeShowDetails, setEventTradeShowDetails] = useState([]);
+
   const eventTradeShow = useSelector(
+    (state) => state?.eventTradeShowsData?.eventTradeShows?.eventTradeShows
+  );
+
+  const eventTradeShows = useSelector(
     (state) => state?.eventTradeShowsData?.eventTradeShows?.eventTradeShows
   );
 
@@ -19,7 +28,14 @@ const EventTradeShowsDetails = ({ params }) => {
         ?.eventTradeShow?.components
   );
 
-  const [eventTradeShowDetails, setEventTradeShowDetails] = useState([]);
+  let title = eventTradeShow
+    ?.filter((e) => e?._id === params?.eventTradeShowsId)[0]
+    ?.components?.find((e) => e.key === "header")?.value;
+
+  const createdAt = eventTradeShow?.filter(
+    (e) => e?._id === params?.eventTradeShowsId
+  )[0]?.createdAt;
+
   const handleEventTradeShowDetails = () => {
     let data = eventTradeShow?.filter(
       (e) => e?._id === params?.eventTradeShowsId
@@ -50,11 +66,23 @@ const EventTradeShowsDetails = ({ params }) => {
 
   return (
     <div>
-      <h1 className="text-head">EventTradeShow</h1>
-      <TemplatePreview
-        templateData={eventTradeShowDetails}
-        title={"EventTradeShow"}
-      />
+      <Breadcrumb title={title} dataTemplate={"eventTradeShows"} />
+
+      <div className="list-container">
+        <div className="content-margin">
+          <TemplatePreview
+            templateData={eventTradeShowDetails}
+            title={"EventTradeShow"}
+            createdAt={createdAt}
+          />
+        </div>
+        <div className="custom-margin">
+          <RelatedComponent
+            data={eventTradeShows}
+            dataTemplate={"eventTradeShows"}
+          />
+        </div>
+      </div>
     </div>
   );
 };

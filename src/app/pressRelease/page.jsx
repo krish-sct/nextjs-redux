@@ -1,14 +1,8 @@
-import React from 'react'
-import List from './List'
+import React from "react";
+import List from "./List";
 
-export const metadata={
-    title:'PressRelease'
-  }
+const PressRelease = async () => {
+  return <List />;
+};
 
-const PressRelease = async() => {
-  return (
-      <List />
-  )
-}
-
-export default PressRelease
+export default PressRelease;

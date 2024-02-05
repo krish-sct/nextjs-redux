@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { handleDateString } from "../../../utils/common";
 
 const SideComponent = ({ data, dataTemplate }) => {
-  console.log(data, dataTemplate);
-
   const [isLatest, setIsLatest] = useState(true);
 
   return (
@@ -44,7 +42,14 @@ const SideComponent = ({ data, dataTemplate }) => {
           <div>
             <ul style={{ listStyleType: "none" }}>
               {data?.map((item, i) => (
-                <div key={i} style={{ height: "11rem", paddingTop: "25px" }}>
+                <div
+                  key={i}
+                  style={{
+                    height: "11rem",
+                    paddingTop: "25px",
+                    maxWidth: "min-content",
+                  }}
+                >
                   <li>
                     <a
                       href={`/${dataTemplate}/${item._id}`}

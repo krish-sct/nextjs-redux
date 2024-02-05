@@ -13,13 +13,13 @@ export async function generateMetadata({ params }) {
     (e) => e.key === "header"
   )?.value;
 
-  const seo = eventTradeShow?.eventTradeShow?.components?.find(
+  const seoDescription = eventTradeShow?.eventTradeShow?.components?.find(
     (e) => e.key === "seo"
   )?.value;
 
   return {
     title: `${title}`,
-    description: `${seo}`,
+    description: `${seoDescription}`,
   };
 }
 

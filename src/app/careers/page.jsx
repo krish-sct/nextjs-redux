@@ -1,16 +1,8 @@
-import React from 'react'
-import List from "./List"
+import React from "react";
+import List from "./List";
 
-export const metadata={
-    title:'Careers'
-  }
+const Careers = async () => {
+  return <List />;
+};
 
-
-const Careers = async() => {
-  return (
-    <List />
-
-  )
-}
-
-export default Careers
+export default Careers;

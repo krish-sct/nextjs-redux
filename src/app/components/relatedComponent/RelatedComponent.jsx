@@ -46,7 +46,14 @@ const RelatedComponent = ({ data, dataTemplate }) => {
           <div>
             <ul style={{ listStyleType: "none" }}>
               {data?.map((item, i) => (
-                <div key={i} style={{ height: "11rem", paddingTop: "25px" }}>
+                <div
+                  key={i}
+                  style={{
+                    height: "11rem",
+                    paddingTop: "25px",
+                    maxWidth: "min-content",
+                  }}
+                >
                   <li>
                     <a
                       href={`/${dataTemplate}/${item._id}`}

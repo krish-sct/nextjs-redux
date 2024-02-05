@@ -13,13 +13,13 @@ export async function generateMetadata({ params }) {
     (e) => e.key === "header"
   )?.value;
 
-  const seo = pressRelease?.pressRelease?.components?.find(
+  const seoDescription = pressRelease?.pressRelease?.components?.find(
     (e) => e.key === "seo"
   )?.value;
 
   return {
     title: `${title}`,
-    description: `${seo}`,
+    description: `${seoDescription}`,
   };
 }
 export default function RootLayout({ children }) {

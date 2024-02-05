@@ -11,6 +11,7 @@ import RelatedComponent from "../../components/relatedComponent/RelatedComponent
 
 const ArticleDetails = ({ params }) => {
   const dispatch = useDispatch();
+  const [articleDetails, setArticleDetails] = useState([]);
 
   const article = useSelector(
     (state) => state?.articleData?.articles?.articles
@@ -30,8 +31,6 @@ const ArticleDetails = ({ params }) => {
 
   const createdAt = article?.filter((e) => e?._id === params?.articleId)[0]
     ?.createdAt;
-
-  const [articleDetails, setArticleDetails] = useState([]);
 
   const handleArticleDetails = () => {
     let data = article?.filter((e) => e?._id === params?.articleId)[0];

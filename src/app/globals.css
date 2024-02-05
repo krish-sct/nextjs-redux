@@ -416,6 +416,7 @@ body {
     color:black;
     font-weight:20px;
     font-size: 20px;
+    width: max-content;
 }
 
 .sidecomp-listing{
@@ -443,6 +444,7 @@ body {
     margin-bottom: 20px;
     display: flex;
     gap:10rem;
+    max-width:min-content
   }
 
 .footerlisting-img{
