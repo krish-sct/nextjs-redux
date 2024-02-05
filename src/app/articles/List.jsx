@@ -3,7 +3,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Pagination from "../components/Pagination";
 import Article from "./Article";
-import Link from "next/link";
 import SideComponent from "../components/sideComponent/SideComponent";
 import FooterComponent from "../components/footerComponent/FooterComponent";
 import Breadcrumb from "../components/Breadcrumb";

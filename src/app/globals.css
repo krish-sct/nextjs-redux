@@ -385,11 +385,17 @@ body {
 }
 
 .images-img{
-    width: 500px; 
-    height: 400px;
+    width: 300px; 
+    height: 200px;
     border-radius: 4px;
 }
 
+.images-imgs{
+    width: 500px; 
+    height: 400px;
+    border-radius: 4px;
+
+}
 .listing-description{
     font-size: 14px;
     color: gray;

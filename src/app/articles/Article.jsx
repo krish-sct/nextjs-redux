@@ -53,7 +53,7 @@ const Articles = ({ articles }) => {
                   .find((e) => e.key === "mainImg")
                   ?.mainImgs?.map((img, imgI) => (
                     <img
-                      className="images-img"
+                      className="images-imgs"
                       src={img?.src}
                       alt={img?.alt}
                       key={imgI}

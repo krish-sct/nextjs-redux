@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 const RelatedComponent = ({ data, dataTemplate }) => {
-  console.log(data, dataTemplate);
+  // console.log(data, dataTemplate);
   const [isRelated, setIsRelated] = useState(true);
   const [imgHeight, setImgHeight] = useState(null);
 

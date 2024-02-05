@@ -6,8 +6,6 @@ import {
   fetchArticleById,
   fetchArticle,
 } from "../../../redux/slices/articleSlice";
-import Link from "next/link";
-import SideComponent from "../../components/sideComponent/SideComponent";
 import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
 
@@ -29,6 +27,10 @@ const ArticleDetails = ({ params }) => {
   let title = article
     ?.filter((e) => e?._id === params?.articleId)[0]
     ?.components?.find((e) => e.key === "header")?.value;
+
+  const createdAt = article?.filter((e) => e?._id === params?.articleId)[0]
+    ?.createdAt;
+  console.log(createdAt);
 
   const [articleDetails, setArticleDetails] = useState([]);
 
@@ -64,7 +66,11 @@ const ArticleDetails = ({ params }) => {
 
       <div className="list-container">
         <div className="content-margin">
-          <TemplatePreview templateData={articleDetails} title={title} />
+          <TemplatePreview
+            templateData={articleDetails}
+            title={title}
+            createdAt={createdAt}
+          />
         </div>
         <div className="custom-margin">
           <RelatedComponent data={articles} dataTemplate={"articles"} />

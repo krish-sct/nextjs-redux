@@ -1,10 +1,12 @@
 import React from "react";
 import SEO from "./SEO";
+import { handleDateString } from "../../utils/common";
 
-const TemplatePreview = ({ templateData, title }) => {
+const TemplatePreview = ({ templateData, title, createdAt }) => {
   console.log(templateData);
   return (
     <div className="preview-wrapper">
+      <div className="f-r color-navy ">{handleDateString(createdAt)}</div>
       <div>
         {templateData?.map((e, i) => {
           return (
@@ -63,7 +65,6 @@ const TemplatePreview = ({ templateData, title }) => {
                         src={img?.src}
                         alt={img?.alt}
                         key={imgI}
-                        loading="lazy"
                       />
                     );
                   })}
