@@ -34,6 +34,24 @@ const TemplatePreview = ({ templateData, title }) => {
               ) : (
                 ""
               )}
+              {e?.mainImgs && e?.mainImgs.length > 0 && e?.key === "mainImg" ? (
+                <div className="images">
+                  {e?.mainImgs?.map((img, imgI) => {
+                    return (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        className="images-img"
+                        src={img?.src}
+                        alt={img?.alt}
+                        key={imgI}
+                        loading="lazy"
+                      />
+                    );
+                  })}
+                </div>
+              ) : (
+                ""
+              )}
               {e?.key === "images" ? (
                 <div className="images">
                   {e?.imgs?.map((img, imgI) => {

@@ -6,22 +6,37 @@ import {
   fetchArticleById,
   fetchArticle,
 } from "../../../redux/slices/articleSlice";
+import Link from "next/link";
+import SideComponent from "../../components/sideComponent/SideComponent";
+import Breadcrumb from "../../components/Breadcrumb";
+import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
 
 const ArticleDetails = ({ params }) => {
+  console.log({ params });
   const dispatch = useDispatch();
+
+  const [isrelated, setIsRelated] = useState(true);
 
   const article = useSelector(
     (state) => state?.articleData?.articles?.articles
   );
 
+  const articles = useSelector((state) => state?.articleData?.articles);
+  // console.log(articles);
+
   const articlePageDetails = useSelector(
     (state) => state?.articleData?.articles?.articleDetails?.article?.components
   );
+
+  let title = article
+    ?.filter((e) => e?._id === params?.articleId)[0]
+    ?.components?.find((e) => e.key === "header")?.value;
 
   const [articleDetails, setArticleDetails] = useState([]);
 
   const handleArticleDetails = () => {
     let data = article?.filter((e) => e?._id === params?.articleId)[0];
+
     setArticleDetails(data?.components || []);
   };
 
@@ -48,8 +63,24 @@ const ArticleDetails = ({ params }) => {
 
   return (
     <div>
-      <h1 className="text-head">Article</h1>
-      <TemplatePreview templateData={articleDetails} title={"Article"} />
+      <div className="breadcrumb">
+        <Link href="/">Home</Link>
+        <span className="breadcrumb-separator">{" > "}</span>
+        <Link href="/articles">Articles</Link>
+        <span className="breadcrumb-separator">{" > "}</span>
+        <div key={params.articleId}>{title}</div>
+      </div>
+      {/* <Breadcrumb title={title} /> */}
+
+      <div className="list-container">
+        <div className="content-margin">
+          <TemplatePreview templateData={articleDetails} title={title} />
+        </div>
+        <div className="custom-margin">
+          <SideComponent data={articles} />
+          {/* <RelatedComponent data={articles} /> */}
+        </div>
+      </div>
     </div>
   );
 };

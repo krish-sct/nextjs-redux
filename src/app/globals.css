@@ -172,6 +172,7 @@ body {
 .temp-link{
     color:rgb(14, 174, 238);
     font-size:20px;
+    text-decoration: none;
 }
 .temp-link:hover{
     color:green;
@@ -337,8 +338,109 @@ body {
 }
 
 .text-subhead{
-   color:blue;
+   color:navy;
    font-size: 30px;
    font-weight: bold;
    font-family: sans-serif;
 }
+
+.breadcrumb{
+    background-color: whitesmoke;
+    padding: auto;
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    font-size: 20px;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color:black;
+
+}
+
+.breadcrumb a:hover{
+    color:blue;
+}
+
+.list-container{
+    display: flex;
+    flex-direction: row;
+    gap:7rem;
+}
+
+.custom-margin{
+    margin-top: 40px;
+    /* margin-right:10rem; */
+}
+
+.content-margin{
+    margin-left: 10px;
+}
+
+.custom-listing{
+    margin-left: 20rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.images-img{
+    width: 500px; 
+    height: 400px;
+    border-radius: 4px;
+}
+
+.listing-description{
+    font-size: 14px;
+    color: gray;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    max-height: 33px;
+}
+
+.color-navy{
+    color: navy;
+    font-size: 13px;
+    background-color:lightcyan;
+    border-radius: 4px;
+    width:max-content;
+}
+
+.list-header{
+    color:black;
+    font-weight:20px;
+    font-size: 20px;
+}
+
+.sidecomp-listing{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.listing-img{
+    width: 200px;
+    height:150px;
+    margin-right: 10px;
+}
+
+.ul{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+
+
+.footer-card {
+    margin-bottom: 20px;
+    display: flex;
+    gap:10rem;
+  }
+
+.footerlisting-img{
+    width: 300px;
+    height:150px;
+    margin-right: 10px;
+  }

@@ -3,13 +3,27 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Pagination from "../components/Pagination";
 import Article from "./Article";
+import Link from "next/link";
+import SideComponent from "../components/sideComponent/SideComponent";
+import FooterComponent from "../components/footerComponent/FooterComponent";
 
 const List = () => {
   const articles = useSelector((state) => state?.articleData?.articles);
   return (
     <div>
+      <div className="breadcrumb">
+        <Link href="/">Home</Link>
+        <span className="breadcrumb-separator">{" > "}</span>
+        <Link href="/articles">Articles</Link>
+      </div>
       <h1 className="text-subhead">Articles</h1>
-      <Article articles={articles} />
+      <div className="list-container">
+        <Article articles={articles} />
+        <div className="custom-listing">
+          <SideComponent data={articles} />
+        </div>
+      </div>
+      <FooterComponent data={articles} />
       <br />
       <Pagination
         total={articles?.totalPages}

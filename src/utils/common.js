@@ -10,3 +10,10 @@ export const handleCase = (templateData) => {
     return templateData?.slice(0, -1);
   }
 };
+
+export const handleDateString = (date) => {
+  const options = { day: "2-digit", month: "short", year: "numeric" };
+  const formattedDate = new Date(date).toLocaleDateString(undefined, options);
+  return formattedDate;
+  // .toDateString();
+};
