@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { handleDateString } from "../../../utils/common";
 
-const SideComponent = ({ data }) => {
-  console.log(data);
+const SideComponent = ({ data, dataTemplate }) => {
+  console.log(data, dataTemplate);
 
   const [isLatest, setIsLatest] = useState(true);
 
@@ -14,14 +14,17 @@ const SideComponent = ({ data }) => {
       {isLatest && (
         <div className="sidecomp-listing">
           <ul style={{ listStyleType: "none" }}>
-            {data?.articles?.map((article, i) => (
+            {data?.map((item, i) => (
               <div key={i} className="card">
                 <li>
-                  <a href={`/articles/${article._id}`} className="temp-link">
-                    {article?.components?.filter((e) => e.key === "mainImg")
+                  <a
+                    href={`/${dataTemplate}/${item._id}`}
+                    className="temp-link"
+                  >
+                    {item?.components?.filter((e) => e.key === "mainImg")
                       ?.length > 0 && (
                       <div className="images">
-                        {article.components
+                        {item.components
                           .find((e) => e.key === "mainImg")
                           ?.mainImgs?.map((img, imgI) => (
                             <img
@@ -40,31 +43,34 @@ const SideComponent = ({ data }) => {
           </ul>
           <div>
             <ul style={{ listStyleType: "none" }}>
-              {data?.articles?.map((article, i) => (
+              {data?.map((item, i) => (
                 <div key={i} style={{ height: "11rem", paddingTop: "25px" }}>
                   <li>
-                    <a href={`/articles/${article._id}`} className="temp-link">
+                    <a
+                      href={`/${dataTemplate}/${item._id}`}
+                      className="temp-link"
+                    >
                       <div className="f-r color-navy ">
-                        {handleDateString(article.createdAt)}
+                        {handleDateString(item.createdAt)}
                       </div>
                       <br />
                       <div className="list-header">
                         {
-                          article?.components?.filter(
+                          item?.components?.filter(
                             (e) => e.key === "header"
                           )?.[0]?.value
                         }
                       </div>
                       <div className="listing-description">
                         {
-                          article?.components?.filter(
+                          item?.components?.filter(
                             (e) => e.key === "description"
                           )?.[0]?.value
                         }
                       </div>
                       <div className="color-navy">
                         {
-                          article?.components?.filter(
+                          item?.components?.filter(
                             (e) => e.key === "subTitle"
                           )?.[0]?.value
                         }

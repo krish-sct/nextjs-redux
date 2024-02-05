@@ -10,12 +10,12 @@ const Articles = ({ articles }) => {
 
   const [ishighlighted, setIsHighlighted] = useState(true);
 
-  const article = useSelector((state) => state?.articleData?.articles);
+  const article = useSelector(
+    (state) => state?.articleData?.articles?.articles
+  );
   // console.log(article);
 
-  const createdAtTime = articles?.articles?.map(
-    (article, i) => article?.createdAt
-  );
+  const createdAtTime = articles?.map((article, i) => article?.createdAt);
   // console.log(createdAtTime);
 
   const createdAtTimeCopy = [...createdAtTime];
@@ -26,7 +26,7 @@ const Articles = ({ articles }) => {
 
   // console.log(sortedByLatest);
 
-  const latestArticles = articles?.articles?.find(
+  const latestArticles = articles?.find(
     (article) => article.createdAt === sortedByLatest[0] || null
   );
   // console.log(latestArticles);

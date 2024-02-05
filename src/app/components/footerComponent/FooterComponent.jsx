@@ -2,15 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchArticle } from "../../../redux/slices/articleSlice";
-import { useSelector } from "react-redux";
 import { handleDateString } from "../../../utils/common";
 
-const FooterComponent = ({ data }) => {
+const FooterComponent = ({ data, dataTemplate }) => {
   const dispatch = useDispatch();
   const [imgWidth, setImgWidth] = useState(null);
-
-  // const article = useSelector((state) => state?.articleData?.articles);
-  // console.log(article);
 
   const getHeader = (header) => {
     return header.value || "";
@@ -30,14 +26,14 @@ const FooterComponent = ({ data }) => {
       <h3>camera</h3>
       <div className="list-container">
         <ul className="ul">
-          {data?.articles?.map((article, i) => (
+          {data?.map((item, i) => (
             <div key={i} className="footer-card">
               <li>
-                <a href={`/articles/${article._id}`} className="temp-link">
-                  {article?.components?.filter((e) => e.key === "mainImg")
+                <a href={`/${dataTemplate}/${item._id}`} className="temp-link">
+                  {item?.components?.filter((e) => e.key === "mainImg")
                     ?.length > 0 && (
                     <div className="images">
-                      {article.components
+                      {item.components
                         .find((e) => e.key === "mainImg")
                         ?.mainImgs?.map((img, imgI) => (
                           <img
@@ -51,14 +47,13 @@ const FooterComponent = ({ data }) => {
                     </div>
                   )}
                   <div className="f-r color-navy">
-                    {handleDateString(article.createdAt)}
+                    {handleDateString(item.createdAt)}
                   </div>
                   <br />
                   <div className="list-header" style={{ width: imgWidth }}>
                     {
-                      article?.components?.filter(
-                        (e) => e.key === "header"
-                      )?.[0]?.value
+                      item?.components?.filter((e) => e.key === "header")?.[0]
+                        ?.value
                     }
                   </div>
                   <div
@@ -66,16 +61,15 @@ const FooterComponent = ({ data }) => {
                     style={{ width: imgWidth }}
                   >
                     {
-                      article?.components?.filter(
+                      item?.components?.filter(
                         (e) => e.key === "description"
                       )?.[0]?.value
                     }
                   </div>
                   <div className="color-navy">
                     {
-                      article?.components?.filter(
-                        (e) => e.key === "subTitle"
-                      )?.[0]?.value
+                      item?.components?.filter((e) => e.key === "subTitle")?.[0]
+                        ?.value
                     }
                   </div>
                 </a>

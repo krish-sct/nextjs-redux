@@ -2,6 +2,7 @@ import React from "react";
 import SEO from "./SEO";
 
 const TemplatePreview = ({ templateData, title }) => {
+  console.log(templateData);
   return (
     <div className="preview-wrapper">
       <div>

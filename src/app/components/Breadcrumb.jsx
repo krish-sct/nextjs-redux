@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { fetchDynamicTemplatePreview } from "../../redux/slices/dynamicTemplatePreview";
 import { useDispatch } from "react-redux";
 
-const Breadcrumb = ({ title, template }) => {
+const Breadcrumb = ({ title, dataTemplate }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { templates, setTemplates } = useState(null);
@@ -24,9 +24,13 @@ const Breadcrumb = ({ title, template }) => {
     <div className="breadcrumb">
       <Link href="/">Home</Link>
       <span className="breadcrumb-separator">{" > "}</span>
-      <Link href={`/${template}`}>{template}</Link>
-      <span className="breadcrumb-separator">{" > "}</span>
-      <div>{title}</div>
+      <Link href={`/${dataTemplate}`}>{dataTemplate}</Link>
+      {title && (
+        <>
+          <span className="breadcrumb-separator">{" > "}</span>
+          <div>{title}</div>
+        </>
+      )}
     </div>
   );
 };

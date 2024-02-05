@@ -12,16 +12,16 @@ import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
 
 const ArticleDetails = ({ params }) => {
-  console.log({ params });
+  // console.log({ params });
   const dispatch = useDispatch();
-
-  const [isrelated, setIsRelated] = useState(true);
 
   const article = useSelector(
     (state) => state?.articleData?.articles?.articles
   );
 
-  const articles = useSelector((state) => state?.articleData?.articles);
+  const articles = useSelector(
+    (state) => state?.articleData?.articles?.articles
+  );
   // console.log(articles);
 
   const articlePageDetails = useSelector(
@@ -36,7 +36,6 @@ const ArticleDetails = ({ params }) => {
 
   const handleArticleDetails = () => {
     let data = article?.filter((e) => e?._id === params?.articleId)[0];
-
     setArticleDetails(data?.components || []);
   };
 
@@ -63,22 +62,22 @@ const ArticleDetails = ({ params }) => {
 
   return (
     <div>
-      <div className="breadcrumb">
+      {/* <div className="breadcrumb">
         <Link href="/">Home</Link>
         <span className="breadcrumb-separator">{" > "}</span>
         <Link href="/articles">Articles</Link>
         <span className="breadcrumb-separator">{" > "}</span>
         <div key={params.articleId}>{title}</div>
-      </div>
-      {/* <Breadcrumb title={title} /> */}
+      </div> */}
+      <Breadcrumb title={title} dataTemplate={"articles"} />
 
       <div className="list-container">
         <div className="content-margin">
           <TemplatePreview templateData={articleDetails} title={title} />
         </div>
         <div className="custom-margin">
-          <SideComponent data={articles} />
-          {/* <RelatedComponent data={articles} /> */}
+          {/* <SideComponent data={articles} dataTemplate={"articles"} /> */}
+          <RelatedComponent data={articles} dataTemplate={"articles"} />
         </div>
       </div>
     </div>
