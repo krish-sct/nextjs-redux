@@ -12,7 +12,6 @@ import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
 
 const ArticleDetails = ({ params }) => {
-  // console.log({ params });
   const dispatch = useDispatch();
 
   const article = useSelector(
@@ -22,7 +21,6 @@ const ArticleDetails = ({ params }) => {
   const articles = useSelector(
     (state) => state?.articleData?.articles?.articles
   );
-  // console.log(articles);
 
   const articlePageDetails = useSelector(
     (state) => state?.articleData?.articles?.articleDetails?.article?.components
@@ -62,13 +60,6 @@ const ArticleDetails = ({ params }) => {
 
   return (
     <div>
-      {/* <div className="breadcrumb">
-        <Link href="/">Home</Link>
-        <span className="breadcrumb-separator">{" > "}</span>
-        <Link href="/articles">Articles</Link>
-        <span className="breadcrumb-separator">{" > "}</span>
-        <div key={params.articleId}>{title}</div>
-      </div> */}
       <Breadcrumb title={title} dataTemplate={"articles"} />
 
       <div className="list-container">
@@ -76,7 +67,6 @@ const ArticleDetails = ({ params }) => {
           <TemplatePreview templateData={articleDetails} title={title} />
         </div>
         <div className="custom-margin">
-          {/* <SideComponent data={articles} dataTemplate={"articles"} /> */}
           <RelatedComponent data={articles} dataTemplate={"articles"} />
         </div>
       </div>

@@ -14,11 +14,6 @@ const List = () => {
   );
   return (
     <div>
-      {/* <div className="breadcrumb">
-        <Link href="/">Home</Link>
-        <span className="breadcrumb-separator">{" > "}</span>
-        <Link href="/articles">Articles</Link>
-      </div> */}
       <Breadcrumb dataTemplate="articles" />
 
       <h1 className="text-subhead">Articles</h1>

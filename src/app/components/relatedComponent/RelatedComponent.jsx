@@ -53,7 +53,10 @@ const RelatedComponent = ({ data, dataTemplate }) => {
                       href={`/${dataTemplate}/${item._id}`}
                       className="temp-link"
                     >
-                      <div className="list-header" style={{ width: imgHeight }}>
+                      <div
+                        className="list-header"
+                        style={{ height: imgHeight }}
+                      >
                         {
                           item?.components?.filter(
                             (e) => e.key === "header"

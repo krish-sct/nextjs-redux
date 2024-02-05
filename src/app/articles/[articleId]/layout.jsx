@@ -6,7 +6,6 @@ const baseURL = configs.baseURL;
 
 export async function generateMetadata({ params }) {
   const id = params.articleId;
-  // console.log("id", id);
 
   const article = await fetch(
     `${baseURL}/articles?id=${params.articleId}`
