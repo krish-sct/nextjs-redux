@@ -1,14 +1,15 @@
 "use client";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { handleDate } from "../../utils/common";
+import { handleDate, handleDateString } from "../../utils/common";
 import { useDispatch } from "react-redux";
 import { fetchTestimonial } from "../../redux/slices/testimonialSlice";
 
 const Testimonial = ({ testimonials }) => {
   const dispatch = useDispatch();
+
   const testimonial = useSelector(
-    (state) => state?.testimonialData?.testimonials
+    (state) => state?.testimonialData?.testimonials?.testimonial
   );
 
   const getHeader = (header) => {
@@ -18,9 +19,10 @@ const Testimonial = ({ testimonials }) => {
   useEffect(() => {
     dispatch(fetchTestimonial());
   }, []);
+
   return (
     <ul>
-      {testimonials?.testimonial?.map((testimonial, i) => (
+      {testimonials?.map((testimonial, i) => (
         <div key={i} className="card">
           <li>
             <div>
@@ -40,7 +42,7 @@ const Testimonial = ({ testimonials }) => {
             </div>
             <br />
             <div className="f-r lightseagreen">
-              {handleDate(testimonial.createdAt)}
+              {handleDateString(testimonial.createdAt)}
             </div>
           </li>
         </div>

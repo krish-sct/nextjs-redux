@@ -1,13 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 const RelatedComponent = ({ data, dataTemplate }) => {
   const [isRelated, setIsRelated] = useState(true);
   const [imgHeight, setImgHeight] = useState(null);
+  const [sortedData, setSortedData] = useState([]);
+
+  useEffect(()=>{
+    const relatedData = data
+    ?.slice()
+    .sort((a, b) =>  new Date(a.createdAt) - new Date(b.createdAt) );
+  
+   const latestItems = relatedData?.slice(1, Math.min(data.length - 1, 4));
+   setSortedData(latestItems);
+  },[data])
+ 
 
   const handleImageLoad = (e) => {
     setImgHeight(e.target.height);
   };
+
   return (
     <div>
       <hr />
@@ -15,7 +27,7 @@ const RelatedComponent = ({ data, dataTemplate }) => {
       {isRelated && (
         <div className="sidecomp-listing">
           <ul style={{ listStyleType: "none" }}>
-            {data?.map((item, i) => (
+            {sortedData?.map((item, i) => (
               <div key={i} className="card">
                 <li>
                   <a
@@ -45,7 +57,7 @@ const RelatedComponent = ({ data, dataTemplate }) => {
           </ul>
           <div>
             <ul style={{ listStyleType: "none" }}>
-              {data?.map((item, i) => (
+              {sortedData?.map((item, i) => (
                 <div
                   key={i}
                   style={{

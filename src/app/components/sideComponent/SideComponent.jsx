@@ -1,9 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { handleDateString } from "../../../utils/common";
 
 const SideComponent = ({ data, dataTemplate }) => {
+  // console.log(data);
   const [isLatest, setIsLatest] = useState(true);
+  const [sortedData, setSortedData] = useState([]);
+
+  useEffect(() => {
+    const sortedData = data
+      ?.slice()
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    const latestItems = sortedData?.slice(1, Math.min(data.length - 1, 4));
+    setSortedData(latestItems);
+  }, [data]);
 
   return (
     <div>
@@ -12,7 +23,7 @@ const SideComponent = ({ data, dataTemplate }) => {
       {isLatest && (
         <div className="sidecomp-listing">
           <ul style={{ listStyleType: "none" }}>
-            {data?.map((item, i) => (
+            {sortedData?.map((item, i) => (
               <div key={i} className="card">
                 <li>
                   <a
@@ -41,7 +52,7 @@ const SideComponent = ({ data, dataTemplate }) => {
           </ul>
           <div>
             <ul style={{ listStyleType: "none" }}>
-              {data?.map((item, i) => (
+              {sortedData?.map((item, i) => (
                 <div
                   key={i}
                   style={{

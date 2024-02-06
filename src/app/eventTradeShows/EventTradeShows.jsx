@@ -7,36 +7,28 @@ import { fetchEventTradeShow } from "../../redux/slices/eventTradeShowsSlice";
 const EventTradeShows = ({ eventTradeShows }) => {
   const dispatch = useDispatch();
 
-  const [ishighlighted, setIsHighlighted] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [ishighlighted, setIsHighlighted] = useState(false);
+  const [LatestData, setLatestData] = useState([]);
 
   const eventTradeShow = useSelector(
     (state) => state?.eventTradeShowsData?.eventTradeShows?.eventTradeShows
   );
-  // console.log(eventTradeShow);
 
-  const createdAtTime = eventTradeShows?.map(
-    (eventTradeShow, i) => eventTradeShow?.createdAt
-  );
-  // console.log(createdAtTime);
+  useEffect(() => {
+    const sortedData = eventTradeShows
+      ?.slice()
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
 
-  const createdAtTimeCopy = [...createdAtTime];
-
-  const sortedByLatest = createdAtTimeCopy.sort(
-    (a, b) => new Date(b) - new Date(a)
-  );
-
-  // console.log(sortedByLatest);
-
-  const latestEventTradeShows = eventTradeShows?.find(
-    (eventTradeShow) => eventTradeShow.createdAt === sortedByLatest[0] || null
-  );
-  // console.log(latestEventTradeShows);
+    setLatestData(sortedData);
+  }, [eventTradeShows]);
 
   const getHeader = (header) => {
     return header.value || "";
   };
 
   useEffect(() => {
+    setIsHighlighted(true);
     dispatch(fetchEventTradeShow());
   }, []);
 
@@ -44,17 +36,16 @@ const EventTradeShows = ({ eventTradeShows }) => {
     <div>
       <hr />
       <h4 className="hr">Highlighted</h4>
-      {ishighlighted && latestEventTradeShows && (
+      {ishighlighted && LatestData && (
         <div className="card">
           <a
             href={`/eventTradeShows/${eventTradeShow._id}`}
             className="temp-link"
           >
-            {latestEventTradeShows?.components?.filter(
-              (e) => e.key === "mainImg"
-            )?.length > 0 && (
+            {LatestData?.components?.filter((e) => e.key === "mainImg")
+              ?.length > 0 && (
               <div className="images">
-                {latestEventTradeShows.components
+                {LatestData.components
                   .find((e) => e.key === "mainImg")
                   ?.mainImgs?.map((img, imgI) => (
                     <img
@@ -67,28 +58,26 @@ const EventTradeShows = ({ eventTradeShows }) => {
               </div>
             )}
             <div className="f-r color-navy ">
-              {handleDateString(latestEventTradeShows.createdAt)}
+              {handleDateString(LatestData.createdAt)}
             </div>
             <br />
             <div className="list-header">
               {
-                latestEventTradeShows?.components?.filter(
-                  (e) => e.key === "header"
-                )?.[0]?.value
+                LatestData?.components?.filter((e) => e.key === "header")?.[0]
+                  ?.value
               }
             </div>
             <div className="listing-description">
               {
-                latestEventTradeShows?.components?.filter(
+                LatestData?.components?.filter(
                   (e) => e.key === "description"
                 )?.[0]?.value
               }
             </div>
             <div className="color-navy">
               {
-                latestEventTradeShows?.components?.filter(
-                  (e) => e.key === "subTitle"
-                )?.[0]?.value
+                LatestData?.components?.filter((e) => e.key === "subTitle")?.[0]
+                  ?.value
               }
             </div>
           </a>

@@ -8,34 +8,30 @@ import { handleDateString } from "../../utils/common";
 const Articles = ({ articles }) => {
   const dispatch = useDispatch();
 
-  const [ishighlighted, setIsHighlighted] = useState(true);
+  const [ishighlighted, setIsHighlighted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [LatestData, setLatestData] = useState([]);
 
   const article = useSelector(
     (state) => state?.articleData?.articles?.articles
   );
   // console.log(article);
 
-  const createdAtTime = articles?.map((article, i) => article?.createdAt);
-  // console.log(createdAtTime);
+  useEffect(() => {
+    const sortedData = articles
+      ?.slice()
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
 
-  const createdAtTimeCopy = [...createdAtTime];
-
-  const sortedByLatest = createdAtTimeCopy.sort(
-    (a, b) => new Date(b) - new Date(a)
-  );
-
-  // console.log(sortedByLatest);
-
-  const latestArticles = articles?.find(
-    (article) => article.createdAt === sortedByLatest[0] || null
-  );
-  // console.log(latestArticles);
+    setLatestData(sortedData);
+  }, [articles]);
 
   const getHeader = (header) => {
     return header.value || "";
   };
 
   useEffect(() => {
+    setIsHighlighted(true);
+    setIsLoading(true);
     dispatch(fetchArticle());
   }, []);
 
@@ -43,13 +39,13 @@ const Articles = ({ articles }) => {
     <div>
       <hr />
       <h4 className="hr">Highlighted</h4>
-      {ishighlighted && latestArticles && (
+      {ishighlighted && LatestData && (
         <div className="card">
-          <a href={`/articles/${latestArticles._id}`} className="temp-link">
-            {latestArticles?.components?.filter((e) => e.key === "mainImg")
+          <a href={`/articles/${LatestData._id}`} className="temp-link">
+            {LatestData?.components?.filter((e) => e.key === "mainImg")
               ?.length > 0 && (
               <div className="images">
-                {latestArticles.components
+                {LatestData.components
                   .find((e) => e.key === "mainImg")
                   ?.mainImgs?.map((img, imgI) => (
                     <img
@@ -62,28 +58,26 @@ const Articles = ({ articles }) => {
               </div>
             )}
             <div className="f-r color-navy ">
-              {handleDateString(latestArticles.createdAt)}
+              {handleDateString(LatestData.createdAt)}
             </div>
             <br />
             <div className="list-header">
               {
-                latestArticles?.components?.filter(
-                  (e) => e.key === "header"
-                )?.[0]?.value
+                LatestData?.components?.filter((e) => e.key === "header")?.[0]
+                  ?.value
               }
             </div>
             <div className="listing-description">
               {
-                latestArticles?.components?.filter(
+                LatestData?.components?.filter(
                   (e) => e.key === "description"
                 )?.[0]?.value
               }
             </div>
             <div className="color-navy">
               {
-                latestArticles?.components?.filter(
-                  (e) => e.key === "subTitle"
-                )?.[0]?.value
+                LatestData?.components?.filter((e) => e.key === "subTitle")?.[0]
+                  ?.value
               }
             </div>
           </a>

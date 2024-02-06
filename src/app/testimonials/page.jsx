@@ -1,12 +1,11 @@
 import List from "./List";
+
 export const metadata = {
-  title: 'Testimonials',
+  title: "Testimonials",
 };
 
 const Testimonials = async () => {
-  return (
-    <List />
-  )
-}
+  return <List />;
+};
 
-export default Testimonials
+export default Testimonials;

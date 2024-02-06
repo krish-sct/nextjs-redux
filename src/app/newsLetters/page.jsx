@@ -1,14 +1,14 @@
-import React from 'react'
-import List from './List'
+import React from "react";
+import List from "./List";
 
-export const metadata={
-    title:'NewsLetter'
-  }
+export const metadata = {
+  title: {
+    default: "NewsLetter",
+  },
+};
 
-const NewsLetter = async() => {
-  return (
-     <List />
-  )
-}
+const NewsLetter = async () => {
+  return <List />;
+};
 
-export default NewsLetter
+export default NewsLetter;

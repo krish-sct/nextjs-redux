@@ -1,10 +1,14 @@
-import React from 'react'
-import List from './List'
+import React from "react";
+import List from "./List";
 
-const EventTradeShows= async() => {
-  return (
-     <List />
-  )
-}
+export const metadata = {
+  title: {
+    default: "EventTradeShows",
+  },
+};
 
-export default EventTradeShows
+const EventTradeShows = async () => {
+  return <List />;
+};
+
+export default EventTradeShows;

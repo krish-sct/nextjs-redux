@@ -6,10 +6,16 @@ import {
   fetchNewsLetterById,
   fetchNewsLetter,
 } from "../../../redux/slices/newsLetterSlice";
+import Breadcrumb from "../../components/Breadcrumb";
 
 const NewsLetterDetails = ({ params }) => {
   const dispatch = useDispatch();
+  const [newsLetterDetails, setNewsLetterDetails] = useState([]);
+
   const newsLetter = useSelector(
+    (state) => state?.newsLetterData?.newsLetters?.newsLetters
+  );
+  const newsLetters = useSelector(
     (state) => state?.newsLetterData?.newsLetters?.newsLetters
   );
 
@@ -19,7 +25,14 @@ const NewsLetterDetails = ({ params }) => {
         ?.components
   );
 
-  const [newsLetterDetails, setNewsLetterDetails] = useState([]);
+  const title = newsLetter
+    ?.filter((e) => e?._id === params?.newsLetterId)[0]
+    ?.components?.find((e) => e.key === "header")?.value;
+
+  const createdAt = newsLetter?.filter(
+    (e) => e?._id === params?.newsLetterId
+  )[0]?.createdAt;
+
   const handleNewsLetterDetails = () => {
     let data = newsLetter?.filter((e) => e?._id === params?.newsLetterId)[0];
     setNewsLetterDetails(data?.components || []);
@@ -47,8 +60,16 @@ const NewsLetterDetails = ({ params }) => {
   }, [newsLetterPageDetails]);
   return (
     <div>
-      <h1 className="text-head">NewsLetter</h1>
-      <TemplatePreview templateData={newsLetterDetails} title={"NewsLetter"} />
+      <Breadcrumb title={title} dataTemplate={"newsLetters"} />
+      <div className="list-container">
+        <div className="content-margin">
+          <TemplatePreview
+            templateData={newsLetterDetails}
+            title={title}
+            createdAt={createdAt}
+          />
+        </div>
+      </div>
     </div>
   );
 };

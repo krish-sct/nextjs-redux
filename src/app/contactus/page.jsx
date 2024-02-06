@@ -8,6 +8,7 @@ import { CountrySelect } from "react-country-state-city";
 import "react-country-state-city/dist/react-country-state-city.css";
 import { useDispatch } from "react-redux";
 import { fetchMaster } from "../../redux/slices/masterSlice";
+import Breadcrumb from "../components/Breadcrumb";
 
 const ContactPage = () => {
   const dispatch = useDispatch();
@@ -66,42 +67,45 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="contactPageContainer">
-      <h1 className="text-head">
-        Contact Form <hr className="hr" />
-      </h1>
-      <div className="contactus">
-        {formData?.map((field, i) => (
-          <div key={i}>
-            {field.type === "select" && field.name === "country" ? (
-              <div className={styles.dropdownstyles}>
-                <CountrySelect
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  value={field.value || ""}
-                  className={field.className}
-                  onChange={(selectedCountry) => {
-                    handleCountryChange(selectedCountry);
-                  }}
-                ></CountrySelect>
-              </div>
-            ) : (
-              <>
-                <input
-                  type={field.type}
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  value={field.value || ""}
-                  className={field.className}
-                  onChange={handleChange}
-                />
-              </>
-            )}
-          </div>
-        ))}
-        <button onClick={handleSubmit} className="contactPageButton">
-          Submit
-        </button>
+    <div>
+      <Breadcrumb data={"masters"} dataTemplate="contactus" />
+      <div className="contactPageContainer">
+        <h1 className="text-head">
+          Contact Form <hr className="hr" />
+        </h1>
+        <div className="contactus">
+          {formData?.map((field, i) => (
+            <div key={i}>
+              {field.type === "select" && field.name === "country" ? (
+                <div className={styles.dropdownstyles}>
+                  <CountrySelect
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    value={field.value || ""}
+                    className={field.className}
+                    onChange={(selectedCountry) => {
+                      handleCountryChange(selectedCountry);
+                    }}
+                  ></CountrySelect>
+                </div>
+              ) : (
+                <>
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    value={field.value || ""}
+                    className={field.className}
+                    onChange={handleChange}
+                  />
+                </>
+              )}
+            </div>
+          ))}
+          <button onClick={handleSubmit} className="contactPageButton">
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );

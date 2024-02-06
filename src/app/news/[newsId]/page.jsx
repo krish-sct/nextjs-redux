@@ -3,16 +3,28 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TemplatePreview from "../../components/TemplatePreview";
 import { fetchNewsById, fetchNews } from "../../../redux/slices/newsSlice";
+import Breadcrumb from "../../components/Breadcrumb";
+import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
 
 const NewsDetails = ({ params }) => {
   const dispatch = useDispatch();
+  const [newsDetails, setNewsDetails] = useState([]);
+
   const newses = useSelector((state) => state?.newsData?.news?.news);
+
+  const news = useSelector((state) => state?.newsData?.news?.news);
 
   const newsPageDetails = useSelector(
     (state) => state?.newsData?.news?.newsDetails?.newses?.components
   );
 
-  const [newsDetails, setNewsDetails] = useState([]);
+  const title = newses
+    ?.filter((e) => e?._id === params?.newsId)[0]
+    ?.components?.find((e) => e.key === "header")?.value;
+
+  const createdAt = newses?.filter((e) => e?._id === params?.newsId)[0]
+    ?.createdAt;
+
   const handleNewsDetails = () => {
     let data = newses?.filter((e) => e?._id === params?.newsId)[0];
     setNewsDetails(data?.components || []);
@@ -40,8 +52,19 @@ const NewsDetails = ({ params }) => {
   }, [newsPageDetails]);
   return (
     <div>
-      <h1 className="text-head">News</h1>
-      <TemplatePreview templateData={newsDetails} title={"News"} />
+      <Breadcrumb title={title} dataTemplate={"news"} />
+      <div className="list-container">
+        <div className="content-margin">
+          <TemplatePreview
+            templateData={newsDetails}
+            title={title}
+            createdAt={createdAt}
+          />
+        </div>
+        <div className="custom-margin">
+          <RelatedComponent data={news} dataTemplate={"news"} />
+        </div>
+      </div>
     </div>
   );
 };

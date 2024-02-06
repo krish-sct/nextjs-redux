@@ -6,6 +6,7 @@ export const metadata = {
     absolute: "Frequently Asked Questions | Econ Systems",
   },
 };
+
 const Faq = async () => {
   return (
     <div>

@@ -1,37 +1,84 @@
-import React, { useEffect } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { handleDate } from "../../utils/common";
 import { useDispatch } from "react-redux";
 import { fetchNews } from "../../redux/slices/newsSlice";
+import { handleDateString } from "../../utils/common";
 
 const News = ({ news }) => {
   const dispatch = useDispatch();
-  const newses = useSelector((state) => state?.newsData?.news);
+  const [ishighlighted, setIsHighlighted] = useState(false);
+  const [LatestData, setLatestData] = useState([]);
+
+  const newses = useSelector((state) => state?.newsData?.news?.news);
+  // console.log(newses);
+
+  useEffect(() => {
+    const sortedData = news
+      ?.slice()
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+
+    setLatestData(sortedData);
+  }, [news]);
 
   const getHeader = (header) => {
     return header.value || "";
   };
 
   useEffect(() => {
+    setIsHighlighted(true);
     dispatch(fetchNews());
   }, []);
 
   return (
-    <ul>
-      {news?.news?.map((newses, i) => (
-        <div key={i} className="card">
-          <li>
-            <a href={`/news/${newses._id}`} className="temp-link">
+    <div>
+      <hr />
+      <h4 className="hr">Highlighted</h4>
+      {ishighlighted && LatestData && (
+        <div className="card">
+          <a href={`/news/${LatestData._id}`} className="temp-link">
+            {LatestData?.components?.filter((e) => e.key === "mainImg")
+              ?.length > 0 && (
+              <div className="images">
+                {LatestData.components
+                  .find((e) => e.key === "mainImg")
+                  ?.mainImgs?.map((img, imgI) => (
+                    <img
+                      className="images-imgs"
+                      src={img?.src}
+                      alt={img?.alt}
+                      key={imgI}
+                    />
+                  ))}
+              </div>
+            )}
+            <div className="f-r color-navy ">
+              {handleDateString(LatestData.createdAt)}
+            </div>
+            <br />
+            <div className="list-header">
               {
-                newses?.components?.filter((e) => e.key === "header")?.[0]
+                LatestData?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value
               }
-            </a>
-            <p className="f-r lightseagreen">{handleDate(newses.createdAt)}</p>
-          </li>
+            </div>
+            <div className="listing-description">
+              {
+                LatestData?.components?.filter(
+                  (e) => e.key === "description"
+                )?.[0]?.value
+              }
+            </div>
+            <div className="color-navy">
+              {
+                LatestData?.components?.filter((e) => e.key === "subTitle")?.[0]
+                  ?.value
+              }
+            </div>
+          </a>
         </div>
-      ))}
-    </ul>
+      )}
+    </div>
   );
 };
 
