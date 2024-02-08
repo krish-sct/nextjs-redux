@@ -358,7 +358,7 @@ export const getVideosUrl = async (page, limit) => {
     );
 
     if (!response.ok) {
-      console.error(`Failed to fatch videos:${response.status}`);
+      console.error(`Failed to fetch videos:${response.status}`);
     }
     return response.json();
   } catch (error) {
@@ -409,7 +409,7 @@ export const addMaster = async (data) => {
   return res.json();
 };
 
-//careersConfig
+//articlesConfig
 export const getArticlesConfig = async () => {
   try {
     const response = await fetch(`${baseURL}/articlesConfig`, {
@@ -601,6 +601,61 @@ export const updateTemplateStaging = async ({ data, templateData }) => {
     return response.json();
   } catch (error) {
     console.error("Error", error.message);
+    throw error;
+  }
+};
+
+//products
+export const getProducts = async (page, limit) => {
+  try {
+    const response = await fetch(
+      `${baseURL}/products?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      console.error(`Failed to fetch products: ${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getProducts:", error.message);
+    throw error;
+  }
+};
+
+export const getProductById = async (productId) => {
+  try {
+    const response = await fetch(`${baseURL}/products?id=${productId}`, {
+      cache: "no-store,",
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to fetch product:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getProductById:", error.message);
+    throw error;
+  }
+};
+
+//productConfig
+
+export const getProductsConfig = async () => {
+  try {
+    const response = await fetch(`${baseURL}/productsConfig`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.error(`Failed to fetch productsConfig:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getProductsConfig:", error.message);
     throw error;
   }
 };

@@ -13,6 +13,7 @@ import masterReducer from "./slices/masterSlice";
 import videoReducer from "./slices/videoSlice";
 import articlesConfigReducer from "./slices/articlesConfigSlice";
 import templateDataReducer from "./slices/dynamicTemplatePreview";
+import productReducer from "./slices/productSlice";
 
 const rootReducer = combineReducers({
   testimonialData: testimonialReducer,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   contactusData: contactusReducer,
   masterData: masterReducer,
   articlesConfigData: articlesConfigReducer,
+  productData: productReducer,
   dynamicTemplatePreviewData: templateDataReducer,
 });
 
