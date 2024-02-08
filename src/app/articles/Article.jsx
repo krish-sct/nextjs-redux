@@ -11,7 +11,9 @@ const Articles = ({ articles }) => {
   const [ishighlighted, setIsHighlighted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [LatestData, setLatestData] = useState([]);
+  const [imgWidth, setImgWidth] = useState(null);
 
+  
   const article = useSelector(
     (state) => state?.articleData?.articles?.articles
   );
@@ -28,6 +30,11 @@ const Articles = ({ articles }) => {
   const getHeader = (header) => {
     return header.value || "";
   };
+
+  const handleImageLoad = (e) => {
+    setImgWidth(e.target.width);
+  };
+
 
   useEffect(() => {
     setIsHighlighted(true);
@@ -53,21 +60,22 @@ const Articles = ({ articles }) => {
                       src={img?.src}
                       alt={img?.alt}
                       key={imgI}
+                      onLoad={handleImageLoad}
                     />
                   ))}
               </div>
             )}
-            <div className="f-r color-navy ">
+            <div className="f-r color-navy " >
               {handleDateString(LatestData.createdAt)}
             </div>
             <br />
-            <div className="list-header">
+            <div className="list-header" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value
               }
             </div>
-            <div className="listing-description">
+            <div className="listing-description" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter(
                   (e) => e.key === "description"

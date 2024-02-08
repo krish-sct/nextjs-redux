@@ -9,6 +9,9 @@ const News = ({ news }) => {
   const dispatch = useDispatch();
   const [ishighlighted, setIsHighlighted] = useState(false);
   const [LatestData, setLatestData] = useState([]);
+  const [imgWidth, setImgWidth] = useState(null);
+
+ 
 
   const newses = useSelector((state) => state?.newsData?.news?.news);
   // console.log(newses);
@@ -23,6 +26,10 @@ const News = ({ news }) => {
 
   const getHeader = (header) => {
     return header.value || "";
+  };
+
+  const handleImageLoad = (e) => {
+    setImgWidth(e.target.width);
   };
 
   useEffect(() => {
@@ -48,6 +55,7 @@ const News = ({ news }) => {
                       src={img?.src}
                       alt={img?.alt}
                       key={imgI}
+                      onLoad={handleImageLoad}
                     />
                   ))}
               </div>
@@ -56,13 +64,13 @@ const News = ({ news }) => {
               {handleDateString(LatestData.createdAt)}
             </div>
             <br />
-            <div className="list-header">
+            <div className="list-header"  style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value
               }
             </div>
-            <div className="listing-description">
+            <div className="listing-description"  style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter(
                   (e) => e.key === "description"

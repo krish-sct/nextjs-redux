@@ -10,6 +10,7 @@ const EventTradeShows = ({ eventTradeShows }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [ishighlighted, setIsHighlighted] = useState(false);
   const [LatestData, setLatestData] = useState([]);
+  const [imgWidth, setImgWidth] = useState(null);
 
   const eventTradeShow = useSelector(
     (state) => state?.eventTradeShowsData?.eventTradeShows?.eventTradeShows
@@ -27,6 +28,10 @@ const EventTradeShows = ({ eventTradeShows }) => {
     return header.value || "";
   };
 
+  const handleImageLoad = (e) => {
+    setImgWidth(e.target.width);
+  };
+
   useEffect(() => {
     setIsHighlighted(true);
     dispatch(fetchEventTradeShow());
@@ -38,10 +43,7 @@ const EventTradeShows = ({ eventTradeShows }) => {
       <h4 className="hr">Highlighted</h4>
       {ishighlighted && LatestData && (
         <div className="card">
-          <a
-            href={`/eventTradeShows/${eventTradeShow._id}`}
-            className="temp-link"
-          >
+          <a href={`/eventTradeShows/${LatestData._id}`} className="temp-link">
             {LatestData?.components?.filter((e) => e.key === "mainImg")
               ?.length > 0 && (
               <div className="images">
@@ -53,6 +55,7 @@ const EventTradeShows = ({ eventTradeShows }) => {
                       src={img?.src}
                       alt={img?.alt}
                       key={imgI}
+                      onLoad={handleImageLoad}
                     />
                   ))}
               </div>
@@ -61,13 +64,13 @@ const EventTradeShows = ({ eventTradeShows }) => {
               {handleDateString(LatestData.createdAt)}
             </div>
             <br />
-            <div className="list-header">
+            <div className="list-header" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value
               }
             </div>
-            <div className="listing-description">
+            <div className="listing-description" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter(
                   (e) => e.key === "description"

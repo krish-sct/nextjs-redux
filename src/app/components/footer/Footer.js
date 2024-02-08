@@ -30,8 +30,8 @@ const Footer = () => {
       </div>
 
       <br />
-      <div>
-        &copy; Copyright @{new Date().getFullYear()} E-con systems .<br />
+      <div className="viewmore">
+        &copy; Copyright @{new Date().getFullYear()} e-con systems .<br />
         All rights reserved.
       </div>
     </div>

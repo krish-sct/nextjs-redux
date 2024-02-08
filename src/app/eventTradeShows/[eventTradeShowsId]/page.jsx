@@ -72,7 +72,7 @@ const EventTradeShowsDetails = ({ params }) => {
         <div className="content-margin">
           <TemplatePreview
             templateData={eventTradeShowDetails}
-            title={"EventTradeShow"}
+            title={title}
             createdAt={createdAt}
           />
         </div>

@@ -10,6 +10,7 @@ const Careers = ({ careers }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [ishighlighted, setIsHighlighted] = useState(false);
   const [LatestData, setLatestData] = useState([]);
+  const [imgWidth, setImgWidth] = useState(null);
 
   const career = useSelector((state) => state?.careerData?.careers?.careers);
 
@@ -23,6 +24,10 @@ const Careers = ({ careers }) => {
 
   const getHeader = (header) => {
     return header.value || "";
+  };
+
+  const handleImageLoad = (e) => {
+    setImgWidth(e.target.width);
   };
 
   useEffect(() => {
@@ -49,6 +54,7 @@ const Careers = ({ careers }) => {
                       src={img?.src}
                       alt={img?.alt}
                       key={imgI}
+                      onLoad={handleImageLoad}
                     />
                   ))}
               </div>
@@ -57,13 +63,13 @@ const Careers = ({ careers }) => {
               {handleDateString(LatestData.createdAt)}
             </div>
             <br />
-            <div className="list-header">
+            <div className="list-header" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value
               }
             </div>
-            <div className="listing-description">
+            <div className="listing-description" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter(
                   (e) => e.key === "description"

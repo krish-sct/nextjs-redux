@@ -9,6 +9,7 @@ const Podcasts = ({ podcasts }) => {
 
   const [ishighlighted, setIsHighlighted] = useState(true);
   const [LatestData, setLatestData] = useState([]);
+  const [imgWidth, setImgWidth] = useState(null);
 
   const podcast = useSelector(
     (state) => state?.podcastData?.podcasts?.podcasts
@@ -24,6 +25,10 @@ const Podcasts = ({ podcasts }) => {
 
   const getHeader = (header) => {
     return header.value || "";
+  };
+
+  const handleImageLoad = (e) => {
+    setImgWidth(e.target.width);
   };
 
   useEffect(() => {
@@ -48,6 +53,7 @@ const Podcasts = ({ podcasts }) => {
                       src={img?.src}
                       alt={img?.alt}
                       key={imgI}
+                      onLoad={handleImageLoad}
                     />
                   ))}
               </div>
@@ -56,13 +62,13 @@ const Podcasts = ({ podcasts }) => {
               {handleDateString(LatestData.createdAt)}
             </div>
             <br />
-            <div className="list-header">
+            <div className="list-header" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value
               }
             </div>
-            <div className="listing-description">
+            <div className="listing-description" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter(
                   (e) => e.key === "description"

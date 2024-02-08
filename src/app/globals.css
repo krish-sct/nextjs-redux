@@ -234,6 +234,7 @@ body {
     gap:10px;
     cursor: pointer;
   }
+
 .menu-category {
     padding: 10px;
     background-color: whitesmoke;
@@ -366,7 +367,8 @@ body {
 .list-container{
     display: flex;
     flex-direction: row;
-    gap:7rem;
+    padding-left: 2rem;
+    /* gap:2rem; */
 }
 
 .custom-margin{
@@ -379,9 +381,9 @@ body {
 }
 
 .custom-listing{
-    margin-left: 20rem;
     display: flex;
     flex-direction: row;
+    margin-left: 10rem;
 }
 
 .images-img{
@@ -391,11 +393,11 @@ body {
 }
 
 .images-imgs{
-    width: 500px; 
+    width: 700px; 
     height: 400px;
     border-radius: 4px;
-
 }
+
 .listing-description{
     font-size: 14px;
     color: gray;
@@ -440,15 +442,94 @@ body {
 
 
 
-.footer-card {
+.footerComp-card {
     margin-bottom: 20px;
     display: flex;
     gap:10rem;
     max-width:min-content
   }
 
-.footerlisting-img{
+.footerComplisting-img{
     width: 300px;
     height:150px;
     margin-right: 10px;
   }
+
+  .footerComp-container{
+    max-height: 17rem;
+    display: flex;
+    flex-direction: row;
+    gap:7rem;
+  }
+
+  .hidden{
+    text-overflow:ellipsis;
+    overflow:hidden;
+  }
+
+  .viewmore-btn{
+    color:green;
+    background-color: white;
+    border-color:green;
+    border-radius: 3px;
+    border-style:solid;
+    border-width: 1px;
+    width:max-content;
+  }
+
+  .viewmore {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .sup{
+    vertical-align: super;
+    font-size:xx-small;
+  }
+
+  .footer-container{
+    background-color: black;
+    color: white;
+    width: auto;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+  }
+
+.footer-row{
+      display: flex;
+      /* padding-left: 15rem; */
+      gap:4rem;
+      justify-content: space-around;
+  }
+  
+  .footer-row-header{
+    font-weight: bolder;
+  }
+
+  .footer-content-row {
+    display: flex;
+    gap: 4rem;
+    justify-content: space-around;
+  }
+
+  .footer-cell{
+    flex:1;
+    padding: 8px;
+}
+
+  .footer-cell a{
+    text-decoration: none;
+    color:#f4f4f4;
+  }
+
+  .warranty-img {
+    width: 20rem;
+    height: 90px;
+    object-fit:contain;
+}
+
+.footer-link{
+    color:white;
+    text-decoration: none;
+}

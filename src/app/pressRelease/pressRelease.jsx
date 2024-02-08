@@ -9,6 +9,7 @@ const PressReleases = ({ pressReleases }) => {
   const dispatch = useDispatch();
   const [ishighlighted, setIsHighlighted] = useState(false);
   const [LatestData, setLatestData] = useState([]);
+  const [imgWidth, setImgWidth] = useState(null);
 
   const pressRelease = useSelector(
     (state) => state?.pressReleaseData?.pressReleases?.pressReleases
@@ -24,6 +25,10 @@ const PressReleases = ({ pressReleases }) => {
 
   const getHeader = (header) => {
     return header.value || "";
+  };
+
+  const handleImageLoad = (e) => {
+    setImgWidth(e.target.width);
   };
 
   useEffect(() => {
@@ -49,6 +54,7 @@ const PressReleases = ({ pressReleases }) => {
                       src={img?.src}
                       alt={img?.alt}
                       key={imgI}
+                      onLoad={handleImageLoad}
                     />
                   ))}
               </div>
@@ -57,13 +63,13 @@ const PressReleases = ({ pressReleases }) => {
               {handleDateString(LatestData.createdAt)}
             </div>
             <br />
-            <div className="list-header">
+            <div className="list-header" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value
               }
             </div>
-            <div className="listing-description">
+            <div className="listing-description" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter(
                   (e) => e.key === "description"
