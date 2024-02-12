@@ -8,7 +8,11 @@ export const metadata = {
 };
 
 const Article = async () => {
-  return <List />;
+  return (
+    // <div className="article-container">
+    <List />
+    // </div>
+  );
 };
 
 export default Article;

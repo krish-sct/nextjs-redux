@@ -22,6 +22,7 @@ const Breadcrumb = ({ title, dataTemplate }) => {
 
   return (
     <div className="breadcrumb">
+      {/* <div className="breadcrumb-frame"> */}
       <Link href="/">Home</Link>
       <span className="breadcrumb-separator">{" > "}</span>
       <Link href={`/${dataTemplate}`}>{dataTemplate}</Link>
@@ -31,6 +32,7 @@ const Breadcrumb = ({ title, dataTemplate }) => {
           <div>{title}</div>
         </>
       )}
+      {/* </div> */}
     </div>
   );
 };
