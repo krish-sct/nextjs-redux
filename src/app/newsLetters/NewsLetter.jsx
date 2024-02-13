@@ -28,7 +28,6 @@ const NewsLetter = ({ newsLetters }) => {
     return header.value || "";
   };
 
-
   const handleImageLoad = (e) => {
     setImgWidth(e.target.width);
   };
@@ -46,20 +45,24 @@ const NewsLetter = ({ newsLetters }) => {
       {ishighlighted && LatestData && (
         <div className="card">
           <a href={`/newsLetters/${LatestData._id}`} className="temp-link">
-            {LatestData?.components?.filter((e) => e.key === "mainImg")
-              ?.length > 0 && (
+            {LatestData?.components?.filter((e) => e.key === "images")?.length >
+              0 && (
               <div className="images">
-                {LatestData.components
-                  .find((e) => e.key === "mainImg")
-                  ?.mainImgs?.map((img, imgI) => (
-                    <img
-                      className="images-imgs"
-                      src={img?.src}
-                      alt={img?.alt}
-                      key={imgI}
-                      onLoad={handleImageLoad}
-                    />
-                  ))}
+                {LatestData.components.find((e) => e.key === "images")
+                  ?.imgs?.[0] && (
+                  <img
+                    className="images-imgs"
+                    src={
+                      LatestData.components.find((e) => e.key === "images")
+                        ?.imgs[0]?.src
+                    }
+                    alt={
+                      LatestData.components.find((e) => e.key === "images")
+                        ?.imgs[0]?.alt
+                    }
+                    onLoad={handleImageLoad}
+                  />
+                )}
               </div>
             )}
             <div className="f-r color-navy">

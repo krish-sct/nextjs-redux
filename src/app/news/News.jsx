@@ -11,8 +11,6 @@ const News = ({ news }) => {
   const [LatestData, setLatestData] = useState([]);
   const [imgWidth, setImgWidth] = useState(null);
 
- 
-
   const newses = useSelector((state) => state?.newsData?.news?.news);
   // console.log(newses);
 
@@ -44,33 +42,37 @@ const News = ({ news }) => {
       {ishighlighted && LatestData && (
         <div className="card">
           <a href={`/news/${LatestData._id}`} className="temp-link">
-            {LatestData?.components?.filter((e) => e.key === "mainImg")
-              ?.length > 0 && (
+            {LatestData?.components?.filter((e) => e.key === "images")?.length >
+              0 && (
               <div className="images">
-                {LatestData.components
-                  .find((e) => e.key === "mainImg")
-                  ?.mainImgs?.map((img, imgI) => (
-                    <img
-                      className="images-imgs"
-                      src={img?.src}
-                      alt={img?.alt}
-                      key={imgI}
-                      onLoad={handleImageLoad}
-                    />
-                  ))}
+                {LatestData.components.find((e) => e.key === "images")
+                  ?.imgs?.[0] && (
+                  <img
+                    className="images-imgs"
+                    src={
+                      LatestData.components.find((e) => e.key === "images")
+                        ?.imgs[0]?.src
+                    }
+                    alt={
+                      LatestData.components.find((e) => e.key === "images")
+                        ?.imgs[0]?.alt
+                    }
+                    onLoad={handleImageLoad}
+                  />
+                )}
               </div>
             )}
             <div className="f-r color-navy ">
               {handleDateString(LatestData.createdAt)}
             </div>
             <br />
-            <div className="list-header"  style={{ width: imgWidth }}>
+            <div className="list-header" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter((e) => e.key === "header")?.[0]
                   ?.value
               }
             </div>
-            <div className="listing-description"  style={{ width: imgWidth }}>
+            <div className="listing-description" style={{ width: imgWidth }}>
               {
                 LatestData?.components?.filter(
                   (e) => e.key === "description"

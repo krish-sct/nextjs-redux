@@ -30,19 +30,23 @@ const SideComponent = ({ data, dataTemplate }) => {
                     href={`/${dataTemplate}/${item._id}`}
                     className="temp-link"
                   >
-                    {item?.components?.filter((e) => e.key === "mainImg")
+                    {item?.components?.filter((e) => e.key === "images")
                       ?.length > 0 && (
                       <div className="images">
-                        {item.components
-                          .find((e) => e.key === "mainImg")
-                          ?.mainImgs?.map((img, imgI) => (
-                            <img
-                              className="listing-img"
-                              src={img?.src}
-                              alt={img?.alt}
-                              key={imgI}
-                            />
-                          ))}
+                        {item.components.find((e) => e.key === "images")
+                          ?.imgs?.[0] && (
+                          <img
+                            className="footerComplisting-img"
+                            src={
+                              item.components.find((e) => e.key === "images")
+                                ?.imgs[0]?.src
+                            }
+                            alt={
+                              item.components.find((e) => e.key === "images")
+                                ?.imgs[0]?.alt
+                            }
+                          />
+                        )}
                       </div>
                     )}
                   </a>

@@ -7,6 +7,7 @@ import {
   fetchNewsLetter,
 } from "../../../redux/slices/newsLetterSlice";
 import Breadcrumb from "../../components/Breadcrumb";
+import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
 
 const NewsLetterDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -68,6 +69,9 @@ const NewsLetterDetails = ({ params }) => {
             title={title}
             createdAt={createdAt}
           />
+        </div>
+        <div className="custom-margin">
+          <RelatedComponent data={newsLetters} dataTemplate={"newsLetters"} />
         </div>
       </div>
     </div>

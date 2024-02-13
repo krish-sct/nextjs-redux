@@ -33,28 +33,38 @@ const RelatedComponent = ({ data, dataTemplate }) => {
                     href={`/${dataTemplate}/${item._id}`}
                     className="temp-link"
                   >
-                    {item?.components?.filter((e) => e.key === "mainImg")
+                    {item?.components?.filter((e) => e.key === "images")
                       ?.length > 0 && (
                       <div className="images">
-                        {item.components
-                          .find((e) => e.key === "mainImg")
-                          ?.mainImgs?.map((img, imgI) => (
-                            <img
-                              className="listing-img"
-                              src={img?.src}
-                              alt={img?.alt}
-                              key={imgI}
-                              onLoad={handleImageLoad}
-                            />
-                          ))}
+                        {item.components.find((e) => e.key === "images")
+                          ?.imgs?.[0] && (
+                          <img
+                            className="listing-img"
+                            src={
+                              item.components.find((e) => e.key === "images")
+                                ?.imgs[0]?.src
+                            }
+                            alt={
+                              item.components.find((e) => e.key === "images")
+                                ?.imgs[0]?.alt
+                            }
+                            onLoad={handleImageLoad}
+                          />
+                        )}
                       </div>
                     )}
                   </a>
                 </li>
                 <li>
-                  {item?.components
-                    ?.filter((e) => e.key === "related")?.[0]
-                    ?.value?.map((relatedItem) => relatedItem.value)}
+                  <a
+                    href={`/${dataTemplate}/${item._id}`}
+                    className="temp-link"
+                    style={{ color: "gray", fontSize: "16px" }}
+                  >
+                    {item?.components
+                      ?.filter((e) => e.key === "related")?.[0]
+                      ?.value?.map((relatedItem) => relatedItem.value)}
+                  </a>
                 </li>
               </div>
             ))}

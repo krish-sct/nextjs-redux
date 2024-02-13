@@ -13,7 +13,6 @@ const Articles = ({ articles }) => {
   const [LatestData, setLatestData] = useState([]);
   const [imgWidth, setImgWidth] = useState(null);
 
-  
   const article = useSelector(
     (state) => state?.articleData?.articles?.articles
   );
@@ -35,7 +34,6 @@ const Articles = ({ articles }) => {
     setImgWidth(e.target.width);
   };
 
-
   useEffect(() => {
     setIsHighlighted(true);
     setIsLoading(true);
@@ -49,23 +47,27 @@ const Articles = ({ articles }) => {
       {ishighlighted && LatestData && (
         <div className="card">
           <a href={`/articles/${LatestData._id}`} className="temp-link">
-            {LatestData?.components?.filter((e) => e.key === "mainImg")
-              ?.length > 0 && (
+            {LatestData?.components?.filter((e) => e.key === "images")?.length >
+              0 && (
               <div className="images">
-                {LatestData.components
-                  .find((e) => e.key === "mainImg")
-                  ?.mainImgs?.map((img, imgI) => (
-                    <img
-                      className="images-imgs"
-                      src={img?.src}
-                      alt={img?.alt}
-                      key={imgI}
-                      onLoad={handleImageLoad}
-                    />
-                  ))}
+                {LatestData.components.find((e) => e.key === "images")
+                  ?.imgs?.[0] && (
+                  <img
+                    className="images-imgs"
+                    src={
+                      LatestData.components.find((e) => e.key === "images")
+                        ?.imgs[0]?.src
+                    }
+                    alt={
+                      LatestData.components.find((e) => e.key === "images")
+                        ?.imgs[0]?.alt
+                    }
+                    onLoad={handleImageLoad}
+                  />
+                )}
               </div>
             )}
-            <div className="f-r color-navy " >
+            <div className="f-r color-navy ">
               {handleDateString(LatestData.createdAt)}
             </div>
             <br />

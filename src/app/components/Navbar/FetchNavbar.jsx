@@ -69,7 +69,6 @@ const links = [
 const Navbar = () => {
   return (
     <div className={styles.container}>
-      {/* //"navbar-container" */}
       <Link className={styles.text} href="/">
         E-con Systems
       </Link>

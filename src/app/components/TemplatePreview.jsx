@@ -40,9 +40,9 @@ const TemplatePreview = ({ templateData, title, createdAt }) => {
               ) : (
                 ""
               )}
-              {e?.mainImgs && e?.mainImgs.length > 0 && e?.key === "mainImg" ? (
+              {e?.imgs && e?.imgs.length > 0 && e?.key === "images" ? (
                 <div className="images">
-                  {e?.mainImgs?.map((img, imgI) => {
+                  {e?.imgs?.map((img, imgI) => {
                     return (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
@@ -58,23 +58,7 @@ const TemplatePreview = ({ templateData, title, createdAt }) => {
               ) : (
                 ""
               )}
-              {e?.key === "images" ? (
-                <div className="images">
-                  {e?.imgs?.map((img, imgI) => {
-                    return (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        className="images-img"
-                        src={img?.src}
-                        alt={img?.alt}
-                        key={imgI}
-                      />
-                    );
-                  })}
-                </div>
-              ) : (
-                ""
-              )}
+
               {e?.key === "list" ? (
                 <div className="lists">
                   <ul>
