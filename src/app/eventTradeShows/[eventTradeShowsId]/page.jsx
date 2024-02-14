@@ -11,6 +11,7 @@ import RelatedComponent from "../../components/relatedComponent/RelatedComponent
 
 const EventTradeShowsDetails = ({ params }) => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
   const [eventTradeShowDetails, setEventTradeShowDetails] = useState([]);
 
@@ -48,8 +49,16 @@ const EventTradeShowsDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchEventTradeShow());
-  }, []);
+    setIsLoading(true);
+    dispatch(fetchEventTradeShow())
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error in fetching EventTradeShows", error);
+        setIsLoading(false);
+      });
+  }, [dispatch]);
 
   useEffect(() => {
     if (eventTradeShow?.length && params) {
@@ -69,19 +78,25 @@ const EventTradeShowsDetails = ({ params }) => {
       <Breadcrumb title={title} dataTemplate={"eventTradeShows"} />
 
       <div className="list-container">
-        <div className="content-margin">
-          <TemplatePreview
-            templateData={eventTradeShowDetails}
-            title={title}
-            createdAt={createdAt}
-          />
-        </div>
-        <div className="custom-margin">
-          <RelatedComponent
-            data={eventTradeShows}
-            dataTemplate={"eventTradeShows"}
-          />
-        </div>
+        {isLoading ? (
+          <div className="spinner"></div>
+        ) : (
+          <>
+            <div className="content-margin">
+              <TemplatePreview
+                templateData={eventTradeShowDetails}
+                title={title}
+                createdAt={createdAt}
+              />
+            </div>
+            <div className="custom-margin">
+              <RelatedComponent
+                data={eventTradeShows}
+                dataTemplate={"eventTradeShows"}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

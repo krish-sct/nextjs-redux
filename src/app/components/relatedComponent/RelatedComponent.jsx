@@ -6,6 +6,7 @@ const RelatedComponent = ({ data, dataTemplate }) => {
   // console.log(data);
   const [imgHeight, setImgHeight] = useState(null);
   const [sortedData, setSortedData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const relatedData = data
@@ -20,11 +21,22 @@ const RelatedComponent = ({ data, dataTemplate }) => {
     setImgHeight(e.target.height);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <hr />
       <h4 className="hr">Related {dataTemplate}</h4>
-      {
+      {isLoading ? (
+        <div className="spinner"></div>
+      ) : (
         <div className="sidecomp-listing">
           <ul style={{ listStyleType: "none" }}>
             {sortedData?.map((item, i) => (
@@ -82,7 +94,7 @@ const RelatedComponent = ({ data, dataTemplate }) => {
             ))}
           </ul>
         </div>
-      }
+      )}
     </div>
   );
 };

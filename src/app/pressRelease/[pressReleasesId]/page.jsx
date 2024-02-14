@@ -12,6 +12,7 @@ import RelatedComponent from "../../components/relatedComponent/RelatedComponent
 const PressReleasesDetails = ({ params }) => {
   const dispatch = useDispatch();
   const [pressReleaseDetails, setpressReleaseDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const pressRelease = useSelector(
     (state) => state?.pressReleaseData?.pressReleases?.pressReleases
@@ -45,8 +46,16 @@ const PressReleasesDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchPressRelease());
-  }, []);
+    setIsLoading(true);
+    dispatch(fetchPressRelease())
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error in fetching PressRelease", error);
+        setIsLoading(false);
+      });
+  }, [dispatch]);
 
   useEffect(() => {
     if (pressRelease?.length && params) {
@@ -65,19 +74,25 @@ const PressReleasesDetails = ({ params }) => {
     <div>
       <Breadcrumb title={title} dataTemplate={"pressRelease"} />
       <div className="list-container">
-        <div className="content-margin">
-          <TemplatePreview
-            templateData={pressReleaseDetails}
-            title={title}
-            createdAt={createdAt}
-          />
-        </div>
-        <div className="custom-margin">
-          <RelatedComponent
-            data={pressReleases}
-            dataTemplate={"pressRelease"}
-          />
-        </div>
+        {isLoading ? (
+          <div className="spinner"></div>
+        ) : (
+          <>
+            <div className="content-margin">
+              <TemplatePreview
+                templateData={pressReleaseDetails}
+                title={title}
+                createdAt={createdAt}
+              />
+            </div>
+            <div className="custom-margin">
+              <RelatedComponent
+                data={pressReleases}
+                dataTemplate={"pressRelease"}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

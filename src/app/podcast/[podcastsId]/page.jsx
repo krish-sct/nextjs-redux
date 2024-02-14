@@ -13,6 +13,7 @@ const PodcastsDetails = ({ params }) => {
   const dispatch = useDispatch();
 
   const [podcastsDetails, setPodcastDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const podcasts = useSelector(
     (state) => state?.podcastData?.podcasts?.podcasts
@@ -39,8 +40,16 @@ const PodcastsDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchPodcast());
-  }, []);
+    setIsLoading(true);
+    dispatch(fetchPodcast())
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching Podcast", error);
+        setIsLoading(false);
+      });
+  }, [dispatch]);
 
   useEffect(() => {
     if (podcasts?.length && params) {
@@ -59,16 +68,22 @@ const PodcastsDetails = ({ params }) => {
     <div>
       <Breadcrumb title={title} dataTemplate={"podcast"} />
       <div className="list-container">
-        <div className="content-margin">
-          <TemplatePreview
-            templateData={podcastsDetails}
-            title={title}
-            createdAt={createdAt}
-          />
-        </div>
-        <div className="custom-margin">
-          <RelatedComponent data={podcasts} dataTemplate={"podcast"} />
-        </div>
+        {isLoading ? (
+          <div className="spinner"></div>
+        ) : (
+          <>
+            <div className="content-margin">
+              <TemplatePreview
+                templateData={podcastsDetails}
+                title={title}
+                createdAt={createdAt}
+              />
+            </div>
+            <div className="custom-margin">
+              <RelatedComponent data={podcasts} dataTemplate={"podcast"} />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

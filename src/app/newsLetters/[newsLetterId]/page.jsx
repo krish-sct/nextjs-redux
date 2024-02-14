@@ -12,6 +12,7 @@ import RelatedComponent from "../../components/relatedComponent/RelatedComponent
 const NewsLetterDetails = ({ params }) => {
   const dispatch = useDispatch();
   const [newsLetterDetails, setNewsLetterDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const newsLetter = useSelector(
     (state) => state?.newsLetterData?.newsLetters?.newsLetters
@@ -44,8 +45,16 @@ const NewsLetterDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchNewsLetter());
-  }, []);
+    setIsLoading(true);
+    dispatch(fetchNewsLetter())
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching NewsLetter", error);
+        setIsLoading(false);
+      });
+  }, [dispatch]);
 
   useEffect(() => {
     if (newsLetter?.length && params) {
@@ -63,16 +72,25 @@ const NewsLetterDetails = ({ params }) => {
     <div>
       <Breadcrumb title={title} dataTemplate={"newsLetters"} />
       <div className="list-container">
-        <div className="content-margin">
-          <TemplatePreview
-            templateData={newsLetterDetails}
-            title={title}
-            createdAt={createdAt}
-          />
-        </div>
-        <div className="custom-margin">
-          <RelatedComponent data={newsLetters} dataTemplate={"newsLetters"} />
-        </div>
+        {isLoading ? (
+          <div className="spinner"></div>
+        ) : (
+          <>
+            <div className="content-margin">
+              <TemplatePreview
+                templateData={newsLetterDetails}
+                title={title}
+                createdAt={createdAt}
+              />
+            </div>
+            <div className="custom-margin">
+              <RelatedComponent
+                data={newsLetters}
+                dataTemplate={"newsLetters"}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

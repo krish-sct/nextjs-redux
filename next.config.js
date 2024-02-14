@@ -22,7 +22,12 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ["www.e-consystems.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.e-consystems.com",
+      },
+    ],
   },
 };
 

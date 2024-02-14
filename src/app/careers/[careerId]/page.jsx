@@ -11,6 +11,7 @@ import RelatedComponent from "../../components/relatedComponent/RelatedComponent
 
 const CareerDetails = ({ params }) => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
   const career = useSelector((state) => state?.careerData?.careers?.careers);
 
@@ -39,8 +40,16 @@ const CareerDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchCareer());
-  }, []);
+    setIsLoading(true);
+    dispatch(fetchCareer())
+      .then(() => {
+        setIsLoading(flase);
+      })
+      .catch((error) => {
+        console.error("Error fetching careers", error);
+        setIsLoading(false);
+      });
+  }, [dispatch]);
 
   useEffect(() => {
     if (career?.length && params) {
@@ -60,16 +69,22 @@ const CareerDetails = ({ params }) => {
       <Breadcrumb title={title} dataTemplate={"careers"} />
 
       <div className="list-container">
-        <div className="content-margin">
-          <TemplatePreview
-            templateData={careerDetails}
-            title={title}
-            createdAt={createdAt}
-          />
-        </div>
-        <div className="custom-margin">
-          <RelatedComponent data={careers} dataTemplate={"careers"} />
-        </div>
+        {isLoading ? (
+          <div className="spinner"></div>
+        ) : (
+          <>
+            <div className="content-margin">
+              <TemplatePreview
+                templateData={careerDetails}
+                title={title}
+                createdAt={createdAt}
+              />
+            </div>
+            <div className="custom-margin">
+              <RelatedComponent data={careers} dataTemplate={"careers"} />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
