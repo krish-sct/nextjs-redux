@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { handleDateString } from "../../utils/common";
+import Image from "next/image";
 
 const FooterPreview = ({ data, dataTemplate }) => {
   // console.log(data, dataTemplate);
@@ -16,23 +17,32 @@ const FooterPreview = ({ data, dataTemplate }) => {
         <div key={i} className="footerComp-card">
           <li>
             <a href={`/${dataTemplate}/${item._id}`} className="temp-link">
-              {item?.components?.filter((e) => e.key === "images")?.length >
+              {item?.components?.filter((e) => e?.key === "images")?.length >
                 0 && (
                 <div className="images">
-                  {item.components.find((e) => e.key === "images")
+                  {item?.components?.find((e) => e?.key === "images")
                     ?.imgs?.[0] && (
-                    <img
-                      className="footerComplisting-img"
-                      src={
-                        item.components.find((e) => e.key === "images")?.imgs[0]
-                          ?.src
-                      }
-                      alt={
-                        item.components.find((e) => e.key === "images")?.imgs[0]
-                          ?.alt
-                      }
-                      onLoad={handleImageLoad}
-                    />
+                    <Suspense
+                      fallback={<div className="spinner">Loading...</div>}
+                    >
+                      <Image
+                        className="footerComplisting-img"
+                        src={
+                          item?.components?.find((e) => e?.key === "images")
+                            ?.imgs[0]?.src
+                        }
+                        alt={
+                          item?.components?.find((e) => e?.key === "images")
+                            ?.imgs[0]?.alt
+                        }
+                        onLoad={handleImageLoad}
+                        width={300}
+                        height={150}
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    </Suspense>
                   )}
                 </div>
               )}

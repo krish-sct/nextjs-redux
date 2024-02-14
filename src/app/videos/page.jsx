@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import List from "./List";
 
 export const metadata = {
@@ -5,7 +6,13 @@ export const metadata = {
 };
 
 const Videos = () => {
-  return <List />;
+  return (
+    <div>
+      <Suspense fallback={<div className="spinner"></div>}>
+        <List />
+      </Suspense>
+    </div>
+  );
 };
 
 export default Videos;

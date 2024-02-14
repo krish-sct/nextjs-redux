@@ -21,6 +21,9 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    domains: ["www.e-consystems.com"],
+  },
 };
 
 module.exports = nextConfig;

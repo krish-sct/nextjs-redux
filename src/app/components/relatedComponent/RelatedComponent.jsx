@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
+import Image from "next/image";
 
 const RelatedComponent = ({ data, dataTemplate }) => {
   // console.log(data);
@@ -9,7 +10,7 @@ const RelatedComponent = ({ data, dataTemplate }) => {
   useEffect(() => {
     const relatedData = data
       ?.slice()
-      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      ?.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
     const latestItems = relatedData?.slice(1, Math.min(data.length - 1, 4));
     setSortedData(latestItems);
@@ -33,23 +34,34 @@ const RelatedComponent = ({ data, dataTemplate }) => {
                     href={`/${dataTemplate}/${item._id}`}
                     className="temp-link"
                   >
-                    {item?.components?.filter((e) => e.key === "images")
+                    {item?.components?.filter((e) => e?.key === "images")
                       ?.length > 0 && (
                       <div className="images">
-                        {item.components.find((e) => e.key === "images")
+                        {item?.components?.find((e) => e?.key === "images")
                           ?.imgs?.[0] && (
-                          <img
-                            className="listing-img"
-                            src={
-                              item.components.find((e) => e.key === "images")
-                                ?.imgs[0]?.src
-                            }
-                            alt={
-                              item.components.find((e) => e.key === "images")
-                                ?.imgs[0]?.alt
-                            }
-                            onLoad={handleImageLoad}
-                          />
+                          <Suspense
+                            fallback={<div className="spinner">Loading...</div>}
+                          >
+                            <Image
+                              className="listing-img"
+                              src={
+                                item?.components?.find(
+                                  (e) => e?.key === "images"
+                                )?.imgs[0]?.src
+                              }
+                              alt={
+                                item?.components?.find(
+                                  (e) => e?.key === "images"
+                                )?.imgs[0]?.alt
+                              }
+                              width={300}
+                              height={150}
+                              placeholder="blur"
+                              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              onLoad={handleImageLoad}
+                            />
+                          </Suspense>
                         )}
                       </div>
                     )}
@@ -62,7 +74,7 @@ const RelatedComponent = ({ data, dataTemplate }) => {
                     style={{ color: "gray", fontSize: "16px" }}
                   >
                     {item?.components
-                      ?.filter((e) => e.key === "related")?.[0]
+                      ?.filter((e) => e?.key === "related")?.[0]
                       ?.value?.map((relatedItem) => relatedItem.value)}
                   </a>
                 </li>

@@ -1,6 +1,7 @@
 import React from "react";
 import SEO from "./SEO";
 import { handleDateString } from "../../utils/common";
+import Image from "next/image";
 
 const TemplatePreview = ({ templateData, title, createdAt }) => {
   return (
@@ -45,11 +46,13 @@ const TemplatePreview = ({ templateData, title, createdAt }) => {
                   {e?.imgs?.map((img, imgI) => {
                     return (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         className="images-img"
                         src={img?.src}
                         alt={img?.alt}
                         key={imgI}
+                        width={300}
+                        height={150}
                         loading="lazy"
                       />
                     );

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { fetchProduct } from "../../redux/slices/productSlice";
+import Image from "next/image"
 
 const ProductPreview = ({ products }) => {
   console.log(products);
@@ -43,18 +44,120 @@ const ProductPreview = ({ products }) => {
           <div className="img-card">
             <div className="frame-587">
               <div className="group-560">
-                {/* <img src={Camera} alt="camera" /> */}
+                {/* firstimage */}
+                <div className="rectangle-73">
+                  {latestProduct?.components?.filter(
+                    (e) => e.key === "img"
+                  ) && (
+                    <Image
+                      src={
+                        latestProduct?.components?.find((e) => e.key === "img")
+                          ?.value?.[0]
+                      }
+                      alt="Product eCAM31"
+                      width="64"
+                      height="55"
+                      className="image-prod"
+                    />
+                  )}
+                </div>
+              </div>
+              {/* second image */}
+              <div className="group-584">
+                <div className="rectangle-73">
+                  {latestProduct?.components?.filter(
+                    (e) => e.key === "img"
+                  ) && (
+                    <Image
+                      src={
+                        latestProduct?.components?.find((e) => e.key === "img")
+                          ?.value?.[1]
+                      }
+                      alt="Product eCAM31"
+                      width="64"
+                      height="55"
+                      className="image-prod"
+                    />
+                  )}
+                </div>
+              </div>
+              {/* third image */}
+              <div className="group-585">
+                <div className="rectangle-73">
+                  {latestProduct?.components?.filter(
+                    (e) => e.key === "img"
+                  ) && (
+                    <Image
+                      src={
+                        latestProduct?.components?.find((e) => e.key === "img")
+                          ?.value?.[2]
+                      }
+                      alt="Product eCAM31"
+                      width="64"
+                      height="55"
+                      className="image-prod"
+                    />
+                  )}
+                </div>
+              </div>
+              {/* forth image */}
+              <div className="group-587">
+                <div className="rectangle-73">
+                  {latestProduct?.components?.filter(
+                    (e) => e.key === "img"
+                  ) && (
+                    <Image
+                      src={
+                        latestProduct?.components?.find((e) => e.key === "img")
+                          ?.value?.[3]
+                      }
+                      alt="Product eCAM31"
+                      width="64"
+                      height="55"
+                      className="image-prod"
+                    />
+                  )}
+                </div>
               </div>
             </div>
-            {latestProduct?.components?.filter((e) => e.key === "img") && (
-              <img
-                src={
-                  latestProduct.components.find((e) => e.key === "img")
-                    ?.value?.[0]
-                }
-                alt="Product eCAM31"
-              />
-            )}
+            <div className="group-560-560">
+              <div className="rectangle-73-73">
+                {latestProduct?.components?.filter((e) => e.key === "img") && (
+                  <img
+                    src={
+                      latestProduct?.components?.find((e) => e.key === "img")
+                        ?.value?.[2]
+                    }
+                    alt="Product eCAM31"
+                    width="64"
+                     height="55"
+                    style={{
+                      width: "331.01px",
+                      height: "286.38px",
+                      top: "53.31px",
+                      left: "121.99px",
+                    }}
+                  />
+                )}
+              </div>
+
+              <div className="group-587 ">
+                <div className="frame-567">
+                  <div className="frame-566">
+                    <p className="tags">Tags</p>
+                  </div>
+                  <div className="frame-568">
+                    <p className="GMSL-Cameras">GMSL Cameras</p>
+                  </div>
+                  <div className="frame-567">
+                    <p className="HDR-Cameras">HDR Cameras</p>
+                  </div>
+                  <div className="frame-569">
+                    <p className="Sony-Cameras">Sony ISX031 Cameras</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

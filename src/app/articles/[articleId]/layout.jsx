@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import configs from "../../../utils/configs";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 const baseURL = configs.baseURL;
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }) {
       email: false,
       telephone: false,
     },
-    metadataBase: new URL("https://192.168.1.220:3000/"),
+    metadataBase: new URL("http://192.168.1.220:3000/"),
     alternates: {
       canonical: "/",
       languages: {
@@ -41,7 +42,11 @@ export async function generateMetadata({ params }) {
 export default function RootLayout({ children }) {
   return (
     <div>
-      <div>{children}</div>
+      <div>
+        <Suspense fallback={<div className="spinner">Loading......</div>}>
+          {children}
+        </Suspense>
+      </div>
     </div>
   );
 }

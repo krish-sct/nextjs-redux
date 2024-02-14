@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchArticle } from "../../redux/slices/articleSlice";
 import { useSelector } from "react-redux";
 import { handleDateString } from "../../utils/common";
-
+import Image from "next/image";
 const Articles = ({ articles }) => {
   const dispatch = useDispatch();
 
@@ -43,6 +43,7 @@ const Articles = ({ articles }) => {
   return (
     <div>
       <hr />
+
       <h4 className="hr">Highlighted</h4>
       {ishighlighted && LatestData && (
         <div className="card">
@@ -52,18 +53,24 @@ const Articles = ({ articles }) => {
               <div className="images">
                 {LatestData.components.find((e) => e.key === "images")
                   ?.imgs?.[0] && (
-                  <img
-                    className="images-imgs"
-                    src={
-                      LatestData.components.find((e) => e.key === "images")
-                        ?.imgs[0]?.src
-                    }
-                    alt={
-                      LatestData.components.find((e) => e.key === "images")
-                        ?.imgs[0]?.alt
-                    }
-                    onLoad={handleImageLoad}
-                  />
+                  <Suspense fallback={<div className="spinner"></div>}>
+                    <Image
+                      className="images-imgs"
+                      src={
+                        LatestData.components.find((e) => e.key === "images")
+                          ?.imgs[0]?.src
+                      }
+                      alt={
+                        LatestData.components.find((e) => e.key === "images")
+                          ?.imgs[0]?.alt
+                      }
+                      onLoad={handleImageLoad}
+                      width={600}
+                      height={400}
+                      placeholder="blur"
+                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                    />
+                  </Suspense>
                 )}
               </div>
             )}

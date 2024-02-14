@@ -1,14 +1,18 @@
-import React from 'react'
-import List from './List'
+import React, { Suspense } from "react";
+import List from "./List";
 
-export const metadata={
-    title:'News'
-  }
+export const metadata = {
+  title: "News",
+};
 
-const News = async() => {
+const News = async () => {
   return (
-      <List />
-  )
-}
+    <div>
+      <Suspense fallback={<div className="spinner"></div>}>
+        <List />
+      </Suspense>
+    </div>
+  );
+};
 
-export default News
+export default News;

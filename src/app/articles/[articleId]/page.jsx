@@ -61,7 +61,6 @@ const ArticleDetails = ({ params }) => {
   return (
     <div>
       <Breadcrumb title={title} dataTemplate={"articles"} />
-
       <div className="list-container">
         <div className="content-margin">
           <TemplatePreview

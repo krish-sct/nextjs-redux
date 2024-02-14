@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar/FetchNavbar";
 import { Providers } from "../redux/providers";
 import Footer from "./components/footer/Footer";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
           <>
             <div className="container">
               <Navbar />
+
               {children}
               {/* <Footer /> */}
             </div>
