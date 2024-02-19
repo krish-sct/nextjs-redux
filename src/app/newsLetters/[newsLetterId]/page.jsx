@@ -8,7 +8,7 @@ import {
 } from "../../../redux/slices/newsLetterSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
-import Error from "../error";
+import Error from "../../error"
 
 const NewsLetterDetails = ({ params }) => {
   const dispatch = useDispatch();

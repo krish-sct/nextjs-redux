@@ -44,7 +44,7 @@ const CareerDetails = ({ params }) => {
     setIsLoading(true);
     dispatch(fetchCareer())
       .then(() => {
-        setIsLoading(flase);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching careers", error);

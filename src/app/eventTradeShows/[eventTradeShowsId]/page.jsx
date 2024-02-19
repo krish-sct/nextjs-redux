@@ -8,7 +8,7 @@ import {
 } from "../../../redux/slices/eventTradeShowsSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
-import Error from "../error";
+import Error from "../../error";
 
 const EventTradeShowsDetails = ({ params }) => {
   const dispatch = useDispatch();
