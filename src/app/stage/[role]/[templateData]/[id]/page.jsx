@@ -9,6 +9,7 @@ import { handleCase } from "../../../../../utils/common";
 import VideoPreview from "../../../../components/VideoPreview";
 import VideoTestPreview from "../../../../components/VideoTestPreview";
 import configs from "../../../../../utils/configs";
+import Error from "../error";
 
 const PreviewPage = ({ params }) => {
   const [stagingData, setStagingData] = useState(null);
@@ -59,6 +60,7 @@ const PreviewPage = ({ params }) => {
       setIsLoading(false);
     } catch (error) {
       console.error("Error in fetching:", error);
+      <Error />;
       setIsLoading(false);
     }
   };

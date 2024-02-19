@@ -8,6 +8,7 @@ import {
 } from "../../../redux/slices/careerSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
+import Error from "../../error";
 
 const CareerDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const CareerDetails = ({ params }) => {
       })
       .catch((error) => {
         console.error("Error fetching careers", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

@@ -5,6 +5,7 @@ import Testimonial from "./Testimonial";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../components/Breadcrumb";
 import { fetchTestimonial } from "../../redux/slices/testimonialSlice";
+import Error from "../error";
 
 const List = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +14,7 @@ const List = () => {
   const testimonials = useSelector(
     (state) => state?.testimonialData?.testimonials?.testimonial
   );
-  
+
   useEffect(() => {
     setIsLoading(true);
     dispatch(fetchTestimonial())
@@ -22,6 +23,7 @@ const List = () => {
       })
       .catch((error) => {
         console.error("Error in fetching PressRelease", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

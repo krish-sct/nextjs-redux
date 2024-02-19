@@ -8,6 +8,7 @@ import {
 } from "../../../redux/slices/newsLetterSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
+import Error from "../error";
 
 const NewsLetterDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const NewsLetterDetails = ({ params }) => {
       })
       .catch((error) => {
         console.error("Error fetching NewsLetter", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

@@ -116,6 +116,48 @@ export async function GET(req, res) {
  *               error: 'Database error'
  */
 
+export async function PUT(req, res) {
+  const body = await req.json();
+
+  const { _id, updatedData } = body;
+  try {
+    await connect();
+    const updatedProduct = await Product.findByIdAndUpdate(
+      _id,
+      {
+        ...updatedData,
+      },
+      { new: true }
+    );
+    if (!updatedProduct) {
+      return NextResponse.json({ message: "Product not found" });
+    }
+    return NextResponse.json(
+      { data: updatedProduct, message: "Product Updated", status: 200 },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json({ error: "Database error" }, { status: 500 });
+  }
+}
+
+/**
+ * @swagger
+ *   /api/products:
+ *   post:
+ *     summary: Submit a Products data
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *     responses:
+ *       '200':
+ *         description: Product data submitted
+ *       '500':
+ *         description: Database error
+ */
 export async function POST(req, res) {
   const body = await req.json();
   console.log({ body });

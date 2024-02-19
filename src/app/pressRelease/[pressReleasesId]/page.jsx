@@ -8,6 +8,7 @@ import {
 } from "../../../redux/slices/pressReleaseSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
+import Error from "../error";
 
 const PressReleasesDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const PressReleasesDetails = ({ params }) => {
       })
       .catch((error) => {
         console.error("Error in fetching PressRelease", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

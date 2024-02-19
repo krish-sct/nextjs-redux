@@ -5,6 +5,7 @@ import TemplatePreview from "../../components/TemplatePreview";
 import { fetchNewsById, fetchNews } from "../../../redux/slices/newsSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
+import Error from "../../error";
 
 const NewsDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const NewsDetails = ({ params }) => {
       })
       .catch((error) => {
         console.error("Error fetching news", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

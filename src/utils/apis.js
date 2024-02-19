@@ -409,6 +409,56 @@ export const addMaster = async (data) => {
   return res.json();
 };
 
+//products
+export const getProducts = async (page, limit) => {
+  try {
+    const response = await fetch(
+      `${baseURL}/products?page=${page || defaultPage}&limit=${
+        limit || defaultLimit
+      }`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      console.error(`Failed to fetch products: ${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getProducts:", error.message);
+    throw error;
+  }
+};
+
+export const getProductById = async (productId) => {
+  try {
+    const response = await fetch(`${baseURL}/products?id=${productId}`, {
+      cache: "no-store,",
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to fetch product:${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Error in getProductById:", error.message);
+    throw error;
+  }
+};
+
+export const addProduct = async (data) => {
+  const res = await fetch(`${baseURL}/products`, {
+    cache: "no-store",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+};
+
 //articlesConfig
 export const getArticlesConfig = async () => {
   try {
@@ -601,44 +651,6 @@ export const updateTemplateStaging = async ({ data, templateData }) => {
     return response.json();
   } catch (error) {
     console.error("Error", error.message);
-    throw error;
-  }
-};
-
-//products
-export const getProducts = async (page, limit) => {
-  try {
-    const response = await fetch(
-      `${baseURL}/products?page=${page || defaultPage}&limit=${
-        limit || defaultLimit
-      }`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      console.error(`Failed to fetch products: ${response.status}`);
-    }
-    return response.json();
-  } catch (error) {
-    console.error("Error in getProducts:", error.message);
-    throw error;
-  }
-};
-
-export const getProductById = async (productId) => {
-  try {
-    const response = await fetch(`${baseURL}/products?id=${productId}`, {
-      cache: "no-store,",
-    });
-
-    if (!response.ok) {
-      console.error(`Failed to fetch product:${response.status}`);
-    }
-    return response.json();
-  } catch (error) {
-    console.error("Error in getProductById:", error.message);
     throw error;
   }
 };

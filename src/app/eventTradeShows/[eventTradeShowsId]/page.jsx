@@ -8,6 +8,7 @@ import {
 } from "../../../redux/slices/eventTradeShowsSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
+import Error from "../error";
 
 const EventTradeShowsDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const EventTradeShowsDetails = ({ params }) => {
       })
       .catch((error) => {
         console.error("Error in fetching EventTradeShows", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

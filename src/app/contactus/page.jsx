@@ -9,6 +9,7 @@ import "react-country-state-city/dist/react-country-state-city.css";
 import { useDispatch } from "react-redux";
 import { fetchMaster } from "../../redux/slices/masterSlice";
 import Breadcrumb from "../components/Breadcrumb";
+import Error from "../error";
 
 const ContactPage = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ const ContactPage = () => {
       handleFormData();
     } else {
       console.error("Error");
+      <Error />;
     }
   };
 

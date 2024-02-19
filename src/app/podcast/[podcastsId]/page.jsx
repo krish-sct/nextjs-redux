@@ -8,6 +8,7 @@ import {
 } from "../../../redux/slices/podcastSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
+import Error from "../../error";
 
 const PodcastsDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const PodcastsDetails = ({ params }) => {
       })
       .catch((error) => {
         console.error("Error fetching Podcast", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

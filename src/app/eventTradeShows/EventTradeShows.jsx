@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { handleDateString } from "../../utils/common";
 import { useDispatch } from "react-redux";
 import { fetchEventTradeShow } from "../../redux/slices/eventTradeShowsSlice";
+import Error from "../error";
 
 const EventTradeShows = ({ eventTradeShows }) => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const EventTradeShows = ({ eventTradeShows }) => {
       })
       .catch((error) => {
         console.error("Error in fetching EventTradeShow", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

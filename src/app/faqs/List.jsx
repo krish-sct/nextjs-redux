@@ -5,6 +5,7 @@ import Pagination from "../components/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../components/Breadcrumb";
 import { fetchFaq } from "../../redux/slices/faqSlice";
+import Error from "../error";
 
 const List = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,6 +21,7 @@ const List = () => {
       })
       .catch((error) => {
         console.error("Error in fetching PressRelease", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

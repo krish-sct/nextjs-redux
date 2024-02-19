@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { updateTemplateStaging } from "../../utils/apis";
+import Error from "../error";
 
 const SEOPreview = ({ title, seoData, stagingData, templateData, role }) => {
   const [seoSuggestionMsg, setSEOSuggestionMsg] = useState("");
@@ -33,6 +34,7 @@ const SEOPreview = ({ title, seoData, stagingData, templateData, role }) => {
       console.log("Template staging ", response);
     } catch (error) {
       console.error("Error in template staging:", error);
+      <Error />;
     }
   };
 

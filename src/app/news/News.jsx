@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchNews } from "../../redux/slices/newsSlice";
 import { handleDateString } from "../../utils/common";
+import Error from "../error";
 
 const News = ({ news }) => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const News = ({ news }) => {
       })
       .catch((error) => {
         console.error("Error in fetching careers", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

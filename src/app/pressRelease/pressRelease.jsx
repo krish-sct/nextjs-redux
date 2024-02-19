@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { handleDateString } from "../../utils/common";
 import { useDispatch } from "react-redux";
 import { fetchPressRelease } from "../../redux/slices/pressReleaseSlice";
+import Error from "../error";
 
 const PressReleases = ({ pressReleases }) => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const PressReleases = ({ pressReleases }) => {
       })
       .catch((error) => {
         console.error("Error in fetching careers", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

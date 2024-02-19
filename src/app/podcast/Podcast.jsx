@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { handleDate, handleDateString } from "../../utils/common";
 import { useDispatch } from "react-redux";
 import { fetchPodcast } from "../../redux/slices/podcastSlice";
+import Error from "../error";
 
 const Podcasts = ({ podcasts }) => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const Podcasts = ({ podcasts }) => {
       })
       .catch((error) => {
         console.error("Error in fetching careers", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

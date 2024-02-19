@@ -5,6 +5,7 @@ import { fetchArticle } from "../../redux/slices/articleSlice";
 import { useSelector } from "react-redux";
 import { handleDateString } from "../../utils/common";
 import Image from "next/image";
+import Error from "../error";
 
 const Articles = ({ articles }) => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const Articles = ({ articles }) => {
       })
       .catch((error) => {
         console.error("Error in fetching articles", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

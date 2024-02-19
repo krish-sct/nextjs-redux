@@ -8,6 +8,7 @@ import {
 } from "../../../redux/slices/articleSlice";
 import Breadcrumb from "../../components/Breadcrumb";
 import RelatedComponent from "../../components/relatedComponent/RelatedComponent";
+import Error from "../error";
 
 const ArticleDetails = ({ params }) => {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ const ArticleDetails = ({ params }) => {
       })
       .catch((error) => {
         console.error("Error in  fetching article", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);

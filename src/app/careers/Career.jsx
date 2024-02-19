@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { handleDate, handleDateString } from "../../utils/common";
+import { handleDateString } from "../../utils/common";
 import { fetchCareer } from "../../redux/slices/careerSlice";
 import { useDispatch } from "react-redux";
+import Error from "../error";
 
 const Careers = ({ careers }) => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const Careers = ({ careers }) => {
       })
       .catch((error) => {
         console.error("Error in fetching careers", error);
+        <Error />;
         setIsLoading(false);
       });
   }, [dispatch]);
