@@ -2,6 +2,46 @@ import { NextResponse } from "next/server";
 import connect from "../../../utils/db";
 import News from "../../../models/News";
 
+/**
+ * @swagger
+ * /api/news:
+ *   get:
+ *     summary: Get a list of news or retrieve a specific news by ID.
+ *     description: |
+ *       This endpoint allows you to retrieve a list of news based on pagination parameters or
+ *       retrieve a specific news by providing its ID.
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         description: The page number for pagination. Default is 1.
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         description: The number of news to return per page. Default is 10.
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: id
+ *         description: The ID of the news to retrieve. If provided, other pagination parameters will be ignored.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response with news data or a specific news.
+ *         content:
+ *           application/json:
+ *             example:
+ *               news: [...]
+ *               totalPages: 5
+ *               currentPage: 1
+ *       500:
+ *         description: Internal server error. Indicates a database error.
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: Database error
+ */
 export async function GET(req, res) {
   const page = parseInt(req.nextUrl?.searchParams?.get("page")) || 1;
   const limit = parseInt(req.nextUrl?.searchParams?.get("limit")) || 10;
@@ -34,6 +74,47 @@ export async function GET(req, res) {
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 }
+
+/**
+ * @swagger
+ * /api/news:
+ *   put:
+ *     summary: Update an news
+ *     description: Update an news by ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               _id:
+ *                 type: string
+ *               updatedData:
+ *                 type: object
+ *     responses:
+ *       200:
+ *         description: News updated successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               data:
+ *                 otherField1: {....}
+ *               message: 'News Updated'
+ *               status: 200
+ *       404:
+ *         description: News not found
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: 'News not found'
+ *       500:
+ *         description: Database error
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: 'Database error'
+ */
 
 export async function PUT(req, res) {
   const body = await req.json();

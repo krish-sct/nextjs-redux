@@ -2,6 +2,47 @@ import { NextResponse } from "next/server";
 import connect from "../../../utils/db";
 import EventTradeShows from "../../../models/EventTradeShows";
 
+/**
+ * @swagger
+ * /api/eventTradeShows:
+ *   get:
+ *     summary: Get a list of eventTradeShows or retrieve a specific eventTradeShow by ID.
+ *     description: |
+ *       This endpoint allows you to retrieve a list of eventTradeShows based on pagination parameters or
+ *       retrieve a specific eventTradeShow by providing its ID.
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         description: The page number for pagination. Default is 1.
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         description: The number of eventTradeShows to return per page. Default is 10.
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: id
+ *         description: The ID of the eventTradeShow to retrieve. If provided, other pagination parameters will be ignored.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response with eventTradeShows data or a specific eventTradeShow.
+ *         content:
+ *           application/json:
+ *             example:
+ *               eventTradeShows: [...]
+ *               totalPages: 5
+ *               currentPage: 1
+ *       500:
+ *         description: Internal server error. Indicates a database error.
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: Database error
+ */
+
 export async function GET(req, res) {
   const page = parseInt(req.nextUrl?.searchParams?.get("page")) || 1;
   const limit = parseInt(req.nextUrl?.searchParams?.get("limit")) || 10;
@@ -35,26 +76,63 @@ export async function GET(req, res) {
   }
 }
 
+/**
+ * @swagger
+ * /api/eventTradeShows:
+ *   put:
+ *     summary: Update an eventTradeShow
+ *     description: Update an eventTradeShow by ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               _id:
+ *                 type: string
+ *               updatedData:
+ *                 type: object
+ *     responses:
+ *       200:
+ *         description: EventTradeShow updated successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               data:
+ *                 otherField1: {....}
+ *               message: 'EventTradeShow Updated'
+ *               status: 200
+ *       404:
+ *         description: EventTradeShow not found
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: 'EventTradeShow not found'
+ *       500:
+ *         description: Database error
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: 'Database error'
+ */
+
 export async function PUT(req, res) {
   const body = await req.json();
   // console.log({ body });
   const { _id, updatedData } = body;
   try {
     await connect();
-    const res = await EventTradeShows.findByIdAndUpdate(
+    const result = await EventTradeShows.findByIdAndUpdate(
       _id,
       { ...updatedData },
       { new: true }
     );
-    if (!res) {
+    if (!result) {
       return NextResponse.json({ message: "EventTradeShows not found" });
     }
     return NextResponse.json(
-      {
-        data: res,
-        message: "EventTradeShows Updated",
-        status: 200,
-      },
+      { data: result, message: "EventTradeShows Updated", status: 200 },
       { status: 200 }
     );
   } catch (error) {

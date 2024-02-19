@@ -2,6 +2,47 @@ import { NextResponse } from "next/server";
 import connect from "../../../utils/db";
 import Faq from "../../../models/Faq";
 
+/**
+ * @swagger
+ * /api/faqs:
+ *   get:
+ *     summary: Get a list of faqs or retrieve a specific faq by ID.
+ *     description: |
+ *       This endpoint allows you to retrieve a list of faqs based on pagination parameters or
+ *       retrieve a specific faq by providing its ID.
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         description: The page number for pagination. Default is 1.
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         description: The number of faqs to return per page. Default is 10.
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: id
+ *         description: The ID of the faq to retrieve. If provided, other pagination parameters will be ignored.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response with faqs data or a specific faq.
+ *         content:
+ *           application/json:
+ *             example:
+ *               faqs: [...]
+ *               totalPages: 5
+ *               currentPage: 1
+ *       500:
+ *         description: Internal server error. Indicates a database error.
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: Database error
+ */
+
 export async function GET(req, res) {
   const page = parseInt(req.nextUrl?.searchParams?.get("page")) || 1;
   const limit = parseInt(req.nextUrl?.searchParams?.get("limit")) || 10;
@@ -34,6 +75,47 @@ export async function GET(req, res) {
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 }
+
+/**
+ * @swagger
+ * /api/faqs:
+ *   put:
+ *     summary: Update an faq
+ *     description: Update an faq by ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               _id:
+ *                 type: string
+ *               updatedData:
+ *                 type: object
+ *     responses:
+ *       200:
+ *         description: Faq updated successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               data:
+ *                 otherField1: {....}
+ *               message: 'Faq Updated'
+ *               status: 200
+ *       404:
+ *         description: Faq not found
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: 'Faq not found'
+ *       500:
+ *         description: Database error
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: 'Database error'
+ */
 
 export async function PUT(req, res) {
   const body = await req.json();
