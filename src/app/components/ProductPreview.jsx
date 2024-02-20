@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { fetchProduct } from "../../redux/slices/productSlice";
-import Image from "next/image"
+import Image from "next/image";
+import DownloadIcon from "../../../public/assets/download_2.png";
+import ShoppingCartIcon from "../../../public/assets/shopping_cart.png";
 
 const ProductPreview = ({ products }) => {
   console.log(products);
@@ -23,6 +25,8 @@ const ProductPreview = ({ products }) => {
     const sortedProduct = products
       ?.slice()
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+    console.log(sortedProduct);
+
     setLatestProduct(sortedProduct);
   }, [products]);
 
@@ -130,7 +134,7 @@ const ProductPreview = ({ products }) => {
                     }
                     alt="Product eCAM31"
                     width="64"
-                     height="55"
+                    height="55"
                     style={{
                       width: "331.01px",
                       height: "286.38px",
@@ -159,6 +163,112 @@ const ProductPreview = ({ products }) => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="frame-1660">
+          <div className="header-title">
+            {
+              latestProduct?.components?.filter((e) => e.key === "header")?.[0]
+                ?.value
+            }
+          </div>
+          <div className="group-565">
+            <div className="highlight">
+              {
+                latestProduct?.components?.filter(
+                  (e) => e.key === "subtitle"
+                )?.[0]?.value
+              }
+            </div>
+            <div className="highlight-content">
+              <ul>
+                {latestProduct?.components
+                  ?.filter((e) => e.key === "list")?.[0]
+                  ?.value?.map((e, i) => (
+                    <li key={i}>{e}</li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+          <div className="frame-608">
+            <div className="frame-566-566">
+              <div className="frame-564">
+                <div className="samplePrice">Sample Price</div>
+                <div className="USD">
+                  {
+                    latestProduct?.components?.filter(
+                      (e) => e.key === "curreny"
+                    )?.[0]?.value
+                  }
+                </div>
+              </div>
+            </div>
+            <div className="sample-image">
+              {latestProduct?.components?.filter((e) => e.key === "logo")
+                .length > 0 && (
+                <ul
+                  className="sidecomp-listing"
+                  style={{ listStyleType: "none" }}
+                >
+                  {latestProduct.components
+                    .find((e) => e.key === "logo")
+                    ?.value?.map((imageUrl, i) => (
+                      <li key={i}>
+                        <img src={imageUrl} alt={`logo:${i}`} />
+                      </li>
+                    ))}
+                </ul>
+              )}
+            </div>
+          </div>
+          <div className="group-568">
+            <div className="group-566">
+              <div className="group-562">
+                <div className="frame-563-563">
+                  <div className="shopping_cart">
+                    <div className="shopping_cart-icon">
+                      {/* <Image
+                        src={ShoppingCartIcon}
+                        alt="icon"
+                        priority="false"
+                      ></Image> */}
+                    </div>
+                    <div className="bounding-box"></div>
+                  </div>
+                  <div className="text-contact">Contact Us</div>
+                </div>
+                <div className="rectangle-92-92">
+                  <Image
+                    src={ShoppingCartIcon}
+                    alt="icon"
+                    priority="false"
+                  ></Image>
+                </div>
+                <div className="contactus-tobuy">Contact Us to Buy</div>
+              </div>
+            </div>
+            <div className="group-567">
+              <div className="group-563">
+                <div className="frame-563">
+                  <div className="download_2">
+                    <div className="download_2-icon">
+                      {/* <Image
+                        src={DownloadIcon}
+                        alt="Icon"
+                        priority="false"
+                      ></Image> */}
+                    </div>
+                    <div className="bounding-box"></div>
+                  </div>
+                  <div className="documents">Documents</div>
+                </div>
+                <div className="rectangle-92">
+                  <Image src={DownloadIcon} alt="Icon" priority="false"></Image>
+                </div>
+                <div className="download-documents">Download Documents</div>
+              </div>
+            </div>
+          </div>
+          <br />
         </div>
       </div>
     </div>
