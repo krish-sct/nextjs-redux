@@ -558,8 +558,7 @@ border-bottom: 1px solid #E9E9E9; */
     width: 1245px;
     height: 2543px;
     gap: 40px;
-    display: flex;
-    flex-direction:row;
+    
 
 }
 .div-card{
@@ -1044,21 +1043,74 @@ background: #1C4DA1;
 }
 
 
+.group-583{
+    width: 1245px;
+height: 2297px;
 
+}
 
+.frame-590{
+    width: 1,245px;
+height: 2,297px;
+top: 518px;
+gap: 40px;
 
+}
 
+.vector-14{
+width: 1242px;
+border: 1px;
+border: 1px solid #E9E9E9;
+}
 
+.vector-13{
+    width: 1242px;
+    border: 1px;
+    border: 1px solid #E9E9E9;
+}
 
+.group-629{
+    width: 1245px;
+height: 1985px;
+border-top: 1px solid #E9E9E9;
+}
 
+.frame-1661{
+    width: 817.5px;
+    height: 1,985px;
+    top: 312px;
+    gap: 40px;
+     
+}
 
+.group-573{
+    width: 817.5px;
+height: 1269px;
+border-radius: 10px;
 
+}
 
+.frame-571{
+    width: 606px;
+height: 1,254px;
+top: 15px;
+left: 211.5px;
+gap: 15px;
 
+}
 
+.text-specification{
+    width: 606px;
+height: 27px;
+font-family: Inter;
+font-size: 20px;
+font-weight: 600;
+line-height: 27px;
+letter-spacing: 0px;
+text-align: left;
+color: #000000;
 
-
-
+}
 
 
 
